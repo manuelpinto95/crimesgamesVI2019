@@ -45,7 +45,6 @@ d3.csv("/data/vg/vgDATA.csv").then(function (data) {
     vgDS = data;
     //console.log(vgDS[0].Total);
     gen_bars1();
-    genLineChart();
 });
 
 
@@ -294,7 +293,7 @@ function genLineChart() {}
     // Add X axis --> it is a date format
     var x = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.year; }))
-      .range([1985, 2010]); //Placeholder Number
+      .range([0, 1]); //Placeholder Number
 
     svg.append("g")
       .attr("transform", "translate(0," + height + ")")
@@ -303,7 +302,7 @@ function genLineChart() {}
     // Add Y axis
     var y = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return +d.population; })])
-      .range([ 0, 10000]); //Placeholder Number
+      .range([ 0, 1000]); //Placeholder Number
 
     svg.append("g")
       .call(d3.axisLeft(y));
@@ -315,8 +314,8 @@ function genLineChart() {}
       .attr("stroke", "steelblue")
       .attr("stroke-width", 1.5)
       .attr("d", d3.line()
-        .x(function(d) { return x(d.Year) })
-        .y(function(d) { return y(d.Population) })
+        .x(function(d) { return x(d.year) })
+        .y(function(d) { return y(d.population) })
         )
 
     })
