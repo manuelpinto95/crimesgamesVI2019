@@ -696,83 +696,86 @@ function gen_WordCloud() {
 
 } */
 
-function genLineChart() {
-    var margin = {
-            top: 20,
-            right: 30,
-            bottom: 30,
-            left: 30
-        },
-        width = 460 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+function gen_linechart() {
+var margin = {top: 50, right: 0, bottom: 50, left: 96}
+  , width = 1500 - margin.left - margin.right // Use the window's width 
+  , height = 300 - margin.top - margin.bottom; // Use the window's height
 
-    // append the svg object to the body of the page
-    var svg = d3.select("#linechart")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+// The number of datapoints
+var n = 37;
 
-    //Read the data
-    d3.csv("data/crime/crimesperstate.csv",
+// 5. X scale will use the index of our data
+var xScale = d3.scaleLinear()
+    .domain([1979, 2016]) // input
+    .range([0, width]); // output
 
-        // When reading the csv, I must format variables:
-        function (d) {
-            return {
-                year: new Date(+d.Year, 0, 1),
-                state: d.State_abbr,
-                population: d.Population,
-                violentCrime: +d.Violent_crime,
-                homicide: +d.Homicide,
-                robbery: +d.Robbery,
-                aggravatedAssault: +d.Aggravated_assault,
-                propertyCrime: +d.Property_crime,
-                burglary: +d.Burglary,
-                larceny: +d.Larceny,
-                motorVehicleTheft: +d.Motor_vehicle_theft
-            }
-        },
+// 6. Y scale will use the randomly generate number 
+var yScale = d3.scaleLinear()
+    .domain([0, 50000]) // input 
+    .range([height, 0]); // output 
 
-        // Now I can use this dataset:
-        function (data) {
+var dataset = d3.range(n).map(function(d) { return {"y": d3.randomUniform(1)() } })
+var datasetExample = d3.csv("/data/crime/crimesperstate.csv", function(d) {
+  return {
+    year : +d.year,
+    state : d.state_abbr,
+    population : +d.population,
+    violent_crime : +d.violent_crime,
+    homicide : +d.homicide,
+    robbery : +d.robbery,
+    aggravated_assault: +d.aggravated_assault,
+    property_crime : +d.property_crime,
+    burglary : +d.burglary,
+    larceny : +d.larceny,
+    motor_vehicle_theft : +d.motor_vehicle_theft
+  };
+}).then(function(data) {
+  console.log(data[0]);
+  console.log(datasetExample);
+    var line = d3.line()
+    .x(function(d) { return xScale(d.year); }) // set the x values for the line generator
+    .y(function(d) { return yScale(d.population); }) // set the y values for the line generator 
+    .curve(d3.curveMonotoneX); // apply smoothing to the line
 
-            // Add X axis --> it is a date format
-            var x = d3.scaleTime()
-                .domain(d3.extent(data, function (d) {
-                    return d.year;
-                }))
-                .range([0, 1]); //Placeholder Number
+// 1. Add the SVG to the page and employ #2
+    var svg = d3.select("#linechart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
+// 3. Call the x axis in a group tag
+    svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
 
-            // Add Y axis
-            var y = d3.scaleLinear()
-                .domain([0, d3.max(data, function (d) {
-                    return +d.population;
-                })])
-                .range([0, 1000]); //Placeholder Number
+// 4. Call the y axis in a group tag
+    svg.append("g")
+    .attr("class", "y axis")
+    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
 
-            svg.append("g")
-                .call(d3.axisLeft(y));
+// 9. Append the path, bind the data, and call the line generator 
+    svg.append("path")
+    .data(data) // 10. Binds data to the line 
+    .attr("class", "line")
+    .attr("stroke", "steelblue") // Assign a class for styling 
+    .attr("d", line); // 11. Calls the line generator 
 
-            // Add the line
-            svg.append("path")
-                .datum(data)
-                .attr("fill", "none")
-                .attr("stroke", "steelblue")
-                .attr("stroke-width", 1.5)
-                .attr("d", d3.line()
-                    .x(function (d) {
-                        return x(d.year)
-                    })
-                    .y(function (d) {
-                        return y(d.population)
-                    })
-                )
-
+// 12. Appends a circle for each datapoint 
+/*svg.selectAll(".dot")
+    .data(datasetExample)
+    .enter().append("circle") // Uses the enter().append() method
+    .attr("class", "dot") // Assign a class for styling
+    .attr("cx", function(d, i) { return xScale(i) })
+    .attr("cy", function(d) { return yScale(d.y) })
+    .attr("r", 5)
+      .on("mouseover", function(a, b, c) { 
+            console.log(a) 
+        this.attr('class', 'focus')
         })
+      .on("mouseout", function() {  })
+*/
+});
 }
+gen_linechart();
