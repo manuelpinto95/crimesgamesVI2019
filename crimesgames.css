@@ -3,6 +3,46 @@ h1 {
    font-family: calibri, arial, sans serif;
 }
 
+div {
+	border:1px solid grey;
+}
+
+.container {
+	display: flex;
+}
+
+.container>div {
+	flex: 1;
+	/*grow*/
+}
+
+#map {
+	height: 600;
+	width: 600;
+}
+#selectors {
+	height: 600;
+	width: 300;
+}
+#stateselect {
+	height: 300;
+
+}
+#masslist {
+	height: 300;
+
+}
+#wordcloud {
+	height: 600;
+	width: 600;
+}
+#linechart {
+	height: 300;
+	width: 1500;
+}
+#dropdownbox {
+	height: 20;
+}
 
 .axis path, .axis line {
     fill: none;

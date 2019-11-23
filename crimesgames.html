@@ -14,38 +14,49 @@
 </head>
 
 <body style="background-color:white;">
-  <h1 id="title">Crime vs Video Games in the U.S</h1>
-  <select onchange="genreSelector()" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
-    <option value="Action">Action </option>
-    <option value="Action_Adventure">Action Adventure</option>
-    <option value="Adventure">Adventure</option>
-    <option value="Board_Game">Board Game</option>
-    <option value="Education">Education</option>
-    <option value="Fighting">Fighting</option>
-    <option value="Misc">Misc</option>
-    <option value="MMO">MMO</option>
-    <option value="Music">Music</option>
-    <option value="Party">Party</option>
-    <option value="Platform">Platform</option>
-    <option value="Puzzle">Puzzle</option>
-    <option value="Racing">Racing</option>
-    <option value="Role_Playing">Role Playing</option>
-    <option value="Sandbox">Sandbox</option>
-    <option value="Shooter">Shooter</option>
-    <option value="Simulation">Simulation</option>
-    <option value="Sports">Sports</option>
-    <option value="Strategy">Strategy</option>
-    <option value="Visual_Novel">Visual Novel</option>
-  </select>
-  <div id="map"></div>
-  <div id="stateselect"></div>
-  <div id="masslist"></div>
-  <div id="wordcloud"></div>
-  <div id="linechart"></div>
-  <div id="barchart"></div>
-  <div id="searchgames"></div>
-  <div class="row" id="third-row">
+  <h1 class=row id="row0">Crime vs Video Games in the U.S</h1>
+
+  <div class="container">
+    <div id="map">map</div>
+    <div id=selectors>
+      <div id="stateselect">state select</div>
+      <div id="masslist">mass shootings list</div>
+    </div>
+    <div id="wordcloud">word cloud</div>
+  </div>
+  <div class="container">
+    <div id="linechart">line chart</div>
+  </div>
+  <div class="container">
+    <select onchange="genreSelector()" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
+      <option value="Action">Action </option>
+      <option value="Action_Adventure">Action Adventure</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Board_Game">Board Game</option>
+      <option value="Education">Education</option>
+      <option value="Fighting">Fighting</option>
+      <option value="Misc">Misc</option>
+      <option value="MMO">MMO</option>
+      <option value="Music">Music</option>
+      <option value="Party">Party</option>
+      <option value="Platform">Platform</option>
+      <option value="Puzzle">Puzzle</option>
+      <option value="Racing">Racing</option>
+      <option value="Role_Playing">Role Playing</option>
+      <option value="Sandbox">Sandbox</option>
+      <option value="Shooter">Shooter</option>
+      <option value="Simulation">Simulation</option>
+      <option value="Sports">Sports</option>
+      <option value="Strategy">Strategy</option>
+      <option value="Visual_Novel">Visual Novel</option>
+    </select>
+    <div id="barchart"></div>
+  </div>
+  <div class="container">
     <div id="timeline"></div>
+  </div>
+  <div class="container">
+    <div id="searchgames">search games</div>
   </div>
 
 </body>
