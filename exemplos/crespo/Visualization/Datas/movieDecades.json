@@ -1,0 +1,84 @@
+{
+    "decades": [
+        {
+            "Gross (millions)": 15048.650000000003,
+            "decade": 2000,
+            "Rating": 432.10000000000036,
+            "Budget (millions)": 2851.29,
+            "Nominations": 3116.0,
+            "Awards": 2627.0
+        },
+        {
+            "Gross (millions)": 324.46000000000004,
+            "decade": 1920,
+            "Rating": 49.400000000000006,
+            "Budget (millions)": 163.41,
+            "Nominations": 11.0,
+            "Awards": 19.0
+        },
+        {
+            "Gross (millions)": 11801.4,
+            "decade": 1970,
+            "Rating": 174.99999999999994,
+            "Budget (millions)": 591.1499999999999,
+            "Nominations": 354.0,
+            "Awards": 386.0
+        },
+        {
+            "Gross (millions)": 696.74,
+            "decade": 1940,
+            "Rating": 99.69999999999997,
+            "Budget (millions)": 128.15,
+            "Nominations": 73.0,
+            "Awards": 112.0
+        },
+        {
+            "Gross (millions)": 14250.920000000002,
+            "decade": 1990,
+            "Rating": 352.8000000000001,
+            "Budget (millions)": 1940.6800000000003,
+            "Nominations": 1386.0,
+            "Awards": 1286.0
+        },
+        {
+            "Gross (millions)": 3986.480000000001,
+            "decade": 1960,
+            "Rating": 149.69999999999996,
+            "Budget (millions)": 437.60999999999996,
+            "Nominations": 160.0,
+            "Awards": 185.0
+        },
+        {
+            "Gross (millions)": 16167.97,
+            "decade": 2010,
+            "Rating": 297.4,
+            "Budget (millions)": 2776.6,
+            "Nominations": 3605.0,
+            "Awards": 2287.0
+        },
+        {
+            "Gross (millions)": 8706.47,
+            "decade": 1980,
+            "Rating": 256.2999999999999,
+            "Budget (millions)": 1139.1899999999998,
+            "Nominations": 396.0,
+            "Awards": 426.0
+        },
+        {
+            "Gross (millions)": 3360.08,
+            "decade": 1930,
+            "Rating": 58.20000000000001,
+            "Budget (millions)": 94.28,
+            "Nominations": 38.0,
+            "Awards": 51.0
+        },
+        {
+            "Gross (millions)": 4348.18,
+            "decade": 1950,
+            "Rating": 207.6999999999999,
+            "Budget (millions)": 551.42,
+            "Nominations": 169.0,
+            "Awards": 273.0
+        }
+    ]
+}

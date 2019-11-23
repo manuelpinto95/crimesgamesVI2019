@@ -32,10 +32,49 @@ colorDict["Sports"] = d3.schemeSet2[5];
 colorDict["Strategy"] = d3.schemeSet2[6];
 colorDict["Visual_Novel"] = d3.schemeSet2[7];
 
+var genreId = {}
+genreId["Action"] = 1;
+genreId["Action_Adventure"] = 2;
+genreId["Adventure"] = 3;
+genreId["Board_Game"] = 4;
+genreId["Education"] = 5;
+genreId["Fighting"] = 6;
+genreId["Misc"] = 7;
+genreId["MMO"] = 8;
+genreId["Music"] = 9;
+genreId["Party"] = 10;
+genreId["Platform"] = 11;;
+genreId["Puzzle"] = 12;
+genreId["Racing"] = 13;
+genreId["Role_Playing"] = 14;
+genreId["Sandbox"] = 15;
+genreId["Shooter"] = 16;
+genreId["Simulation"] = 17;
+genreId["Sports"] = 18;
+genreId["Strategy"] = 19;
+genreId["Visual_Novel"] = 20;
+
 // utility function
 function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
 };
+
+function removeOtherGenres(data, genre) {
+    var colIndex = genreId[genre];
+    for (var j = 0; j < 20; j++) {
+        if (j != 1 || j != colIndex) {
+            var temp = data.toString().split("\n");
+            for (var i = 0; i < temp.length; ++i) {
+                temp[i] = temp[i].split(",");
+                temp[i].splice(colIndex, 1);
+                temp[i] = temp[i].join(","); // comment this if you want a 2D array
+            }
+        }
+    }
+    return temp.join("\n"); // returns CSV
+    //return temp; // returns 2D array
+    //return d3.csv.parse(temp); // returns a parsed object
+}
 
 /* d3.csv("/data/vg/Action.csv").then(function (data) {
     data.forEach(function (d) {
@@ -56,14 +95,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     dispatch = d3.dispatch("vgEvent");
     dispatch.on("vgEvent", function (vg) {
         if (vgSelectedBar != null) {
-            vgSelectedBar.attr("fill", "purple");
+            vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
-        console.log("rect[Year=\'" + vg.Year + "\']");
-        vgSelectedBar = d3.select("rect[Year=\'" + vg.Year + "\']");
-        console.log(vgSelectedBar);
-        
-        vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)"),
-        vgSelectedBar.attr("fill", "red");
+        vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
+        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
 
     // convert from string to number
@@ -92,7 +127,6 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         d.Total = +d.Total;
     });
     vgDS = data;
-    barchart.data = vgDS;
     gen_barChart();
     gen_timeline();
 });
@@ -101,16 +135,16 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 function genreSelector() {
     vgSelectedGenre = document.getElementById("dropdownbox").value;
     console.log(colorDict[vgSelectedGenre]);
-    
-    document.getElementById("dropdownbox").setAttribute("style","background-color:" + colorDict[vgSelectedGenre]);
+
+    document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
     update_barChart();
 }
 
 function update_barChart() {
-   //console.log("barchart update is called!\n year filers:");
-   //console.log(year_filters);
-   //console.log("genre");
-   //console.log(vgSelectedGenre);
+    //console.log("barchart update is called!\n year filers:");
+    //console.log(year_filters);
+    //console.log("genre");
+    //console.log(vgSelectedGenre);
 
     //console.log(barchart.data);
     barchart.data = vgDS.filter(function (d) {
@@ -186,16 +220,22 @@ function gen_barChart() {
     barchart.w = 1500;
     barchart.h = 200;
 
+    barchart.data = vgDS.filter(function (d, key) {
+        //return key=="Year"||key=="Total"||key==vgSelectedGenre;
+        return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
+    })
+    console.log(barchart.data);
+
     barchart.svg = d3.select("#barchart")
         .append("svg")
         .attr("width", barchart.w)
         .attr("height", barchart.h);
-    
+
     barchart.svg.append("text")
         .attr("class", "title")
         .attr("transform", "translate(700,30)")
-    	.text("Video Games per Year");
-    
+        .text("Video Games per Year");
+
 
     barchart.padding = 40;
     barchart.bar_w = 20;
@@ -218,8 +258,8 @@ function gen_barChart() {
 
     barchart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
-        .domain([barchart.data[0].Year, barchart.data[barchart.data.length - 1].Year])
-        .range([barchart.padding + barchart.bar_w / 2, barchart.w - barchart.padding - barchart.bar_w / 2]))
+            .domain([barchart.data[0].Year, barchart.data[barchart.data.length - 1].Year])
+            .range([barchart.padding + barchart.bar_w / 2, barchart.w - barchart.padding - barchart.bar_w / 2]))
 
         .tickFormat(d3.format("d"))
         .ticks(barchart.data.length);
@@ -244,6 +284,7 @@ function gen_barChart() {
             rect1.setAttribute('x', barchart.xScale(i));
             rect1.setAttribute('y', barchart.yScale(d.Total));
             rect1.setAttribute("fill", d3.schemeCategory10[0]);
+            rect1.setAttribute("Year", d.Year);
             rects.appendChild(rect1);
 
             var genre = getGenre(vgSelectedGenre, d);
@@ -254,14 +295,34 @@ function gen_barChart() {
             rect2.setAttribute('x', barchart.xScale(i));
             rect2.setAttribute('y', barchart.yScale(genre));
             rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
+            rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
 
             return rects;
         })
         .on("mouseover", function (d) {
+            //tooltip.style("display", null);
             dispatch.call("vgEvent", d, d);
         })
+
 }
+
+/* var tooltip = barchart.svg.append("g")
+  .attr("class", "tooltip")
+  .style("display", "none");
+    
+tooltip.append("rect")
+  .attr("width", 30)
+  .attr("height", 20)
+  .attr("fill", "white")
+  .style("opacity", 0.5);
+
+tooltip.append("text")
+  .attr("x", 15)
+  .attr("dy", "1.2em")
+  .style("text-anchor", "middle")
+  .attr("font-size", "12px")
+  .attr("font-weight", "bold"); */
 
 function gen_timeline() {
     var margin = {
@@ -636,9 +697,14 @@ function gen_WordCloud() {
 } */
 
 function genLineChart() {
-    var margin = {top: 20, right: 30, bottom: 30, left: 30},
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    var margin = {
+            top: 20,
+            right: 30,
+            bottom: 30,
+            left: 30
+        },
+        width = 460 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
 
     // append the svg object to the body of the page
     var svg = d3.select("#linechart")
@@ -647,57 +713,66 @@ function genLineChart() {
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+            "translate(" + margin.left + "," + margin.top + ")");
 
-//Read the data
+    //Read the data
     d3.csv("data/crime/crimesperstate.csv",
 
-  // When reading the csv, I must format variables:
-  function(d){
-    return { year : new Date(+d.Year, 0, 1),
-             state : d.State_abbr,
-             population : d.Population,
-             violentCrime: +d.Violent_crime,
-             homicide: +d.Homicide,
-             robbery: +d.Robbery,
-             aggravatedAssault: +d.Aggravated_assault,
-             propertyCrime: +d.Property_crime,
-             burglary: +d.Burglary,
-             larceny: +d.Larceny,
-             motorVehicleTheft: +d.Motor_vehicle_theft
+        // When reading the csv, I must format variables:
+        function (d) {
+            return {
+                year: new Date(+d.Year, 0, 1),
+                state: d.State_abbr,
+                population: d.Population,
+                violentCrime: +d.Violent_crime,
+                homicide: +d.Homicide,
+                robbery: +d.Robbery,
+                aggravatedAssault: +d.Aggravated_assault,
+                propertyCrime: +d.Property_crime,
+                burglary: +d.Burglary,
+                larceny: +d.Larceny,
+                motorVehicleTheft: +d.Motor_vehicle_theft
             }
-  },
+        },
 
-  // Now I can use this dataset:
-  function(data) {
+        // Now I can use this dataset:
+        function (data) {
 
-    // Add X axis --> it is a date format
-    var x = d3.scaleTime()
-      .domain(d3.extent(data, function(d) { return d.year; }))
-      .range([0, 1]); //Placeholder Number
+            // Add X axis --> it is a date format
+            var x = d3.scaleTime()
+                .domain(d3.extent(data, function (d) {
+                    return d.year;
+                }))
+                .range([0, 1]); //Placeholder Number
 
-    svg.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x));
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
 
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(data, function(d) { return +d.population; })])
-      .range([ 0, 1000]); //Placeholder Number
+            // Add Y axis
+            var y = d3.scaleLinear()
+                .domain([0, d3.max(data, function (d) {
+                    return +d.population;
+                })])
+                .range([0, 1000]); //Placeholder Number
 
-    svg.append("g")
-      .call(d3.axisLeft(y));
+            svg.append("g")
+                .call(d3.axisLeft(y));
 
-    // Add the line
-    svg.append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("d", d3.line()
-        .x(function(d) { return x(d.year) })
-        .y(function(d) { return y(d.population) })
-        )
+            // Add the line
+            svg.append("path")
+                .datum(data)
+                .attr("fill", "none")
+                .attr("stroke", "steelblue")
+                .attr("stroke-width", 1.5)
+                .attr("d", d3.line()
+                    .x(function (d) {
+                        return x(d.year)
+                    })
+                    .y(function (d) {
+                        return y(d.population)
+                    })
+                )
 
-    })
+        })
 }

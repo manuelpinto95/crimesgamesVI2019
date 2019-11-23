@@ -1,0 +1,659 @@
+{
+    "years": [
+        {
+            "year": "1994",
+            "movies": [
+                "The Shawshank Redemption",
+                "Pulp Fiction",
+                "Forrest Gump",
+                "L\u00e9on: The Professional",
+                "The Lion King"
+            ]
+        },
+        {
+            "year": "1972",
+            "movies": [
+                "The Godfather"
+            ]
+        },
+        {
+            "year": "1974",
+            "movies": [
+                "The Godfather: Part II",
+                "Chinatown"
+            ]
+        },
+        {
+            "year": "2008",
+            "movies": [
+                "The Dark Knight",
+                "WALL\u00b7E",
+                "Gran Torino",
+                "A Wednesday"
+            ]
+        },
+        {
+            "year": "1957",
+            "movies": [
+                "12 Angry Men",
+                "Paths of Glory",
+                "Witness for the Prosecution",
+                "The Bridge on the River Kwai",
+                "The Seventh Seal",
+                "Wild Strawberries",
+                "The Nights of Cabiria"
+            ]
+        },
+        {
+            "year": "1993",
+            "movies": [
+                "Schindler's List",
+                "In the Name of the Father",
+                "Jurassic Park",
+                "Groundhog Day"
+            ]
+        },
+        {
+            "year": "2003",
+            "movies": [
+                "Lord of the Rings: Return of the King",
+                "Oldeuboi",
+                "Finding Nemo",
+                "Kill Bill: Vol. 1",
+                "Memories of Murder",
+                "Munna Bhai M.B.B.S.",
+                "Pirates of the Caribbean: The Curse of the Black Pearl"
+            ]
+        },
+        {
+            "year": "1966",
+            "movies": [
+                "The Good, the Bad and the Ugly",
+                "Andrei Rublev",
+                "Persona",
+                "The Battle of Algiers"
+            ]
+        },
+        {
+            "year": "1999",
+            "movies": [
+                "Fight Club",
+                "The Matrix",
+                "The Green Mile",
+                "American Beauty",
+                "The Sixth Sense"
+            ]
+        },
+        {
+            "year": "2001",
+            "movies": [
+                "Lord of the Rings: Fellowship of the Ring",
+                "Spirited Away",
+                "Am\u00e9lie",
+                "A Beautiful Mind",
+                "Donnie Darko",
+                "Monsters, Inc."
+            ]
+        },
+        {
+            "year": "1980",
+            "movies": [
+                "Star Wars: Ep V - The Empire Strikes Back",
+                "The Shining",
+                "Raging Bull",
+                "The Elephant Man"
+            ]
+        },
+        {
+            "year": "2010",
+            "movies": [
+                "Inception",
+                "Toy Story 3",
+                "Incendies",
+                "How to Train Your Dragon",
+                "Shutter Island"
+            ]
+        },
+        {
+            "year": "2002",
+            "movies": [
+                "Lord of the Rings: Two Towers",
+                "City of God",
+                "The Pianist",
+                "Catch Me If You Can",
+                "Infernal Affairs"
+            ]
+        },
+        {
+            "year": "1975",
+            "movies": [
+                "One Flew Over the Cuckoo's Nest",
+                "Monty Python and the Holy Grail",
+                "Barry Lyndon",
+                "Jaws",
+                "Dog Day Afternoon"
+            ]
+        },
+        {
+            "year": "1990",
+            "movies": [
+                "Goodfellas"
+            ]
+        },
+        {
+            "year": "1954",
+            "movies": [
+                "Seven Samurai",
+                "Rear Window",
+                "On the Waterfront",
+                "Dial M for Murder"
+            ]
+        },
+        {
+            "year": "1977",
+            "movies": [
+                "Star Wars: Ep IV - A New Hope",
+                "Annie Hall"
+            ]
+        },
+        {
+            "year": "1995",
+            "movies": [
+                "Se7en",
+                "The Usual Suspects",
+                "Braveheart",
+                "Toy Story",
+                "Heat",
+                "Casino",
+                "Before Sunrise",
+                "La Haine",
+                "Twelve Monkeys"
+            ]
+        },
+        {
+            "year": "1991",
+            "movies": [
+                "The Silence of the Lambs",
+                "Terminator 2",
+                "Beauty and the Beast"
+            ]
+        },
+        {
+            "year": "1946",
+            "movies": [
+                "It's a Wonderful Life",
+                "The Best Years of Our Lives"
+            ]
+        },
+        {
+            "year": "1997",
+            "movies": [
+                "Life Is Beautiful",
+                "Princess Mononoke",
+                "Good Will Hunting",
+                "L.A. Confidential",
+                "Children of Heaven"
+            ]
+        },
+        {
+            "year": "1998",
+            "movies": [
+                "Saving Private Ryan",
+                "American History X",
+                "Lock, Stock and Two Smoking Barrels",
+                "The Big Lebowski",
+                "The Truman Show"
+            ]
+        },
+        {
+            "year": "1968",
+            "movies": [
+                "Once Upon a Time in the West",
+                "2001: A Space Odyssey"
+            ]
+        },
+        {
+            "year": "2014",
+            "movies": [
+                "Interstellar",
+                "Whiplash",
+                "Gone Girl",
+                "Relatos salvajes",
+                "The Grand Budapest Hotel",
+                "PK"
+            ]
+        },
+        {
+            "year": "1960",
+            "movies": [
+                "Psycho",
+                "The Apartment"
+            ]
+        },
+        {
+            "year": "1942",
+            "movies": [
+                "Casablanca"
+            ]
+        },
+        {
+            "year": "1931",
+            "movies": [
+                "City Lights",
+                "M"
+            ]
+        },
+        {
+            "year": "2011",
+            "movies": [
+                "The Intouchables",
+                "A Separation",
+                "Warrior",
+                "Harry Potter and the Deathly Hallows: Part 2",
+                "The Help"
+            ]
+        },
+        {
+            "year": "1936",
+            "movies": [
+                "Modern Times"
+            ]
+        },
+        {
+            "year": "1981",
+            "movies": [
+                "Raiders of the Lost Ark",
+                "Das Boot"
+            ]
+        },
+        {
+            "year": "2006",
+            "movies": [
+                "The Departed",
+                "The Prestige",
+                "The Lives of Others",
+                "Pan's Labyrinth",
+                "Rang De Basanti"
+            ]
+        },
+        {
+            "year": "1985",
+            "movies": [
+                "Back to the Future",
+                "Ran",
+                "Come and See"
+            ]
+        },
+        {
+            "year": "2000",
+            "movies": [
+                "Gladiator",
+                "Memento",
+                "Requiem for a Dream",
+                "Snatch",
+                "Amores Perros",
+                "In the Mood for Love"
+            ]
+        },
+        {
+            "year": "1979",
+            "movies": [
+                "Apocalypse Now",
+                "Alien",
+                "Life of Brian",
+                "Stalker"
+            ]
+        },
+        {
+            "year": "1940",
+            "movies": [
+                "The Great Dictator",
+                "Rebecca",
+                "The Grapes of Wrath"
+            ]
+        },
+        {
+            "year": "1950",
+            "movies": [
+                "Sunset Blvd.",
+                "Rash\u00f4mon",
+                "All About Eve"
+            ]
+        },
+        {
+            "year": "1964",
+            "movies": [
+                "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb"
+            ]
+        },
+        {
+            "year": "1988",
+            "movies": [
+                "Cinema Paradiso",
+                "Grave of the Fireflies",
+                "Die Hard",
+                "My Neighbor Totoro"
+            ]
+        },
+        {
+            "year": "2012",
+            "movies": [
+                "Django Unchained",
+                "The Dark Knight Rises",
+                "Jagten"
+            ]
+        },
+        {
+            "year": "2017",
+            "movies": [
+                "Blade Runner 2049",
+                "Dunkirk",
+                "Logan"
+            ]
+        },
+        {
+            "year": "1986",
+            "movies": [
+                "Aliens",
+                "Platoon",
+                "Stand by Me",
+                "Castle in the Sky"
+            ]
+        },
+        {
+            "year": "1984",
+            "movies": [
+                "Once Upon a Time in America",
+                "Amadeus",
+                "Nausica\u00e4 of the Valley of the Wind",
+                "The Terminator",
+                "Paris, Texas"
+            ]
+        },
+        {
+            "year": "2016",
+            "movies": [
+                "Dangal",
+                "Kimi no na wa.",
+                "Hacksaw Ridge",
+                "La La Land",
+                "Ah-ga-ssi"
+            ]
+        },
+        {
+            "year": "1941",
+            "movies": [
+                "Citizen Kane",
+                "The Maltese Falcon"
+            ]
+        },
+        {
+            "year": "1958",
+            "movies": [
+                "Vertigo",
+                "Touch of Evil"
+            ]
+        },
+        {
+            "year": "1959",
+            "movies": [
+                "North by Northwest",
+                "Some Like It Hot",
+                "Ben-Hur",
+                "The 400 Blows"
+            ]
+        },
+        {
+            "year": "1983",
+            "movies": [
+                "Star Wars: Ep VI - Return of the Jedi",
+                "Scarface"
+            ]
+        },
+        {
+            "year": "1992",
+            "movies": [
+                "Reservoir Dogs",
+                "Unforgiven"
+            ]
+        },
+        {
+            "year": "2007",
+            "movies": [
+                "Taare Zameen Par",
+                "No Country for Old Men",
+                "There Will Be Blood",
+                "Into the Wild",
+                "The Bourne Ultimatum"
+            ]
+        },
+        {
+            "year": "1971",
+            "movies": [
+                "A Clockwork Orange"
+            ]
+        },
+        {
+            "year": "1962",
+            "movies": [
+                "Lawrence of Arabia",
+                "To Kill a Mockingbird"
+            ]
+        },
+        {
+            "year": "1944",
+            "movies": [
+                "Double Indemnity"
+            ]
+        },
+        {
+            "year": "2004",
+            "movies": [
+                "Eternal Sunshine of the Spotless Mind",
+                "Downfall",
+                "Howl's Moving Castle",
+                "Hotel Rwanda",
+                "Million Dollar Baby"
+            ]
+        },
+        {
+            "year": "1976",
+            "movies": [
+                "Taxi Driver",
+                "Network",
+                "Rocky"
+            ]
+        },
+        {
+            "year": "1987",
+            "movies": [
+                "Full Metal Jacket",
+                "The Princess Bride"
+            ]
+        },
+        {
+            "year": "1952",
+            "movies": [
+                "Singin' in the Rain",
+                "Ikiru"
+            ]
+        },
+        {
+            "year": "1973",
+            "movies": [
+                "The Sting",
+                "Paper Moon"
+            ]
+        },
+        {
+            "year": "2009",
+            "movies": [
+                "3 Idiots",
+                "Inglourious Basterds",
+                "Up",
+                "The Secret in Their Eyes",
+                "Mary and Max",
+                "Hachi: A Dog's Tale"
+            ]
+        },
+        {
+            "year": "1948",
+            "movies": [
+                "Bicycle Thieves",
+                "The Treasure of the Sierra Madre"
+            ]
+        },
+        {
+            "year": "1921",
+            "movies": [
+                "The Kid"
+            ]
+        },
+        {
+            "year": "1965",
+            "movies": [
+                "For a Few Dollars More"
+            ]
+        },
+        {
+            "year": "1927",
+            "movies": [
+                "Metropolis",
+                "Sunrise"
+            ]
+        },
+        {
+            "year": "1989",
+            "movies": [
+                "Indiana Jones and the Last Crusade",
+                "Dead Poets Society"
+            ]
+        },
+        {
+            "year": "1961",
+            "movies": [
+                "Yojimbo",
+                "Judgment at Nuremberg"
+            ]
+        },
+        {
+            "year": "2005",
+            "movies": [
+                "Babam ve Oglum",
+                "Batman Begins",
+                "V for Vendetta"
+            ]
+        },
+        {
+            "year": "1949",
+            "movies": [
+                "The Third Man"
+            ]
+        },
+        {
+            "year": "1963",
+            "movies": [
+                "The Great Escape",
+                "8\u00bd"
+            ]
+        },
+        {
+            "year": "1925",
+            "movies": [
+                "The Gold Rush"
+            ]
+        },
+        {
+            "year": "2015",
+            "movies": [
+                "Inside Out",
+                "Room",
+                "Mad Max: Fury Road",
+                "Spotlight",
+                "Star Wars: The Force Awakens"
+            ]
+        },
+        {
+            "year": "1939",
+            "movies": [
+                "Mr. Smith Goes to Washington",
+                "Gone with the Wind",
+                "The Wizard of Oz"
+            ]
+        },
+        {
+            "year": "1982",
+            "movies": [
+                "Blade Runner",
+                "The Thing",
+                "Gandhi"
+            ]
+        },
+        {
+            "year": "2013",
+            "movies": [
+                "The Wolf of Wall Street",
+                "Rush",
+                "12 Years a Slave",
+                "Prisoners"
+            ]
+        },
+        {
+            "year": "1926",
+            "movies": [
+                "The General"
+            ]
+        },
+        {
+            "year": "1996",
+            "movies": [
+                "Trainspotting",
+                "Fargo",
+                "The Bandit"
+            ]
+        },
+        {
+            "year": "1978",
+            "movies": [
+                "The Deer Hunter"
+            ]
+        },
+        {
+            "year": "1953",
+            "movies": [
+                "Tokyo Story",
+                "The Wages of Fear"
+            ]
+        },
+        {
+            "year": "1967",
+            "movies": [
+                "Cool Hand Luke"
+            ]
+        },
+        {
+            "year": "1928",
+            "movies": [
+                "The Passion of Joan of Arc"
+            ]
+        },
+        {
+            "year": "1934",
+            "movies": [
+                "It Happened One Night"
+            ]
+        },
+        {
+            "year": "1969",
+            "movies": [
+                "Butch Cassidy and the Sundance Kid"
+            ]
+        },
+        {
+            "year": "1955",
+            "movies": [
+                "Diabolique"
+            ]
+        }
+    ]
+}

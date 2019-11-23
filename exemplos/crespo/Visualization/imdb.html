@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>IMDB Top 250 Movies</title>
+
+		<link rel="stylesheet" href="bs/css/bootstrap.min.css" >
+		<link href="style.css" rel="stylesheet" type="text/css">
+
+		<!-- jQuery library -->
+		<script src="tippyjs-2.0.0-beta/dist/tippy.all.min.js"></script>
+		<script src="jQuery/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="popper/popper.min.js"></script>
+		<script src="bs/js/bootstrap.min.js" ></script>
+
+		<script src="d3.v4.min.js" charset="utf-8"></script>
+
+		<script src="imdb.js"></script>	 
+
+	</head>
+
+	<body>
+		<nav class="navbar dark">
+	      <div class="container-fluid">
+	        <div class="navbar-header">
+	          <img id="imdb-icon" src="img/imdb-icon.png">
+	          <h1 id="imdb-title">Top 250 movies on IMDB!</h1>
+	        </div>
+	        <form class="navbar-form navbar-left" id="formMovie">
+ 	          <div class="input-group">
+ 	            <input id="inputMovie" list="movieList" name="movies" class="form-control" placeholder="Search Movie">
+				<datalist id="movieList">
+				</datalist>
+ 	            <div class="input-group-btn">
+ 	              <button class="btn btn-default" type="button" id="submitBtn"><img src="img/search-icon.png"></button>
+ 	            </div>
+ 	          </div>
+ 	        </form>
+	      </div>
+	    </nav>
+		<div id="ClevelandWrapper">
+			<div id="sliderWrapper">
+				<div style="width: 250; display: inline-block;">
+			      <label for="clevelandSlider" id="label-slider">
+			        Maximum <span id= "max-attribute">cenas</span> = <span id="max-value">…</span>
+			      </label>
+			    </div>
+			      <input id="clevelandSlider" type="range" min="0" max="0" value="0" class="slider">
+			</div>
+			<div id="items">
+			    <button id="movies" class="btn btn-outline-dark btn-clev-y active">All Movies</button>
+		    </div>
+			<div id="clevelandDot"></div>
+		    <div class="buttonWrapper">
+		      <button id="clev-Rating" type="button" key="Rating" class="btn btn-clev-x btn-outline-primary" style="display: inline-block;">Rating</button>
+		      <button id="clev-Budget" type="button" key="Budget (millions)" class="btn btn-clev-x btn-outline-success" style="display: inline-block;">Budget</button>
+		      <button id="clev-Gross" type="button" key="Gross (millions)" class="btn btn-clev-x btn-outline-info" style="display: inline-block;">Gross</button>
+		      <button id="clev-Awards" type="button" key="Awards" class="btn btn-clev-x btn-outline-warning active" style="display: inline-block;">Awards</button>
+		      <button id="clev-Nominations" type="button" key="Nominations" class="btn btn-clev-x btn-outline-danger" style="display: inline-block;">Nominations</button>
+		    </div>
+		    <div class="clear"><!-- --></div>
+			</div>
+			<div id ="circleWrapper">
+			<div id="circleSliderWrapper">
+				<div>
+			      <label for="circleSlider" id="label-slider">
+			        Minimum Films = <span id="minFilmsValue">1</span>
+			      </label>
+			    </div>
+			      <input id="circleSlider" type="range" min="1" max="10" value="1" class="slider">
+				</div>
+			<div id="actor_circle"></div>
+		</div>
+		<div id = "scatterWrapper">
+			<div id="scatterPlot"></div>
+			<div class="buttonWrapper" id="yScat-Buttons">
+		      <button id="yScat-Rating" type="button" key="Rating" class="btn btn-scat-y btn-outline-primary" style="display: inline-block;">Rating</button>
+		      <button id="yScat-Budget" type="button" key="Budget (millions)" class="btn btn-scat-y btn-outline-success active" style="display: inline-block;">Budget</button>
+		      <button id="yScat-Gross" type="button" key="Gross (millions)" class="btn btn-scat-y btn-outline-info" style="display: inline-block;">Gross</button>
+		      <br>
+		      <button id="yScat-Awards" type="button" key="Awards" class="btn btn-scat-y btn-outline-warning" style="display: inline-block;position: relative; left: 10px;">Awards</button>
+		      <button id="yScat-Nominations" type="button" key="Nominations" class="btn-scat-y btn btn-outline-danger" style="display: inline-block;position: relative; left: 10px;">Nominations</button>
+		    </div>
+		</div>
+    <div id="timeWrapper">
+    	<div id="timeline"></div>
+    	<div id="lineChart"></div>
+    </div>
+		<div id="myTemplate" style="display: none;" >
+	  		
+	  		<img class="moviePoster" height="150" src="./img/The Shawshank Redemption.jpg" style="display: inline-block;">
+	  		<div style="display: inline-block;font-size: 18; vertical-align:middle; margin: 10px">
+	  			<span style="display: block; text-align: left;">Title: <span class="movieTitle">The Shawshank Redemption</span></span>
+	  			<span class="movieX" style="display: block;  text-align: left;">Awards: 250</span>
+	  			<span class="movieY" style="display: block; text-align: left;">Nominations: 250</span>
+	  		</div>
+		</div>
+		<div id="actorCircleTippyTemplate" style="display: none;" >
+			<img class="moviePoster" height="150" src="./img/The Shawshank Redemption.jpg" style="display: none;"><br/>
+			<div style="display: inline-block;font-size: 18; vertical-align:middle; margin: 10px">
+				<span class="movieTitle">The Shawshank Redemption</span>
+			</div>
+	</div>
+		<div id="timeLineTippyTemplate" style="display: none;" >
+	  		<img class="moviePoster" height="200" src="./img/The Shawshank Redemption.jpg" style="display: none;">
+		</div>
+
+	</body>
+
+
+</html>

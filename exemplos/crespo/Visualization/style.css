@@ -1,0 +1,372 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    background-color: #fffff4
+}
+
+b {
+    font-weight: 900;
+}
+
+.dark{
+    background-color: #222;
+    border-color: #080808;
+    color: #9d9d9d; 
+    padding-top: 0px;
+    height: 50px;
+}
+
+#imdb-icon{
+    width: 60
+}
+
+#imdb-title{
+    display: inline-block;
+    position: relative;
+    top:10px;
+    font-size: 35;
+    margin-left: 20px;
+}
+form.navbar-form.navbar-left{
+    margin-bottom: 0;
+}
+
+.outline {
+    fill: none;
+    stroke: #000000;
+    stroke-width: 1px;
+}
+
+#tooltip {
+    font-size: 10pt;
+    font-weight: 900;
+
+    fill: #000000;
+    stroke: #ffffff;
+    stroke-width: 0.25px;
+}
+
+.highlight {
+    stroke: red;
+    stroke-weight: 4px;
+    stroke-opacity: 1.0;
+}
+
+
+
+.btn-outline-*{
+    border: 1.5px !important;
+    font-weight: 600 !important;
+}
+
+.btn.disabled{
+    opacity: .35;
+}
+
+
+
+/*-------------- CSS for Cleveland Dot Plot -------------*/
+
+#sliderWrapper{
+    position: relative;
+    left: 340px;
+}
+
+#ClevelandWrapper{
+    display: inline-block;
+    margin-top: 10px;
+    left: 0px;
+    position: absolute;
+}
+
+#label-slider{
+    display: block;
+    width: 260px; 
+    text-align: center;
+    margin:0px;
+}
+
+#clevelandSlider{
+    width: 260px;
+    position: relative;
+    left: 20px;
+}
+#items{
+    position: absolute;
+    top: -4px;
+    left: 240px;
+    z-index: 200;
+}
+
+#items>button{
+    display: inline-block;
+   
+}
+
+#the_chart{
+    position: relative; 
+    left: 90px;
+}
+
+
+
+#clevelandDot{
+    position: relative;
+    margin-left: 50px;
+    top: 0px;
+}
+
+#clevelandDot>svg>circle{
+    stroke: black;
+    stroke-width: 2px;
+    fill: #fffff4;
+}
+
+#clevelandDot>svg>circle.selected{
+    stroke: black;
+    stroke-width: 2px;
+    fill: red !important;
+}
+
+#clevelandDot>svg>circle.mouseover{
+    stroke: black;
+    stroke-width: 2px;
+    fill: orange;
+}
+g{
+    font-size: 14px
+}
+
+g>line{
+    stroke: rgba(0,0,0,1)
+}
+
+.axisLabel{
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/*--------------------- TimeLine ----------------------*/
+#timeWrapper{
+    position: absolute;
+    top: 900px;
+}
+
+#timeline{
+    position: relative;
+    top: -50px;
+    z-index:99;
+}
+
+#lineChart{
+    position: relative;
+    top: -170px;
+}
+
+.year_selected{
+    fill: #2889ca;
+}
+
+.year-mouseover{
+    fill:orange;
+}
+
+
+/*-----------------------------------------------------*/
+
+#scatterWrapper{
+    display: inline-block;
+    position: absolute;
+    top:440px;
+}
+
+#ClevelandWrapper > .buttonWrapper, #xScat-Buttons  {
+    position: relative;
+    left: 330px;
+    display: inline-block;
+    top: 15;
+    z-index: 999;
+}
+
+#scatterWrapper > #xScat-Buttons{
+    top: -40px;
+}
+
+.buttonWrapper > button{
+    display: inline-block;
+    border-width: 1.5px !important;
+    font-weight: 600 !important;
+    z-index: 200;
+}
+
+
+#scatterWrapper > #yScat-Buttons {
+    position: relative;
+    display: inline-block;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+
+    top: -250px;
+    left: -50px;
+
+}
+
+#scatterPlot{
+    position: relative; 
+    margin-left: 85px;
+}
+
+
+#scatterPlot>svg>circle.selected{
+    fill: rgba(228,30,30,1);
+    z-index: 9;
+}
+
+.clear{
+    clear: both;
+}
+
+.scatt-mouseover{
+    fill:orange !important;
+}
+
+/*-------------Circle---------------*/
+
+#circleWrapper{
+    display: inline-block;
+    position: absolute;
+    left: 950px;
+    top: 0px;
+}
+#circleSlider{
+    margin-left:66px;
+}
+#circleSliderWrapper{
+        top: 101px;
+    position: absolute;
+    left: 20px;
+    width: 150px;
+}
+
+#actor_Circle{
+}
+.node {
+    font-size:2px
+}
+.link {
+    fill: none;
+    stroke: #D0D0D0;
+    stroke-weight: 0.25px;
+    stroke-opacity: 0.5;
+}
+.node--highlighted{
+    font-weight:bold;
+    stroke: #a0a0a0;
+}
+.node:hover,
+.node--source,
+.node--target {
+    font-weight: 700;
+    font-size:10px;
+    stroke-width:1px;
+    
+}
+
+.node--selected{
+    fill: #2889ca;
+    font-size:10px;
+    font-weight: bold;
+    stroke:none
+    
+}
+
+.node--source {
+    fill: #2ca02c;
+    font-weight: bold;
+    stroke:none
+}
+
+.node--target {
+    fill: #d62728;
+    font-weight: bold;
+    stroke:none
+}
+.link--highlighted{
+    stroke-opacity: 1;
+    color: #a0a0a0;
+    stroke-width: 1px;
+    stroke: #a0a0a0;
+}
+
+.link--selected{
+    stroke-opacity: 1;
+    color: #2889ca;
+    stroke-width: 2px;
+    stroke: #2889ca;
+}
+
+.node--movie-mouseover {
+    fill: orange;
+    font-size:10px;
+    font-weight: bold;
+    stroke:none
+}
+.link--movie-mouseover{
+    stroke-opacity: 1;
+    color: orange;
+    stroke-width: 2px;
+    stroke: orange;
+}
+
+.link:hover,
+.link--active{
+    stroke-opacity: 1;
+    color: #d62728;
+    stroke-width: 2px;
+    stroke: #d62728;
+}
+
+
+
+
+
+.slidecontainer {
+    width: 100%;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 9px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
