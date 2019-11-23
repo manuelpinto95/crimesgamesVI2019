@@ -1,42 +1,53 @@
-
-
-
-
 <html>
-
-
 <!-- Load d3.js -->
-<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3.v5.js"></script>
 
 <!-- Load d3-cloud -->
 <script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
 
 
-  <head>
-   <title>Crime vs Video Games</title>
-   <link rel="stylesheet" href="crimesgames.css">
-   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-   <script src="crimesgames.js"></script>
-  </head>
+<head>
+  <title>Crime vs Video Games</title>
+  <link rel="stylesheet" href="crimesgames.css">
+  <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+  <script src="crimesgames.js"></script>
+</head>
 
-
-
-
-  <body style="background-color:white;">
-    <h1 id="title">Crime vs Video Games in the U.S</h1>
-    <div id="map"></div>
-    <div id="stateselect"></div>
-    <div id="masslist"></div>
-    <div id="wordcloud"></div>
-    <div id="linechart"></div>
-    <div id="barchart"></div>
-    <div id="searchgames"></div>
+<body style="background-color:white;">
+  <h1 id="title">Crime vs Video Games in the U.S</h1>
+  <select onchange="genreSelector()" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
+    <option value="Action">Action </option>
+    <option value="Action_Adventure">Action Adventure</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Board_Game">Board Game</option>
+    <option value="Education">Education</option>
+    <option value="Fighting">Fighting</option>
+    <option value="Misc">Misc</option>
+    <option value="MMO">MMO</option>
+    <option value="Music">Music</option>
+    <option value="Party">Party</option>
+    <option value="Platform">Platform</option>
+    <option value="Puzzle">Puzzle</option>
+    <option value="Racing">Racing</option>
+    <option value="Role_Playing">Role Playing</option>
+    <option value="Sandbox">Sandbox</option>
+    <option value="Shooter">Shooter</option>
+    <option value="Simulation">Simulation</option>
+    <option value="Sports">Sports</option>
+    <option value="Strategy">Strategy</option>
+    <option value="Visual_Novel">Visual Novel</option>
+  </select>
+  <div id="map"></div>
+  <div id="stateselect"></div>
+  <div id="masslist"></div>
+  <div id="wordcloud"></div>
+  <div id="linechart"></div>
+  <div id="barchart"></div>
+  <div id="searchgames"></div>
+  <div class="row" id="third-row">
     <div id="timeline"></div>
-    
-  </body>
+  </div>
 
-
+</body>
 
 </html>
-
-
