@@ -3,7 +3,7 @@ var vgTotal,
     vgAction,
     vgShooter,
     vgSelectedBar = null,
-    vgSelectedGenre = "Action";
+    vgSelectedGenre = "Action",
     crimeState;
 
 
