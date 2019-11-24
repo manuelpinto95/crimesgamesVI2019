@@ -6,6 +6,12 @@ var vgTotal,
     vgSelectedGenre = "Action",
     crimeState;
 
+var crimeDS,
+    selectedState = "the USA",//TODO retirar depois
+    selectedCrimeType = "violent_crime",
+    //selectedStates = ["AK", "AL", "AR"],
+    //stateColors = [d3.schemeDark2[0], d3.schemeDark2[1], d3.schemeDark2[2]],
+    crimeSelectedDot = null;
 
 var year_filters = [1979, 2016];
 var year_hovered = null;
@@ -54,6 +60,74 @@ genreId["Sports"] = 18;
 genreId["Strategy"] = 19;
 genreId["Visual_Novel"] = 20;
 
+var crimeNameDic = {}
+crimeNameDic["violent_crime"] = "Violent crime"
+crimeNameDic["homicide"] = "Homicide"
+crimeNameDic["rape_legacy"] = "Rape legacy"
+crimeNameDic["rape_revised"] = "Rape revised"
+crimeNameDic["robbery"] = "Robbery"
+crimeNameDic["aggravated_assault"] = "Aggravated assault"
+crimeNameDic["property_crime"] = "Property crime"
+crimeNameDic["burglary"] = "Burglary"
+crimeNameDic["larceny"] = "Larceny"
+crimeNameDic["motor_vehicle_theft"] = "Motor vehicle theft"
+
+var stateDir = {
+    "AK": "Alaska",
+    "AL": "Alabama",
+    "AR": "Arkansas",
+    "AZ": "Arizona",
+    "CA": "California",
+    "CO": "Colorado",
+    "CT": "Connecticut",
+    "DC": "District of Columbia",
+    "DE": "Delaware",
+    "FL": "Florida",
+    "GA": "Georgia",
+    "HI": "Hawaii",
+    "IA": "Iowa",
+    "ID": "Idaho",
+    "IL": "Illinois",
+    "IN": "Indiana",
+    "KS": "Kansas",
+    "KY": "Kentucky",
+    "LA": "Louisiana",
+    "MA": "Massachusetts",
+    "MD": "Maryland",
+    "ME": "Maine",
+    "MI": "Michigan",
+    "MN": "Minnesota",
+    "MO": "Missouri",
+    "MS": "Mississippi",
+    "MT": "Montana",
+    "NC": "North Carolina",
+    "ND": "North Dakota",
+    "NE": "Nebraska",
+    "NH": "New Hampshire",
+    "NJ": "New Jersey",
+    "NM": "New Mexico",
+    "NV": "Nevada",
+    "NY": "New York",
+    "OH": "Ohio",
+    "OK": "Oklahoma",
+    "OR": "Oregon",
+    "PA": "Pennsylvania",
+    "PR": "Puerto Rico",
+    "RI": "Rhode Island",
+    "SC": "South Carolina",
+    "SD": "South Dakota",
+    "TN": "Tennessee",
+    "TX": "Texas",
+    "UT": "Utah",
+    "VA": "Virginia",
+    "VT": "Vermont",
+    "WA": "Washington",
+    "WI": "Wisconsin",
+    "WV": "West Virginia",
+    "WY": "Wyoming",
+    "the USA": "the USA"
+}
+
 // utility function
 function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -89,6 +163,36 @@ d3.csv("/data/vg/Shooter.csv").then(function (data) {
     });
     vgShooter = data;
 }); */
+d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
+    /* // mouse hover event
+    dispatch = d3.dispatch("crimeEvent");
+    dispatch.on("crimeEvent", function (vg) {
+        if (crimeSelectedDot != null) {
+            vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
+            crimeSelectedDot.attr("r", lineChart.r);
+        }
+        vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot.attr("r", 5);
+        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
+    }) */
+    // convert from string to number
+    data.forEach(function (d) {
+        d.population = +d.population;
+        d.violent_crime = +d.violent_crime;
+        d.homicide = +d.homicide;
+        d.rape_legacy = +d.rape_legacy;
+        d.rape_revised = +d.rape_revised;
+        d.robbery = +d.robbery;
+        d.aggravated_assault = +d.aggravated_assault;
+        d.property_crime = +d.property_crime;
+        d.burglary = +d.burglary;
+        d.larceny = +d.larceny;
+        d.motor_vehicle_theft = +d.motor_vehicle_theft;
+    });
+    crimeDS = data;
+    genLineChart();
+});
 
 d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
@@ -96,8 +200,11 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     dispatch.on("vgEvent", function (vg) {
         if (vgSelectedBar != null) {
             vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
+            crimeSelectedDot.attr("r", lineChart.r);
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot.attr("r", 5);
         vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
 
@@ -224,7 +331,7 @@ function gen_barChart() {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
     })
-    console.log(barchart.data);
+    //console.log(barchart.data);
 
     barchart.svg = d3.select("#barchart")
         .append("svg")
@@ -521,7 +628,7 @@ function gen_timeline() {
     }
 }
 
-function getGenre (name, d) {
+function getGenre(name, d) {
     var genre;
     switch (name) {
         case "Action":
@@ -590,6 +697,200 @@ function getGenre (name, d) {
             break;
     }
     return genre;
+}
+var lineChart = {
+    data: 0,
+
+    margin: {
+        top: 50,
+        right: 50,
+        bottom: 50,
+        left: 50
+    },
+
+    // initialize with trash values!
+    width: 0,
+    height: 0,
+    linewidth: 2,
+
+    // initialize with huge values
+    xMin: 10000.0,
+    xMax: -10000.0,
+    yMin: 10000.0,
+    yMax: -10000.0,
+
+    // initialize with trash values!
+    xScale: 0,
+    yScale: 0,
+    maxXValue: 0,
+    svg: 0
+};
+
+function genLineChart() {
+
+    lineChart.w = 1500;
+    lineChart.h = 200;
+
+    lineChart.svg = d3.select("#linechart")
+        .append("svg")
+        .attr("width", lineChart.w)
+        .attr("height", lineChart.h);
+
+    lineChart.svg.append("text")
+        .attr("class", "title")
+        .attr("transform", "translate(700,30)")
+        .text(crimeNameDic[selectedCrimeType] + " in " + stateDir[selectedState]);
+
+    console.log(crimeDS);
+    lineChart.data = crimeDS.filter(function (d, key) {
+        //return key=="Year"||key=="Total"||key==vgSelectedGenre;
+        return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == selectedState/*  (d.state_abbr == selectedStates[0] || d.state_abbr == selectedStates[1] || d.state_abbr == selectedStates[2]) */)
+    })
+    console.log(lineChart.data);
+
+    lineChart.padding = 40;
+    lineChart.bar_w = 20;
+    lineChart.r = 2;
+
+    lineChart.yMax = d3.max(lineChart.data, function (d) {
+        return getCrimeMax(selectedState, d)
+    })
+
+    //console.log(lineChart.yMax);
+
+
+    lineChart.yScale = d3.scaleLinear()
+        .domain([lineChart.yMax, 0])
+        .range([lineChart.padding, lineChart.h - lineChart.padding]);
+
+    lineChart.xScale = d3.scaleLinear()
+        .domain([0, lineChart.data.length])
+        .range([lineChart.padding, lineChart.w - lineChart.padding]);
+
+    lineChart.yAxis = d3.axisLeft()
+        .scale(lineChart.yScale)
+        .ticks(4);
+
+    lineChart.xAxis = d3.axisBottom()
+        .scale(d3.scaleLinear()
+            .domain([lineChart.data[0].Year, lineChart.data[lineChart.data.length - 1].Year])
+            .range([lineChart.padding + lineChart.bar_w / 2, lineChart.w - lineChart.padding - lineChart.bar_w / 2]))
+        .tickFormat(d3.format("d"))
+        .ticks(lineChart.data.length);
+
+    lineChart.svg.append("g")
+        .attr("transform", "translate(40,0)")
+        .attr("class", "y axis")
+        .call(lineChart.yAxis);
+
+    lineChart.svg.append("g")
+        .attr("transform", "translate(0," + (lineChart.h - lineChart.padding) + ")")
+        .call(lineChart.xAxis);
+
+
+    lineChart.svg.selectAll("circle")
+        .data(lineChart.data)
+        .enter().append("circle")
+        .attr("r", lineChart.r)
+        .attr("fill", function (d) {
+            return "blue";
+        })
+        .attr("year", function (d) {
+            return d.Year;
+        })
+        .attr("cx", function (d, i) {
+            return lineChart.xScale(i); //TODO maybe d.Year
+        })
+        .attr("cy", function (d) {
+            var crime = getCrime(selectedCrimeType, d);
+            //console.log(crime); 
+            //console.log(d.violent_crime);
+
+            return lineChart.yScale(d.violent_crime);
+        })
+        .on("mouseover", function (d) {
+            //tooltip.style("display", null);
+            dispatch.call("vgEvent", d, d);
+        })
+    /* .attr("title", function (d) {
+        return d.title;
+    }); */
+}
+
+function getCrime(name, d) {
+    var crime;
+    switch (name) {
+        case "violent_crime":
+            crime = d.violent_crime
+            break;
+        case "homicide":
+            crime = d.homicide
+            break;
+        case "rape_legacy":
+            crime = d.rape_legacy
+            break;
+        case "robbery":
+            crime = d.robbery
+            break;
+        case "aggravated_assault":
+            crime = d.aggravated_assault
+            break;
+        case "property_crime":
+            crime = d.property_crime
+            break;
+        case "burglary":
+            crime = d.burglary
+            break;
+        case "larceny":
+            crime = d.larceny
+            break;
+        case "motor_vehicle_theft":
+            crime = d.motor_vehicle_theft
+            break;
+        default:
+            crime = d.violent_crime;
+            break;
+    }
+    //console.log(crime);
+    return crime;
+}
+
+function getCrimeMax(name, d) {
+    var crime;
+    switch (name) {
+        case "violent_crime":
+            crime = +d.violent_crime
+            break;
+        case "homicide":
+            crime = +d.homicide
+            break;
+        case "rape_legacy":
+            crime = +d.rape_legacy
+            break;
+        case "robbery":
+            crime = +d.robbery
+            break;
+        case "aggravated_assault":
+            crime = +d.aggravated_assault
+            break;
+        case "property_crime":
+            crime = +d.property_crime
+            break;
+        case "burglary":
+            crime = +d.burglary
+            break;
+        case "larceny":
+            crime = +d.larceny
+            break;
+        case "motor_vehicle_theft":
+            crime = +d.motor_vehicle_theft
+            break;
+        default:
+            crime = +d.violent_crime;
+            break;
+    }
+    //console.log(crime);
+    return crime;
 }
 
 //------------------------
@@ -695,87 +996,3 @@ function gen_WordCloud() {
 
 
 } */
-
-function gen_linechart() {
-var margin = {top: 50, right: 0, bottom: 50, left: 96}
-  , width = 1500 - margin.left - margin.right // Use the window's width 
-  , height = 300 - margin.top - margin.bottom; // Use the window's height
-
-// The number of datapoints
-var n = 37;
-
-// 5. X scale will use the index of our data
-var xScale = d3.scaleLinear()
-    .domain([1979, 2016]) // input
-    .range([0, width]); // output
-
-// 6. Y scale will use the randomly generate number 
-var yScale = d3.scaleLinear()
-    .domain([0, 50000]) // input 
-    .range([height, 0]); // output 
-
-var dataset = d3.range(n).map(function(d) { return {"y": d3.randomUniform(1)() } })
-var datasetExample = d3.csv("/data/crime/crimesperstate.csv", function(d) {
-  return {
-    year : +d.year,
-    state : d.state_abbr,
-    population : +d.population,
-    violent_crime : +d.violent_crime,
-    homicide : +d.homicide,
-    robbery : +d.robbery,
-    aggravated_assault: +d.aggravated_assault,
-    property_crime : +d.property_crime,
-    burglary : +d.burglary,
-    larceny : +d.larceny,
-    motor_vehicle_theft : +d.motor_vehicle_theft
-  };
-}).then(function(data) {
-  console.log(data[0]);
-  console.log(datasetExample);
-    var line = d3.line()
-    .x(function(d) { return xScale(d.year); }) // set the x values for the line generator
-    .y(function(d) { return yScale(d.population); }) // set the y values for the line generator 
-    .curve(d3.curveMonotoneX); // apply smoothing to the line
-
-// 1. Add the SVG to the page and employ #2
-    var svg = d3.select("#linechart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-// 3. Call the x axis in a group tag
-    svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(xScale)); // Create an axis component with d3.axisBottom
-
-// 4. Call the y axis in a group tag
-    svg.append("g")
-    .attr("class", "y axis")
-    .call(d3.axisLeft(yScale)); // Create an axis component with d3.axisLeft
-
-// 9. Append the path, bind the data, and call the line generator 
-    svg.append("path")
-    .data(data) // 10. Binds data to the line 
-    .attr("class", "line")
-    .attr("stroke", "steelblue") // Assign a class for styling 
-    .attr("d", line); // 11. Calls the line generator 
-
-// 12. Appends a circle for each datapoint 
-/*svg.selectAll(".dot")
-    .data(datasetExample)
-    .enter().append("circle") // Uses the enter().append() method
-    .attr("class", "dot") // Assign a class for styling
-    .attr("cx", function(d, i) { return xScale(i) })
-    .attr("cy", function(d) { return yScale(d.y) })
-    .attr("r", 5)
-      .on("mouseover", function(a, b, c) { 
-            console.log(a) 
-        this.attr('class', 'focus')
-        })
-      .on("mouseout", function() {  })
-*/
-});
-}
-gen_linechart();
