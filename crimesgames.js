@@ -326,10 +326,10 @@ tooltip.append("text")
 
 function gen_timeline() {
     var margin = {
-            left: 30,
+            left: 170,
             right: 30
         },
-        width = 1500,
+        width = 1600,
         height = 60,
         range = [1979, 2016],
         step = 1; // change the step and if null, it'll switch back to a normal slider
@@ -711,7 +711,7 @@ var xScale = d3.scaleLinear()
 
 // 6. Y scale will use the randomly generate number 
 var yScale = d3.scaleLinear()
-    .domain([0, 50000]) // input 
+    .domain([0, 5000000]) // input 
     .range([height, 0]); // output 
 
 var dataset = d3.range(n).map(function(d) { return {"y": d3.randomUniform(1)() } })
