@@ -218,7 +218,7 @@ var barchart = {
 
 function gen_barChart() {
     barchart.w = 1500;
-    barchart.h = 200;
+    barchart.h = 270;
 
     barchart.data = vgDS.filter(function (d, key) {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
@@ -244,7 +244,7 @@ function gen_barChart() {
         return +d.Total;
     })
 
-    barchart.yScale = d3.scaleSymlog()
+    barchart.yScale = d3.scaleSqrt()
         .domain([barchart.yMax, 0])
         .range([barchart.padding, barchart.h - barchart.padding]);
 
@@ -254,7 +254,7 @@ function gen_barChart() {
 
     barchart.yAxis = d3.axisLeft()
         .scale(barchart.yScale)
-        .ticks(3);
+        .ticks(5);
 
     barchart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
