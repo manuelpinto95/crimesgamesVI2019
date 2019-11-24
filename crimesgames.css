@@ -1,122 +1,142 @@
-h1 { 
-   font-size: 18pt;
-   font-family: calibri, arial, sans serif;
+h1 {
+  font-size: 18pt;
+  font-family: calibri, arial, sans serif;
 }
 
 div {
-	border:1px solid grey;
+  border: 1px solid grey;
 }
 
 .container {
-	display: flex;
+  display: flex;
 }
 
 .container>div {
-	flex: 1;
-	/*grow*/
+  flex: 1;
+  /*grow*/
 }
 
 #map {
-	height: 600;
-	width: 600;
+  height: 600;
+  width: 600;
 }
+
 #selectors {
-	height: 600;
-	width: 300;
+  height: 600;
+  width: 300;
 }
+
 #stateselect {
-	height: 300;
+  height: 300;
 
 }
+
 #masslist {
-	height: 300;
+  height: 300;
 
 }
+
 #wordcloud {
-	height: 600;
-	width: 600;
+  height: 600;
+  width: 600;
 }
+
 #linechart {
-	height: 300;
-	width: 1500;
+  height: 300;
+  text-align: center;
 }
+#barchart {
+  height: 300;
+  text-align: center;
+}
+
 #dropdownbox {
   height: 20;
   width: 133;
-  vertical-align: top; /* here */
+  vertical-align: top;
+  /* here */
 }
 
 #crimeSelector {
   height: 20;
   width: 133;
+  height: 20;
+  width: 133;
+  vertical-align: top;
+  /* here */
 }
 
-.axis path, .axis line {
-    fill: none;
-    stroke: black;
+.axis path,
+.axis line {
+  fill: none;
+  stroke: black;
 
 }
 
 .axis text {
-   font-family: calibri, sans serif;
-   font-size: 10pt;
+  font-family: calibri, sans serif;
+  font-size: 10pt;
 }
 
 .btn {
-	width: 100px;
-	font-family: calibri, sans serif;
-	padding: 10px;
-	border: solid 1px black;
-	color: white;
+  width: 100px;
+  font-family: calibri, sans serif;
+  padding: 10px;
+  border: solid 1px black;
+  color: white;
 }
 
 /*============== Timeline styling ==============*/
 
 #timeline {
-    font: 10pt Helvetica, sans-serif;
-    fill: #000000;
-    color: #000000;
+  font: 10pt Helvetica, sans-serif;
+  fill: #000000;
+  color: #000000;
+  text-align: center;
 }
 
-#timeline text{
-    fill: #000000;
-    color: #000000;
-}   
+#timeline text {
+  fill: #000000;
+  color: #000000;
+}
 
 #timeline svg line.track {
-    stroke-opacity: 0.4;
-    stroke: #000;
-    stroke-width: 10px;
+  stroke-opacity: 0.4;
+  stroke: #000;
+  stroke-width: 10px;
 }
+
 #timeline svg line.track-inset {
-    stroke: #444444;
-    stroke-width: 8px;
+  stroke: #444444;
+  stroke-width: 8px;
 }
 
 #timeline svg line.track-interval {
-    stroke: steelblue;
-    stroke-width: 8px;
+  stroke: steelblue;
+  stroke-width: 8px;
 }
 
 /* this is a hidden element, changing it here won't do anything visually */
 #timeline svg line.track-overlay {
-    stroke: #eeeeee;
-    stroke-width: 40px;
-    stroke-opacity: 0;
+  stroke: #eeeeee;
+  stroke-width: 40px;
+  stroke-opacity: 0;
 }
 
-#timeline svg line.track-overlay, #timeline svg line.track, #timeline svg line.track-inset {
-    stroke-linecap: round;
+#timeline svg line.track-overlay,
+#timeline svg line.track,
+#timeline svg line.track-inset {
+  stroke-linecap: round;
 }
 
 #timeline svg #minHandle {
-    fill: #057db5;
-    stroke: #444444;
+  fill: #057db5;
+  stroke: #444444;
 }
 
 #timeline svg #maxHandle {
-    fill: #28c5ff;
-    stroke: #444444;
+  fill: #28c5ff;
+  stroke: #444444;
 }
 
 /*============== Dropdown list styler ==============*/
@@ -125,80 +145,83 @@ div {
 	background: #8dd3c7;
 } */
 
-  
-  select option[value="Action"] {
-	background: #8dd3c7;
-  }
-  
-  select option[value="Action_Adventure"] {
-	background: #ffffb3;
-  }
-  
-  select option[value="Adventure"] {
-	background: #bebada;
-  }
-  
-  select option[value="Board_Game"] {
-	background: #fb8072;
-  }
 
-  select option[value="Education"] {
-	background: #80b1d3;
-  }
-  select option[value="Fighting"] {
-	background: #fdb462;
-  }
-  
-  select option[value="Misc"] {
-	background: #b3de69;
-  }
-  
-  select option[value="MMO"] {
-	background: #fccde5;
-  }
-  
-  select option[value="Music"] {
-	background: #d9d9d9;
-  }
-  
-  select option[value="Party"] {
-	background: #bc80bd;
-  }
-  select option[value="Platform"] {
-	background: #ccebc5;
-  }
-  
-  select option[value="Puzzle"] {
-	background: #ffed6f;
-  }
-  
-  select option[value="Racing"] {
-	background: #66c2a5;
-  }
-  
-  select option[value="Role_Playing"] {
-	background: #fc8d62;
-  }
-  
-  select option[value="Sandbox"] {
-	background: #8da0cb;
-  }
-  select option[value="Shooter"] {
-	background: #e78ac3;
-  }
-  
-  select option[value="Simulation"] {
-	background: #a6d854;
-  }
-  
-  select option[value="Sports"] {
-	background: #ffd92f;
-  }
-  
-  select option[value="Strategy"] {
-	background: #e5c494;
-  }
-  
-  select option[value="Visual_Novel"] {
-	background: #b3b3b3;
-  }
+select option[value="Action"] {
+  background: #8dd3c7;
+}
+
+select option[value="Action_Adventure"] {
+  background: #ffffb3;
+}
+
+select option[value="Adventure"] {
+  background: #bebada;
+}
+
+select option[value="Board_Game"] {
+  background: #fb8072;
+}
+
+select option[value="Education"] {
+  background: #80b1d3;
+}
+
+select option[value="Fighting"] {
+  background: #fdb462;
+}
+
+select option[value="Misc"] {
+  background: #b3de69;
+}
+
+select option[value="MMO"] {
+  background: #fccde5;
+}
+
+select option[value="Music"] {
+  background: #d9d9d9;
+}
+
+select option[value="Party"] {
+  background: #bc80bd;
+}
+
+select option[value="Platform"] {
+  background: #ccebc5;
+}
+
+select option[value="Puzzle"] {
+  background: #ffed6f;
+}
+
+select option[value="Racing"] {
+  background: #66c2a5;
+}
+
+select option[value="Role_Playing"] {
+  background: #fc8d62;
+}
+
+select option[value="Sandbox"] {
+  background: #8da0cb;
+}
+
+select option[value="Shooter"] {
+  background: #e78ac3;
+}
+
+select option[value="Simulation"] {
+  background: #a6d854;
+}
+
+select option[value="Sports"] {
+  background: #ffd92f;
+}
+
+select option[value="Strategy"] {
+  background: #e5c494;
+}
+
+select option[value="Visual_Novel"] {
+  background: #b3b3b3;
+}

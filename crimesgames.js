@@ -201,11 +201,13 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         if (vgSelectedBar != null) {
             vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
             crimeSelectedDot.attr("r", lineChart.r);
+            crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
         crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
         crimeSelectedDot.attr("r", 5);
         vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
+        crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
 
     // convert from string to number
@@ -752,7 +754,7 @@ var lineChart = {
 function genLineChart() {
 
     lineChart.w = 1500;
-    lineChart.h = 200;
+    lineChart.h = 300;
 
     lineChart.svg = d3.select("#linechart")
         .append("svg")
@@ -805,7 +807,7 @@ function genLineChart() {
         .call(lineChart.yAxis);
 
     lineChart.svg.append("g")
-        .attr("transform", "translate(0," + (lineChart.h - lineChart.padding) + ")")
+        .attr("transform", "translate(-10," + (lineChart.h - lineChart.padding) + ")")
         .call(lineChart.xAxis);
 
 
@@ -814,7 +816,7 @@ function genLineChart() {
         .enter().append("circle")
         .attr("r", lineChart.r)
         .attr("fill", function (d) {
-            return "blue";
+            return d3.schemeCategory10[0];
         })
         .attr("year", function (d) {
             return d.Year;
