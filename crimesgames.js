@@ -205,7 +205,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
         crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot.attr("r", 5);
+        crimeSelectedDot.attr("r", 6);
         vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
         crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
@@ -776,7 +776,7 @@ function genLineChart() {
 
     lineChart.padding = 40;
     lineChart.bar_w = 20;
-    lineChart.r = 2;
+    lineChart.r = 3;
 
     lineChart.yMax = d3.max(lineChart.data, function (d) {
         return getCrimeMax(selectedCrimeType, d)
@@ -792,7 +792,13 @@ function genLineChart() {
 
     lineChart.yAxis = d3.axisLeft()
         .scale(lineChart.yScale)
-        .ticks(4);
+        .ticks(8)
+        .tickFormat(function (d) {
+            if ((d / 1000) >= 1) {
+              d = d / 1000 + "K";
+            }
+            return d;
+          });
 
     lineChart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
