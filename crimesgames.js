@@ -325,7 +325,7 @@ var barchart = {
 
 function gen_barChart() {
     barchart.w = 1500;
-    barchart.h = 200;
+    barchart.h = 270;
 
     barchart.data = vgDS.filter(function (d, key) {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
@@ -351,7 +351,7 @@ function gen_barChart() {
         return +d.Total;
     })
 
-    barchart.yScale = d3.scaleSymlog()
+    barchart.yScale = d3.scaleSqrt()
         .domain([barchart.yMax, 0])
         .range([barchart.padding, barchart.h - barchart.padding]);
 
@@ -361,7 +361,7 @@ function gen_barChart() {
 
     barchart.yAxis = d3.axisLeft()
         .scale(barchart.yScale)
-        .ticks(3);
+        .ticks(5);
 
     barchart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
@@ -433,10 +433,10 @@ tooltip.append("text")
 
 function gen_timeline() {
     var margin = {
-            left: 30,
+            left: 170,
             right: 30
         },
-        width = 1500,
+        width = 1600,
         height = 60,
         range = [1979, 2016],
         step = 1; // change the step and if null, it'll switch back to a normal slider
@@ -992,7 +992,4 @@ function gen_WordCloud() {
             .text(function (d) {
                 return d.text;
             });
-    }
-
-
-} */
+    } */
