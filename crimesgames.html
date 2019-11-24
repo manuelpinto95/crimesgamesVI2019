@@ -24,33 +24,47 @@
     </div>
     <div id="wordcloud">word cloud</div>
   </div>
-  <div class="container">
-    <div id="linechart"></div>
+  <div class="row">
+    <div id="linechart">
+      <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector"> ==$0
+        <option value="violent_crime">Violent crime </option>
+        <option value="homicide">Homicide</option>
+        <option value="rape_legacy">Rape legacy</option>
+        <option value="rape_revised">Rape revised</option>
+        <option value="robbery">Robbery</option>
+        <option value="aggravated_assault">Aggravated assault</option>
+        <option value="property_crime">Property crime</option>
+        <option value="burglary">Burglary</option>
+        <option value="larceny">Larceny</option>
+        <option value="motor_vehicle_theft">Motor vehicle theft</option>
+      </select>
+    </div>
   </div>
-  <div class="container">
-    <select onchange="genreSelector()" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
-      <option value="Action">Action </option>
-      <option value="Action_Adventure">Action Adventure</option>
-      <option value="Adventure">Adventure</option>
-      <option value="Board_Game">Board Game</option>
-      <option value="Education">Education</option>
-      <option value="Fighting">Fighting</option>
-      <option value="Misc">Misc</option>
-      <option value="MMO">MMO</option>
-      <option value="Music">Music</option>
-      <option value="Party">Party</option>
-      <option value="Platform">Platform</option>
-      <option value="Puzzle">Puzzle</option>
-      <option value="Racing">Racing</option>
-      <option value="Role_Playing">Role Playing</option>
-      <option value="Sandbox">Sandbox</option>
-      <option value="Shooter">Shooter</option>
-      <option value="Simulation">Simulation</option>
-      <option value="Sports">Sports</option>
-      <option value="Strategy">Strategy</option>
-      <option value="Visual_Novel">Visual Novel</option>
-    </select>
-    <div id="barchart"></div>
+  <div class="row">
+    <div id="barchart">
+      <select onchange="genreSelector()" vertical-align="top" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
+        <option value="Action">Action </option>
+        <option value="Action_Adventure">Action Adventure</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Board_Game">Board Game</option>
+        <option value="Education">Education</option>
+        <option value="Fighting">Fighting</option>
+        <option value="Misc">Misc</option>
+        <option value="MMO">MMO</option>
+        <option value="Music">Music</option>
+        <option value="Party">Party</option>
+        <option value="Platform">Platform</option>
+        <option value="Puzzle">Puzzle</option>
+        <option value="Racing">Racing</option>
+        <option value="Role_Playing">Role Playing</option>
+        <option value="Sandbox">Sandbox</option>
+        <option value="Shooter">Shooter</option>
+        <option value="Simulation">Simulation</option>
+        <option value="Sports">Sports</option>
+        <option value="Strategy">Strategy</option>
+        <option value="Visual_Novel">Visual Novel</option>
+      </select>
+    </div>
   </div>
   <div class="container">
     <div id="timeline"></div>

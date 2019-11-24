@@ -7,7 +7,7 @@ var vgTotal,
     crimeState;
 
 var crimeDS,
-    selectedState = "the USA",//TODO retirar depois
+    selectedState = "the USA", //TODO retirar depois
     selectedCrimeType = "violent_crime",
     //selectedStates = ["AK", "AL", "AR"],
     //stateColors = [d3.schemeDark2[0], d3.schemeDark2[1], d3.schemeDark2[2]],
@@ -247,6 +247,12 @@ function genreSelector() {
     update_barChart();
 }
 
+function crimeSelector() {
+    selectedCrimeType = document.getElementById("crimeSelector").value;
+    console.log(selectedCrimeType);
+    update_lineChart();
+}
+
 function update_barChart() {
     //console.log("barchart update is called!\n year filers:");
     //console.log(year_filters);
@@ -270,11 +276,11 @@ function update_barChart() {
 
     gen_barChart();
 
-    barchart.svg.select(".xAxis").transition().duration(750)
-        .call(d3.axisBottom(barchart.xScale));
+    /*  barchart.svg.select(".xAxis").transition().duration(750)
+         .call(d3.axisBottom(barchart.xScale));
 
-    barchart.svg.select(".yAxis").transition().duration(750)
-        .call(d3.axisLeft(barchart.yScale));
+     barchart.svg.select(".yAxis").transition().duration(750)
+         .call(d3.axisLeft(barchart.yScale)); */
 
     /* var padding = 40;
     var bar_w = 20;
@@ -293,6 +299,22 @@ function update_barChart() {
         .range([padding + bar_w / 2, w - padding - bar_w / 2]));
     d3.select(".xaxis")
         .call(xaxis); */
+}
+
+function update_lineChart() {
+    /* lineChart.data = vgDS.filter(function (d) {
+        return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == selectedState)
+    })
+
+    lineChart.xAxis = d3.axisBottom()
+        .scale(d3.scaleLinear()
+            .domain([barchart.data[0].Year, barchart.data[barchart.data.length - 1].Year])
+            .range([barchart.padding + barchart.bar_w / 2, barchart.w - barchart.padding - barchart.bar_w / 2]))
+        .tickFormat(d3.format("d"))
+        .ticks(vgDS.length); */
+
+    lineChart.svg.remove();
+    genLineChart();
 }
 
 var barchart = {
@@ -331,7 +353,7 @@ function gen_barChart() {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
     })
-    //console.log(barchart.data);
+    console.log(barchart.data);
 
     barchart.svg = d3.select("#barchart")
         .append("svg")
@@ -538,6 +560,7 @@ function gen_timeline() {
             d3.select("#heatmap").selectAll("*").remove();
             //d3.select("#linechart").selectAll("*").remove();
             update_barChart();
+            update_lineChart();
         });;
 
     // this is the bar on top of above tracks with stroke = transparent and on which the drag behaviour is actually called
@@ -738,13 +761,14 @@ function genLineChart() {
 
     lineChart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(700,30)")
+        .attr("transform", "translate(700,40)")
         .text(crimeNameDic[selectedCrimeType] + " in " + stateDir[selectedState]);
 
     console.log(crimeDS);
+
     lineChart.data = crimeDS.filter(function (d, key) {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
-        return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == selectedState/*  (d.state_abbr == selectedStates[0] || d.state_abbr == selectedStates[1] || d.state_abbr == selectedStates[2]) */)
+        return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == selectedState /*  (d.state_abbr == selectedStates[0] || d.state_abbr == selectedStates[1] || d.state_abbr == selectedStates[2]) */ )
     })
     console.log(lineChart.data);
 
@@ -753,11 +777,8 @@ function genLineChart() {
     lineChart.r = 2;
 
     lineChart.yMax = d3.max(lineChart.data, function (d) {
-        return getCrimeMax(selectedState, d)
+        return getCrimeMax(selectedCrimeType, d)
     })
-
-    //console.log(lineChart.yMax);
-
 
     lineChart.yScale = d3.scaleLinear()
         .domain([lineChart.yMax, 0])
@@ -803,10 +824,7 @@ function genLineChart() {
         })
         .attr("cy", function (d) {
             var crime = getCrime(selectedCrimeType, d);
-            //console.log(crime); 
-            //console.log(d.violent_crime);
-
-            return lineChart.yScale(d.violent_crime);
+            return lineChart.yScale(crime);
         })
         .on("mouseover", function (d) {
             //tooltip.style("display", null);

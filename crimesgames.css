@@ -41,7 +41,14 @@ div {
 	width: 1500;
 }
 #dropdownbox {
-	height: 20;
+  height: 20;
+  width: 133;
+  vertical-align: top; /* here */
+}
+
+#crimeSelector {
+  height: 20;
+  width: 133;
 }
 
 .axis path, .axis line {
