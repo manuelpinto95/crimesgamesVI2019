@@ -24,8 +24,8 @@
     <div id="map">map</div>
     <div id=selectors>
       <div id="stateselect">
-        <select id="c1"  onchange="addState()" name="FipsCode"> ==$0
-          <option value="">Choose States to compare</option>
+        <select id="c1"  onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
+          <option hidden default = "">Choose States to Compare</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
           <option value="Arizona">Arizona</option>
@@ -68,7 +68,7 @@
           <option value="Rhode Island">Rhode Island</option>
           <option value="South Carolina">South Carolina</option>
           <option value="South Dakota">South Dakota</option>
-          <option value="Tnnessee">Tennessee</option>
+          <option value="Tennessee">Tennessee</option>
           <option value="Texas">Texas</option>
           <option value="Utah">Utah</option>
           <option value="Vermont">Vermont</option>
@@ -87,7 +87,8 @@
   </div>
 
   <div id="linechart">
-    <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector"> ==$0
+    <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector" label ="Choose Type of Crime"> ==$0
+      <option hidden default = "">Type of Crime</option>
       <option value="violent_crime">Violent crime </option>
       <option value="homicide">Homicide</option>
       <option value="rape_legacy">Rape legacy</option>
