@@ -13,6 +13,8 @@ var crimeDS,
     //stateColors = [d3.schemeDark2[0], d3.schemeDark2[1], d3.schemeDark2[2]],
     crimeSelectedDot = null;
 
+var states = ["", "", ""];
+
 var year_filters = [1979, 2016];
 var year_hovered = null;
 
@@ -127,56 +129,12 @@ var stateDir = {
     "WY": "Wyoming",
     "the USA": "the USA"
 }
-
 // utility function
 function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
 };
 
-function removeOtherGenres(data, genre) {
-    var colIndex = genreId[genre];
-    for (var j = 0; j < 20; j++) {
-        if (j != 1 || j != colIndex) {
-            var temp = data.toString().split("\n");
-            for (var i = 0; i < temp.length; ++i) {
-                temp[i] = temp[i].split(",");
-                temp[i].splice(colIndex, 1);
-                temp[i] = temp[i].join(","); // comment this if you want a 2D array
-            }
-        }
-    }
-    return temp.join("\n"); // returns CSV
-    //return temp; // returns 2D array
-    //return d3.csv.parse(temp); // returns a parsed object
-}
-
-/* d3.csv("/data/vg/Action.csv").then(function (data) {
-    data.forEach(function (d) {
-        d.Num = +Num;
-    });
-    vgAction = data;
-});
-
-d3.csv("/data/vg/Shooter.csv").then(function (data) {
-    data.forEach(function (d) {
-        d.Num = +Num;
-    });
-    vgShooter = data;
-}); */
 d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
-    /* // mouse hover event
-    dispatch = d3.dispatch("crimeEvent");
-    dispatch.on("crimeEvent", function (vg) {
-        if (crimeSelectedDot != null) {
-            vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
-            crimeSelectedDot.attr("r", lineChart.r);
-        }
-        vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot.attr("r", 5);
-        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
-    }) */
-    // convert from string to number
     data.forEach(function (d) {
         d.population = +d.population;
         d.violent_crime = +d.violent_crime;
@@ -355,7 +313,7 @@ function gen_barChart() {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
     })
-    console.log(barchart.data);
+    //console.log(barchart.data);
 
     barchart.svg = d3.select("#barchart")
         .append("svg")
@@ -764,15 +722,15 @@ function genLineChart() {
     lineChart.svg.append("text")
         .attr("class", "title")
         .attr("transform", "translate(700,40)")
-        .text(crimeNameDic[selectedCrimeType] + " in " + stateDir[selectedState]);
+        .text(crimeNameDic[selectedCrimeType] + " in " + stateDir[selectedState] + " per 1000 capita");
 
-    console.log(crimeDS);
+    //console.log(crimeDS);
 
     lineChart.data = crimeDS.filter(function (d, key) {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == selectedState /*  (d.state_abbr == selectedStates[0] || d.state_abbr == selectedStates[1] || d.state_abbr == selectedStates[2]) */ )
     })
-    console.log(lineChart.data);
+    //console.log(lineChart.data);
 
     lineChart.padding = 40;
     lineChart.bar_w = 20;
@@ -795,10 +753,10 @@ function genLineChart() {
         .ticks(8)
         .tickFormat(function (d) {
             if ((d / 1000) >= 1) {
-              d = d / 1000 + "K";
+                d = d / 1000 + "K";
             }
             return d;
-          });
+        });
 
     lineChart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
@@ -832,7 +790,12 @@ function genLineChart() {
         })
         .attr("cy", function (d) {
             var crime = getCrime(selectedCrimeType, d);
-            return lineChart.yScale(crime);
+            //console.log("-----------------");
+            //console.log(crime);
+            //console.log(d.population);
+
+            var crimePerCapita = crime / d.population * 1000;
+            return lineChart.yScale(crimePerCapita);
         })
         .on("mouseover", function (d) {
             //tooltip.style("display", null);
@@ -916,7 +879,8 @@ function getCrimeMax(name, d) {
             break;
     }
     //console.log(crime);
-    return crime;
+    var pop = d.population
+    return crime / pop * 1000;
 }
 
 //------------------------
