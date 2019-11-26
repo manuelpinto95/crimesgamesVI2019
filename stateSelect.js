@@ -1,3 +1,5 @@
+var states = ["", "", ""];
+
 function addState() {
     var newState = document.getElementById("c1").value;
     if (newState=="") return;
