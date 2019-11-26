@@ -241,7 +241,7 @@ function crimeSelector() {
 }
 
 function getStatesText() {
-    if (states == ["", "", ""])
+    if (countStates()==0)
         return "the USA"
     else {
         var ret = "";
