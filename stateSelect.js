@@ -1,5 +1,15 @@
 var states = ["", "", ""];
 
+function countStates() {
+    var i = 0;
+    var count = 0;
+    for (i = 0; i < 3; i++) {
+        if (states[i] != "")
+            count++;
+    }
+    return count;
+}
+
 function addState() {
     var newState = document.getElementById("c1").value;
     if (newState=="") return;
