@@ -10,7 +10,7 @@
   <title>Crime vs Video Games</title>
   <link rel="stylesheet" href="crimesgames.css">
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
-  <script src="crimesgames.js"></script>
+  <script src="barChart.js"></script>
   <script src="stateSelect.js"></script>
   <script src="timeLine.js"></script>
   <script src="wordCloud.js"></script>
@@ -24,8 +24,8 @@
     <div id="map">map</div>
     <div id=selectors>
       <div id="stateselect">
-        <select id="c1"  onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
-          <option hidden default = "">Choose States to Compare</option>
+        <select id="c1" onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
+          <option hidden default="">Choose States to Compare</option>
           <option value="Alabama">Alabama</option>
           <option value="Alaska">Alaska</option>
           <option value="Arizona">Arizona</option>
@@ -78,7 +78,7 @@
           <option value="Wisconsin">Wisconsin</option>
           <option value="Wyoming">Wyoming</option>
         </select>
-        <ul id =stateList>
+        <ul id=stateList>
         </ul>
       </div>
       <div id="masslist">mass shootings list</div>
@@ -87,8 +87,9 @@
   </div>
 
   <div id="linechart">
-    <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector" label ="Choose Type of Crime"> ==$0
-      <option hidden default = "">Type of Crime</option>
+    <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector" label="Choose Type of Crime">
+      ==$0
+      <option hidden default="">Type of Crime</option>
       <option value="violent_crime">Violent crime </option>
       <option value="homicide">Homicide</option>
       <option value="rape_legacy">Rape legacy</option>
@@ -103,9 +104,18 @@
   </div>
 
   <div id="barchart">
-    <!-- <div class="topnav">
-      <input type="text" placeholder="Search a video game...">
-    </div> -->
+    <!-- <select id="c2" name="FipsCode" label="Search for a video game..."> ==$0
+      <option hidden default="">Search for a video game...</option>
+    </select> -->
+    <div class="input-group">
+      <input id="vgSearch" list="vgList" name="videogames" class="form-control" placeholder="Search Video Games">
+      <datalist id="vgList">
+      </datalist>
+      <!-- <div class="input-group-btn">
+        <button class="btn btn-default" type="button" id="submitBtn"><img src="search-icon.png"></button>
+      </div> -->
+    </div>
+
     <select onchange="genreSelector()" vertical-align="top" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
       <option value="Action">Action </option>
       <option value="Action_Adventure">Action Adventure</option>

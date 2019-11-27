@@ -4,7 +4,8 @@ var vgTotal,
     vgShooter,
     vgSelectedBar = null,
     vgSelectedGenre = "Action",
-    crimeState;
+    crimeState,
+    vgNames;
 
 var colorDict = {}
 colorDict["Action"] = d3.schemeSet3[0];
@@ -65,7 +66,6 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
         crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
-
     // convert from string to number
     data.forEach(function (d) {
 
@@ -94,6 +94,24 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     vgDS = data;
     gen_barChart();
     gen_timeline();
+});
+
+d3.csv("/data/vg/vgNames.csv").then(function (data) {
+    data.forEach(function (d) {
+        d.Year = +d.Year;
+    });
+    vgNames = data;
+    var list = document.getElementById("vgList");
+    for(var i=0;i<vgNames.length;i++) {
+        var option = document.createElement("option");
+        option.setAttribute("value",vgNames[i].Name);
+        option.setAttribute("Year",vgNames[i].Year);
+        option.setAttribute("Genre",vgNames[i].Genre);
+        option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre))
+        list.appendChild(option);
+    }
+    console.log("video game dataset is now loaded");
+    
 });
 
 
