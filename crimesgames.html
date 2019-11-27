@@ -15,6 +15,7 @@
   <script src="timeLine.js"></script>
   <script src="wordCloud.js"></script>
   <script src="lineChart.js"></script>
+  <script src="vgSearcher.js"></script>
 </head>
 
 <body style="background-color:white;">
@@ -108,7 +109,7 @@
       <option hidden default="">Search for a video game...</option>
     </select> -->
     <div class="input-group">
-      <input id="vgSearch" list="vgList" name="videogames" class="form-control" placeholder="Search Video Games">
+      <input id="vgSearch" onchange="vgSelected()"  list="vgList" name="videogames" class="form-control" placeholder="Search Video Games">
       <datalist id="vgList">
       </datalist>
       <!-- <div class="input-group-btn">

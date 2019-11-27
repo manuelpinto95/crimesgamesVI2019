@@ -96,25 +96,6 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     gen_timeline();
 });
 
-d3.csv("/data/vg/vgNames.csv").then(function (data) {
-    data.forEach(function (d) {
-        d.Year = +d.Year;
-    });
-    vgNames = data;
-    var list = document.getElementById("vgList");
-    for(var i=0;i<vgNames.length;i++) {
-        var option = document.createElement("option");
-        option.setAttribute("value",vgNames[i].Name);
-        option.setAttribute("Year",vgNames[i].Year);
-        option.setAttribute("Genre",vgNames[i].Genre);
-        option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre))
-        list.appendChild(option);
-    }
-    console.log("video game dataset is now loaded");
-    
-});
-
-
 function genreSelector() {
     vgSelectedGenre = document.getElementById("dropdownbox").value;
     console.log(colorDict[vgSelectedGenre]);
@@ -276,6 +257,8 @@ function gen_barChart() {
             rect2.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(genre));
             rect2.setAttribute('x', barchart.xScale(i));
             rect2.setAttribute('y', barchart.yScale(genre));
+            //console.log(vgSelectedGenre);
+            
             rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);

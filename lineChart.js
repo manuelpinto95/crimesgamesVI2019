@@ -114,6 +114,12 @@ d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
         d.motor_vehicle_theft = +d.motor_vehicle_theft;
     });
     crimeDS = data;
+    /* var entries = d3.nest()
+        .key(function (d) { return d.Year; })
+        .key(function (d) { return d.state_abbr; })
+        .entries(crimeDS);
+    console.log(crimeDS);
+    console.log(entries); */
     genLineChart();
 });
 
@@ -132,17 +138,15 @@ function genLineChart() {
         .attr("transform", "translate(700,40)")
         .text(crimeNameDic[selectedCrimeType] + " in " + getStatesText() + " per 1000 capita");
 
-    //console.log(crimeDS);
 
     filterCrimeData()
 
-    
-    console.log(lineChart.data);
-    
+    //console.log(lineChart.data);
+
     lineChart.padding = 40;
     lineChart.bar_w = 20;
     lineChart.r = 3;
-    
+
     defineLineChartAxis()
 
     lineChart.svg.append("g")
@@ -152,6 +156,7 @@ function genLineChart() {
 
     lineChart.svg.append("g")
         .attr("transform", "translate(-10," + (lineChart.h - lineChart.padding) + ")")
+        .attr("class", "xaxis")
         .call(lineChart.xAxis);
 
 
@@ -180,11 +185,24 @@ function genLineChart() {
 }
 
 function update_lineChart() {
+    /* lineChart.svg.remove();
+    genLineChart(); */
     filterCrimeData()
+    console.log(lineChart.data);
     defineLineChartAxis()
-    lineChart.svg.selectAll("circle")
-        .data(lineChart.data)
-        .transition() // add a smooth transition
+    /* d3.select(".xaxis")
+        .call(lineChart.xAxis);
+    defineLineChartAxis()
+    d3.select(".yaxis")
+        .call(lineChart.yAxis); */
+
+    var circles = lineChart.svg.selectAll("circle")
+        .data(lineChart.data);
+
+    circles.exit().remove();
+
+    circles
+        .transition()
         .duration(1000)
         .attr("r", lineChart.r)
         .attr("fill", function (d) {
@@ -201,6 +219,7 @@ function update_lineChart() {
             var crimePerCapita = crime / d.population * 1000;
             return lineChart.yScale(crimePerCapita);
         });
+
 }
 
 function defineLineChartAxis() {
@@ -241,7 +260,7 @@ function crimeSelector() {
 }
 
 function getStatesText() {
-    if (countStates()==0)
+    if (countStates() == 0)
         return "the USA"
     else {
         var ret = "";
@@ -256,6 +275,8 @@ function getStatesText() {
 }
 
 function filterCrimeData() {
+    //console.log(year_filters);
+
     lineChart.data = crimeDS.filter(function (d, key) {
         if (countStates() == 0) {
             return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && d.state_abbr == "the USA")
