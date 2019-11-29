@@ -61,10 +61,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot = d3.select("circle[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot = d3.select("circle.dot[Year=\'" + vg.Year + "\']");
         crimeSelectedDot.attr("r", 6);
-        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
         crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
+        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
     })
     // convert from string to number
     data.forEach(function (d) {
@@ -153,35 +153,26 @@ function update_barChart() {
 }
 var barchart = {
     data: 0,
-
+    svg: 0,
     margin: {
-        top: 50,
-        right: 50,
-        bottom: 50,
-        left: 50
+        top: 1,
+        right: 5,
+        bottom: 1,
+        left: 5
     },
-
-    // initialize with trash values!
-    width: 0,
-    height: 0,
-    linewidth: 2,
-
-    // initialize with huge values
-    xMin: 10000.0,
-    xMax: -10000.0,
-    yMin: 10000.0,
-    yMax: -10000.0,
-
-    // initialize with trash values!
-    xScale: 0,
-    yScale: 0,
-    maxXValue: 0,
-    svg: 0
+    w: 0,
+    h: 0,
+    padding: 40,
+    r: 3,
+    bar_w: 20
 };
 
 function gen_barChart() {
-    barchart.w = 1500;
-    barchart.h = 270;
+
+    barchart.w = window.innerWidth - barchart.margin.left - barchart.margin.right // Use the window's width 
+    barchart.h = window.innerHeight / 4 - barchart.margin.top - barchart.margin.bottom; // Use the window's height
+
+    barchart.padding = 40;
 
     barchart.data = vgDS.filter(function (d, key) {
         //return key=="Year"||key=="Total"||key==vgSelectedGenre;
@@ -202,8 +193,8 @@ function gen_barChart() {
 
     barchart.padding = 40;
     barchart.bar_w = 20;
-
-    barchart.yMax = d3.max(barchart.data, function (d) {
+    
+    barchart.yMax = d3.max(barchart.data, function (d) {   
         return +d.Total;
     })
 

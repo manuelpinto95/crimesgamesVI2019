@@ -16,7 +16,7 @@ div {
   /*grow*/
 }
 
-#map {
+/* #map {
   height: 600;
   width: 600;
 }
@@ -39,7 +39,7 @@ div {
 #wordcloud {
   height: 600;
   width: 600;
-}
+} */
 
 #linechart {
   height: 300;
@@ -321,3 +321,24 @@ ul li:hover {
 }
 
 .close:hover {background: #bbb;}
+
+/* LINE CHART */
+
+.line {
+  fill: none;
+  stroke-width: 3;
+}
+
+.overlay {
+fill: none;
+pointer-events: all;
+}
+/* Style the dots by assigning a fill and stroke */
+.dot {
+  stroke: #fff;
+}
+
+.focus circle {
+fill: none;
+stroke: steelblue;
+}

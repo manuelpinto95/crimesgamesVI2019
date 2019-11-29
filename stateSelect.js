@@ -1,4 +1,7 @@
-var states = ["", "", ""];
+var states = ["","",""];
+states[0] = "CA";
+states[1] = "LA";
+states[2] = "";
 
 function countStates() {
     var i = 0;
