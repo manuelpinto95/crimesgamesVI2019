@@ -3,9 +3,9 @@ h1 {
   font-family: calibri, arial, sans serif;
 }
 
-div {
+/* div {
   border: 1px solid grey;
-}
+} */
 
 .container {
   display: flex;
@@ -298,7 +298,6 @@ ul {
 ul li {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6;
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
@@ -341,4 +340,19 @@ pointer-events: all;
 .focus circle {
 fill: none;
 stroke: steelblue;
+}
+
+/*Tool tip*/
+
+div.tooltip {	
+  position: absolute;			
+  text-align: center;			
+  width: auto;					
+  height: auto;					
+  padding: 2px;				
+  font: 12px sans-serif;		
+  background: lightsteelblue;	
+  border: 0px;		
+  border-radius: 8px;			
+  pointer-events: none;			
 }

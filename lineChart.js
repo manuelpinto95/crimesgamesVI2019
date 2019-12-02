@@ -99,7 +99,7 @@ var lineChart = {
     margin: {
         top: 1,
         right: 5,
-        bottom: 1,
+        bottom: 5,
         left: 5
     },
     w: 0,
@@ -115,7 +115,7 @@ function genLineChart() {
     lineChart.h = window.innerHeight / 4 - lineChart.margin.top - lineChart.margin.bottom; // Use the window's height
 
     lineChart.padding = 40;
-    lineChart.r = 3;
+    lineChart.r = 4;
 
     lineChart.svg = d3.select("#linechart")
         .append("svg")
@@ -142,6 +142,10 @@ function genLineChart() {
         .attr("class", "xaxis")
         .call(lineChart.xAxis);
 
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     var numStates = countStates();
     if (numStates == 0) {
         // Define lines
@@ -153,10 +157,40 @@ function genLineChart() {
                 return lineChart.yScale(crimePerCapita);
             }) // set the y values for the line generator 
             .curve(d3.curveMonotoneX) // apply smoothing to the line
+
         lineChart.svg.append("path")
-            .datum(line[0].values) // 10. Binds data to the line 
+            .datum(lineChart.data[0].values) // 10. Binds data to the line 
             .attr("class", "line") // Assign a class for styling 
-            .attr("d", line); // 11. Calls the line generator
+            .attr("d", line) // 11. Calls the line generator
+            .attr("stroke", d3.schemeDark2[3]);
+
+        lineChart.svg.selectAll("dot")
+            .data(lineChart.data[0].values)
+            .enter().append("circle") // Uses the enter().append() method
+            .attr("class", "dot") // Assign a class for styling
+            .attr("cx", function (d, i) { return lineChart.xScale(i); })
+            .attr("cy", function (d) {
+                var crime = getCrime(selectedCrimeType, d);
+                crimePerCapita = crime / d.population * 1000;
+                return lineChart.yScale(crimePerCapita);
+            })
+            .attr("r", 5)
+            .attr("fill", d3.schemeDark2[3])
+            .attr("Year", function (d) { return d.Year; })
+            .on("mouseover", function (d, i) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(1))
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
+                dispatch.call("vgEvent", d, d);
+            })
+            .on("mouseout", function (d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            })
     }
     else {
         for (let index = 0; index < numStates; index++) {
@@ -188,56 +222,74 @@ function genLineChart() {
                 })
                 .attr("r", 5)
                 .attr("fill", colorOfLines[index])
-                .attr("Year",function (d) {return d.Year;})
+                .attr("Year", function (d) { return d.Year; })
                 .on("mouseover", function (d) {
-                    //tooltip.style("display", null);
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(1))
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
                     dispatch.call("vgEvent", d, d);
                 })
-                .on("mouseout", function () { })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                })
         }
     }
 }
 
 function update_lineChart() {
-    filterCrimeData()
+    lineChart.svg.remove();
+    genLineChart();
+    /*filterCrimeData()
     defineLineChartAxis()
 
-    var circles = lineChart.svg.selectAll("circle")
-        .data(lineChart.data);
-    circles.exit().remove();
-    circles
-        .transition()
-        .duration(1000)
-        .attr("r", lineChart.r)
-        .attr("fill", function (d) {
-            return d3.schemeCategory10[0];
-        })
-        .attr("year", function (d) {
-            return d.Year;
-        })
-        .attr("cx", function (d, i) {
-            return lineChart.xScale(i); //TODO maybe d.Year
-        })
-        .attr("cy", function (d) {
-            var crime = getCrime(selectedCrimeType, d);
-            var crimePerCapita = crime / d.population * 1000;
-            return lineChart.yScale(crimePerCapita);
-        });
+    var numStates = countStates();
 
-    var path = lineChart.svg.selectAll("path")
+    var path = lineChart.svg.selectAll("path.line")
         .data(lineChart.data);
     path.exit().remove();
-    var line = d3.line()
-        .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
-        .y(function (d) {
-            var crime = getCrime(selectedCrimeType, d);
-            var crimePerCapita = crime / d.population * 1000;
-            return lineChart.yScale(crimePerCapita);
-        }) // set the y values for the line generator 
-        .curve(d3.curveMonotoneX) // apply smoothing to the line
-    path
-        .transition()
-        .duration(1000);
+
+
+    for (let index = 0; index < numStates; index++) {
+        var circles = lineChart.svg.selectAll("circle")
+            .data(lineChart.data[index].values)
+        circles.exit().remove();
+
+        circles
+            .transition()
+            .duration(1000)
+            .attr("class", "dot") // Assign a class for styling
+            .attr("cx", function (d, i) { return lineChart.xScale(i); })
+            .attr("cy", function (d) {
+                var crime = getCrime(selectedCrimeType, d);
+                var crimePerCapita = crime / d.population * 1000;
+                return lineChart.yScale(crimePerCapita);
+            })
+            .attr("r", 5)
+            .attr("fill", colorOfLines[index])
+            .attr("Year", function (d) { return d.Year; });
+
+        var line = d3.line()
+            .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
+            .y(function (d) {
+                var crime = getCrime(selectedCrimeType, d);
+                var crimePerCapita = crime / d.population * 1000;
+                return lineChart.yScale(crimePerCapita);
+            }) // set the y values for the line generator 
+            .curve(d3.curveMonotoneX) // apply smoothing to the line
+
+        path
+            .transition()
+            .duration(1000);
+            //.attr("class", "line") // Assign a class for styling 
+            //.attr("d", line) // 11. Calls the line generator
+            //.attr("stroke", colorOfLines[index]);
+    } */
+
     /* lineChart.svg.append("path")
         .datum(entries[0].values) // 10. Binds data to the line 
         .attr("class", "line") // Assign a class for styling 
@@ -277,7 +329,7 @@ function defineLineChartAxis() {
 
     lineChart.yAxis = d3.axisLeft()
         .scale(lineChart.yScale)
-        .ticks(8)
+        .ticks(6)
         .tickFormat(function (d) {
             if ((d / 1000) >= 1) {
                 d = d / 1000 + "K";
@@ -290,7 +342,7 @@ function defineLineChartAxis() {
             .domain([lineChart.data[0].values[0].Year, lineChart.data[0].values[lineChart.data[0].values.length - 1].Year])
             .range([lineChart.padding + lineChart.bar_w / 2, lineChart.w - lineChart.padding - lineChart.bar_w / 2]))
         .tickFormat(d3.format("d"))
-        .ticks(lineChart.data.length);
+        .ticks(lineChart.data[0].values.length);
 }
 
 function crimeSelector() {

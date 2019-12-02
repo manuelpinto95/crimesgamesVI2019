@@ -1,7 +1,7 @@
 var states = ["","",""];
-states[0] = "CA";
+/* states[0] = "CA";
 states[1] = "LA";
-states[2] = "";
+states[2] = "AK"; */
 
 function countStates() {
     var i = 0;
@@ -44,7 +44,7 @@ function addState() {
     span.setAttribute("class", "close");
     span.appendChild(document.createTextNode("x"));
     li.appendChild(span);
-    li.appendChild(document.createTextNode(newState));
+    li.appendChild(document.createTextNode(stateDic[newState]));
     ul.appendChild(li);
 
     span.addEventListener("click", function () {

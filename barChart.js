@@ -29,27 +29,27 @@ colorDict["Sports"] = d3.schemeSet2[5];
 colorDict["Strategy"] = d3.schemeSet2[6];
 colorDict["Visual_Novel"] = d3.schemeSet2[7];
 
-var genreId = {}
-genreId["Action"] = 1;
-genreId["Action_Adventure"] = 2;
-genreId["Adventure"] = 3;
-genreId["Board_Game"] = 4;
-genreId["Education"] = 5;
-genreId["Fighting"] = 6;
-genreId["Misc"] = 7;
-genreId["MMO"] = 8;
-genreId["Music"] = 9;
-genreId["Party"] = 10;
-genreId["Platform"] = 11;;
-genreId["Puzzle"] = 12;
-genreId["Racing"] = 13;
-genreId["Role_Playing"] = 14;
-genreId["Sandbox"] = 15;
-genreId["Shooter"] = 16;
-genreId["Simulation"] = 17;
-genreId["Sports"] = 18;
-genreId["Strategy"] = 19;
-genreId["Visual_Novel"] = 20;
+var genreTextDic = {}
+genreTextDic["Action"] = "Action";
+genreTextDic["Action_Adventure"] = "Action Adventure";
+genreTextDic["Adventure"] = "Adventure";
+genreTextDic["Board_Game"] = "Board Game";
+genreTextDic["Education"] = "Education";
+genreTextDic["Fighting"] = "Fighting";
+genreTextDic["Misc"] = "Misc";
+genreTextDic["MMO"] = "MMO";
+genreTextDic["Music"] = "Music";
+genreTextDic["Party"] = "Party";
+genreTextDic["Platform"] = "Platform";
+genreTextDic["Puzzle"] = "Puzzle";
+genreTextDic["Racing"] = "Racing";
+genreTextDic["Role_Playing"] = "Role Playing";
+genreTextDic["Sandbox"] = "Sandbox";
+genreTextDic["Shooter"] = "Shooter";
+genreTextDic["Simulation"] = "Simulation";
+genreTextDic["Sports"] = "Sports";
+genreTextDic["Strategy"] = "Strategy";
+genreTextDic["Visual_Novel"] = "Visual Novel";
 
 d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
@@ -61,7 +61,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot = d3.select("circle.dot[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
         crimeSelectedDot.attr("r", 6);
         crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
         vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
@@ -151,6 +151,8 @@ function update_barChart() {
     d3.select(".xaxis")
         .call(xaxis); */
 }
+
+
 var barchart = {
     data: 0,
     svg: 0,
@@ -166,6 +168,8 @@ var barchart = {
     r: 3,
     bar_w: 20
 };
+
+var barchartTooltipDiv;
 
 function gen_barChart() {
 
@@ -193,8 +197,8 @@ function gen_barChart() {
 
     barchart.padding = 40;
     barchart.bar_w = 20;
-    
-    barchart.yMax = d3.max(barchart.data, function (d) {   
+
+    barchart.yMax = d3.max(barchart.data, function (d) {
         return +d.Total;
     })
 
@@ -227,6 +231,11 @@ function gen_barChart() {
         .attr("transform", "translate(0," + (barchart.h - barchart.padding) + ")")
         .call(barchart.xAxis);
 
+        barchartTooltipDiv = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+
     barchart.svg.selectAll("rect")
         .data(barchart.data)
         .enter().append(function (d, i) {
@@ -249,16 +258,26 @@ function gen_barChart() {
             rect2.setAttribute('x', barchart.xScale(i));
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
-            
+
             rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
 
             return rects;
         })
-        .on("mouseover", function (d) {
-            //tooltip.style("display", null);
+        .on("mouseover", function (d, i) {
+            barchartTooltipDiv.transition()
+                .duration(200)
+                .style("opacity", .9);
+            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + getGenre(vgSelectedGenre, d))
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
             dispatch.call("vgEvent", d, d);
+        })
+        .on("mouseout", function (d) {
+            barchartTooltipDiv.transition()
+                .duration(500)
+                .style("opacity", 0);
         })
 
 }
