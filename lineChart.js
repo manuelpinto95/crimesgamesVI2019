@@ -112,7 +112,7 @@ var lineChart = {
 function genLineChart() {
 
     lineChart.w = window.innerWidth - lineChart.margin.left - lineChart.margin.right // Use the window's width 
-    lineChart.h = window.innerHeight / 4 - lineChart.margin.top - lineChart.margin.bottom; // Use the window's height
+    lineChart.h = 200 - lineChart.margin.top - lineChart.margin.bottom; // Use the window's height
 
     lineChart.padding = 40;
     lineChart.r = 4;
@@ -124,18 +124,24 @@ function genLineChart() {
 
     lineChart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(700,40)")
-        .text(crimeNameDic[selectedCrimeType] + " in " + getStatesText() + " per 1000 capita");
+        .attr("transform", "translate(" + (lineChart.w / 2 - 50) + ",40)")
+        .text("Crime occurrences per 1000 capita");
 
     filterCrimeData()
-    console.log("lineChard.data:");
-    console.log(lineChart.data);
+
     defineLineChartAxis()
 
     lineChart.svg.append("g")
         .attr("transform", "translate(40,0)")
         .attr("class", "y axis")
         .call(lineChart.yAxis);
+
+    lineChart.svg.append("text")
+        .attr("x", 62)
+        .attr("y", 35)
+        //.attr("transform", "rotate(-90)")
+        .style("text-anchor", "middle")
+        .text(crimeNameDic[selectedCrimeType]);
 
     lineChart.svg.append("g")
         .attr("transform", "translate(-10," + (lineChart.h - lineChart.padding) + ")")
@@ -145,6 +151,36 @@ function genLineChart() {
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+
+    var numStates = countStates();
+    if (numStates == 0) {
+        lineChart.svg.append("circle")
+            .attr("class", "dot") // Assign a class for styling
+            .attr("cx", lineChart.w - 60)
+            .attr("cy", 20)
+            .attr("r", 4)
+            .attr("fill", d3.schemeDark2[3])
+        lineChart.svg.append("text")
+            .attr("class", "title")
+            .attr("x", lineChart.w - 50)
+            .attr("y", 20 + 4)
+            .text("USA");
+    }
+    else {
+        for (let index = 0; index < numStates; index++) {
+            lineChart.svg.append("circle")
+                .attr("class", "dot") // Assign a class for styling
+                .attr("cx", lineChart.w - 60)
+                .attr("cy", 20 * (index + 1))
+                .attr("r", 4)
+                .attr("fill", d3.schemeDark2[index])
+            lineChart.svg.append("text")
+                .attr("class", "title")
+                .attr("x", lineChart.w - 50)
+                .attr("y", 20 * (index + 1) + 4)
+                .text(states[index]);
+        }
+    }
 
     var numStates = countStates();
     if (numStates == 0) {
@@ -246,19 +282,19 @@ function update_lineChart() {
     genLineChart();
     /*filterCrimeData()
     defineLineChartAxis()
-
+ 
     var numStates = countStates();
-
+ 
     var path = lineChart.svg.selectAll("path.line")
         .data(lineChart.data);
     path.exit().remove();
-
-
+ 
+ 
     for (let index = 0; index < numStates; index++) {
         var circles = lineChart.svg.selectAll("circle")
             .data(lineChart.data[index].values)
         circles.exit().remove();
-
+ 
         circles
             .transition()
             .duration(1000)
@@ -272,7 +308,7 @@ function update_lineChart() {
             .attr("r", 5)
             .attr("fill", colorOfLines[index])
             .attr("Year", function (d) { return d.Year; });
-
+ 
         var line = d3.line()
             .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
             .y(function (d) {
@@ -281,7 +317,7 @@ function update_lineChart() {
                 return lineChart.yScale(crimePerCapita);
             }) // set the y values for the line generator 
             .curve(d3.curveMonotoneX) // apply smoothing to the line
-
+ 
         path
             .transition()
             .duration(1000);

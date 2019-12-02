@@ -8,15 +8,14 @@ function clamp(value, min, max) {
 
 function gen_timeline() {
     var margin = {
-            left: 170,
-            right: 30
-        },
-        width = 1600,
-        height = 60,
+        left: 30,
+        right: 30
+    },
+        height = 45,
         range = [1979, 2016],
         step = 1; // change the step and if null, it'll switch back to a normal slider
 
-
+    width = window.innerWidth - 10; // Use the window's width 
     var svg = d3.select('#timeline')
         .append('svg')
         .attr('width', width)

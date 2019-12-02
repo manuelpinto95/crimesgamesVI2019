@@ -174,7 +174,7 @@ var barchartTooltipDiv;
 function gen_barChart() {
 
     barchart.w = window.innerWidth - barchart.margin.left - barchart.margin.right // Use the window's width 
-    barchart.h = window.innerHeight / 4 - barchart.margin.top - barchart.margin.bottom; // Use the window's height
+    barchart.h = 200 - barchart.margin.top - barchart.margin.bottom; // Use the window's height
 
     barchart.padding = 40;
 
@@ -191,12 +191,10 @@ function gen_barChart() {
 
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(700,30)")
-        .text("Video Games per Year");
+        .attr("transform", "translate(" + (barchart.w / 2 - 50) + ",30)")
+        .text("New Video Games per year");
 
 
-    barchart.padding = 40;
-    barchart.bar_w = 20;
 
     barchart.yMax = d3.max(barchart.data, function (d) {
         return +d.Total;
@@ -231,9 +229,33 @@ function gen_barChart() {
         .attr("transform", "translate(0," + (barchart.h - barchart.padding) + ")")
         .call(barchart.xAxis);
 
-        barchartTooltipDiv = d3.select("body").append("div")
+    barchartTooltipDiv = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+
+    barchart.svg.append("rect")
+        .attr("x", barchart.w - 146)
+        .attr("y", 0)
+        .attr("width", 15)
+        .attr("height", 15)
+        .attr("fill", d3.schemeCategory10[0])
+    barchart.svg.append("text")
+        .attr("class", "title")
+        .attr("x", barchart.w - 125)
+        .attr("y", 12)
+        .text("All genres");
+
+    barchart.svg.append("rect")
+        .attr("x", barchart.w - 146)
+        .attr("y", 25)
+        .attr("width", 15)
+        .attr("height", 15)
+        .attr("fill", colorDict[vgSelectedGenre])
+    barchart.svg.append("text")
+        .attr("class", "title")
+        .attr("x", barchart.w - 125)
+        .attr("y", 37)
+        .text(genreTextDic[vgSelectedGenre]);
 
 
     barchart.svg.selectAll("rect")

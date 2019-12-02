@@ -107,15 +107,12 @@
     <!-- <select id="c2" name="FipsCode" label="Search for a video game..."> ==$0
       <option hidden default="">Search for a video game...</option>
     </select> -->
-    <div class="input-group">
+
       <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
         placeholder="Search Video Games">
       <datalist id="vgList">
       </datalist>
-      <!-- <div class="input-group-btn">
-        <button class="btn btn-default" type="button" id="submitBtn"><img src="search-icon.png"></button>
-      </div> -->
-    </div>
+    
 
     <select onchange="genreSelector()" vertical-align="top" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
       <option value="Action">Action </option>

@@ -41,9 +41,9 @@ function vgSelected() {
     var game = document.getElementById("vgSearch").value;
     console.log(game);
     
-    //Save state
+    /* //Save state
     stateBeforeSelection.genre = vgSelectedGenre;
-    stateBeforeSelection.years = year_filters;
+    stateBeforeSelection.years = year_filters; */
 
     //updateState
     var gameData = vgNames.filter(function (d) {
@@ -53,9 +53,9 @@ function vgSelected() {
     
     vgSelectedGenre = gameData[0].Genre.trim();
 
-    console.log(year_filters);
+    /* console.log(year_filters);
     newTimeFrame(gameData[0].Year);
-    console.log(year_filters);
+    console.log(year_filters); */
     
     update_barChart();
     update_lineChart();
