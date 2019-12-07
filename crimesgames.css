@@ -3,6 +3,11 @@ h1 {
   font-family: calibri, arial, sans serif;
 }
 
+h2 {
+  font-size: 14pt;
+  font-family: calibri, arial, sans serif;
+}
+
 div {
   border: 1px solid grey;
 }
@@ -23,17 +28,17 @@ div {
 
 #selectors {
   height: 450;
-  width: 300;
+  width: 500;
 }
 
 #stateselect {
-  height: 225;
-
+  height: 160;
+  width: 500;
 }
 
 #masslist {
-  height: 225;
-
+  height: 290;
+  width: 500;
 }
 
 #wordcloud {
@@ -352,7 +357,7 @@ div.tooltip {
   width: auto;					
   height: auto;					
   padding: 2px;				
-  font: 12px sans-serif;		
+  font: 20px sans-serif;		
   background: lightsteelblue;	
   border: 0px;		
   border-radius: 8px;			

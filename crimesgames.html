@@ -16,13 +16,24 @@
   <script src="wordCloud.js"></script>
   <script src="lineChart.js"></script>
   <script src="vgSearcher.js"></script>
+  <script src="map.js"></script>
+  <script src="top3MS.js"></script>
 </head>
 
 <body style="background-color:white;">
-  <h1 class=row id="row0">Crime vs Video Games in the U.S</h1>
+  <div class="container">
+    <h1 class=row id="row0">Crime, Video Games and Mass Shootings in the USA
+      <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
+        placeholder="Search a Video Game...               ">
+      <datalist id="vgList">
+      </datalist>
+      <ul id=selectedGame>
+      </ul>
+    </h1>
+
+  </div>
 
   <div class="container">
-    <div id="map">map</div>
     <div id=selectors>
       <div id="stateselect">
         <select id="c1" onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
@@ -81,8 +92,11 @@
         <ul id=stateList>
         </ul>
       </div>
-      <div id="masslist">mass shootings list</div>
+      <div id="masslist">
+        <h2 class=row id="row0">TOP 3 mass shootings </h2>
+      </div>
     </div>
+    <div id="map"></div>
     <div id="wordcloud">word cloud</div>
   </div>
 
@@ -107,13 +121,6 @@
     <!-- <select id="c2" name="FipsCode" label="Search for a video game..."> ==$0
       <option hidden default="">Search for a video game...</option>
     </select> -->
-
-      <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
-        placeholder="Search Video Games">
-      <datalist id="vgList">
-      </datalist>
-    
-
     <select onchange="genreSelector()" vertical-align="top" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
       <option value="Action">Action </option>
       <option value="Action_Adventure">Action Adventure</option>

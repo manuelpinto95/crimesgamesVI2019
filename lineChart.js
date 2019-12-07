@@ -217,10 +217,10 @@ function genLineChart() {
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(1))
+                div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
-                dispatch.call("vgEvent", d, d);
+                dispatch.call("yearEvent", d, d);
             })
             .on("mouseout", function (d) {
                 div.transition()
@@ -263,10 +263,10 @@ function genLineChart() {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(1))
+                    div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
-                    dispatch.call("vgEvent", d, d);
+                    dispatch.call("yearEvent", d, d);
                 })
                 .on("mouseout", function (d) {
                     div.transition()

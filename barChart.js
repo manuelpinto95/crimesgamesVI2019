@@ -53,18 +53,26 @@ genreTextDic["Visual_Novel"] = "Visual Novel";
 
 d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
-    dispatch = d3.dispatch("vgEvent");
-    dispatch.on("vgEvent", function (vg) {
+    dispatch = d3.dispatch("yearEvent");
+    dispatch.on("yearEvent", function (vg) {
         if (vgSelectedBar != null) {
-            vgSelectedBar.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
+            if (vg.Year != barchart.selectedGameYear)
+                vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+            else
+                vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
+
+            
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
         crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
         crimeSelectedDot.attr("r", 6);
-        crimeSelectedDot.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
-        vgSelectedBar.attr("style", "stroke-width:2;stroke:rgb(0,0,0)");
+        crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+        if (vg.Year != barchart.selectedGameYear)
+            vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+        else
+            vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
     })
     // convert from string to number
     data.forEach(function (d) {
@@ -166,7 +174,9 @@ var barchart = {
     h: 0,
     padding: 40,
     r: 3,
-    bar_w: 20
+    bar_w: 20,
+    selectedGameName: null,
+    selectedGameYear: 0
 };
 
 var barchartTooltipDiv;
@@ -232,7 +242,75 @@ function gen_barChart() {
     barchartTooltipDiv = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
+    /* 
+        if (barchart.selectedGameName != null) {
+            barchart.svg.append("line")
+                .attr("x1",  barchart.xScale(barchart.selectedGameYear - year_filters[0]) + barchart.bar_w/2) 
+                .attr("y1", 0)
+                .attr("x2",barchart.xScale(barchart.selectedGameYear - year_filters[0]) + barchart.bar_w/2)  
+                .attr("y2", 20)
+                .style("stroke-width", 2)
+                .style("stroke", "red")
+                .style("fill", "none");
+        } */
 
+    barchart.svg.selectAll("rect")
+        .data(barchart.data)
+        .enter().append(function (d, i) {
+            var rects = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+
+            var rect1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect1.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10);
+            rect1.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(d.Total));
+            rect1.setAttribute('x', barchart.xScale(i));
+            rect1.setAttribute('y', barchart.yScale(d.Total));
+            rect1.setAttribute("fill", d3.schemeCategory10[0]);
+            rect1.setAttribute("Year", d.Year);
+            if (d.Year == barchart.selectedGameYear) {
+                rect1.setAttribute("style", "stroke-width:2;stroke:rgb(255,0,0)");
+            }
+            else {
+                rect1.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+            }
+            rects.appendChild(rect1);
+
+            var genre = getGenre(vgSelectedGenre, d);
+
+            var rect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+            rect2.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10);
+            rect2.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(genre));
+            rect2.setAttribute('x', barchart.xScale(i));
+            rect2.setAttribute('y', barchart.yScale(genre));
+            //console.log(vgSelectedGenre);
+
+            rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
+            rect2.setAttribute("Year", d.Year);
+            rects.appendChild(rect2);
+            if (d.Year == barchart.selectedGameYear) {
+                rect2.setAttribute("style", "stroke-width:2;stroke:rgb(255,0,0)");
+            }
+            else {
+                rect2.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+            }
+
+            return rects;
+        })
+        .on("mouseover", function (d, i) {
+            barchartTooltipDiv.transition()
+                .duration(200)
+                .style("opacity", .9);
+            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + getGenre(vgSelectedGenre, d))
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px");
+            dispatch.call("yearEvent", d, d);
+        })
+        .on("mouseout", function (d) {
+            barchartTooltipDiv.transition()
+                .duration(500)
+                .style("opacity", 0);
+        })
+
+    //LEGEND
     barchart.svg.append("rect")
         .attr("x", barchart.w - 146)
         .attr("y", 0)
@@ -256,51 +334,6 @@ function gen_barChart() {
         .attr("x", barchart.w - 125)
         .attr("y", 37)
         .text(genreTextDic[vgSelectedGenre]);
-
-
-    barchart.svg.selectAll("rect")
-        .data(barchart.data)
-        .enter().append(function (d, i) {
-            var rects = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-            var rect1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect1.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 1);
-            rect1.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(d.Total));
-            rect1.setAttribute('x', barchart.xScale(i));
-            rect1.setAttribute('y', barchart.yScale(d.Total));
-            rect1.setAttribute("fill", d3.schemeCategory10[0]);
-            rect1.setAttribute("Year", d.Year);
-            rects.appendChild(rect1);
-
-            var genre = getGenre(vgSelectedGenre, d);
-
-            var rect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect2.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 1);
-            rect2.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(genre));
-            rect2.setAttribute('x', barchart.xScale(i));
-            rect2.setAttribute('y', barchart.yScale(genre));
-            //console.log(vgSelectedGenre);
-
-            rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
-            rect2.setAttribute("Year", d.Year);
-            rects.appendChild(rect2);
-
-            return rects;
-        })
-        .on("mouseover", function (d, i) {
-            barchartTooltipDiv.transition()
-                .duration(200)
-                .style("opacity", .9);
-            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + getGenre(vgSelectedGenre, d))
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
-            dispatch.call("vgEvent", d, d);
-        })
-        .on("mouseout", function (d) {
-            barchartTooltipDiv.transition()
-                .duration(500)
-                .style("opacity", 0);
-        })
 
 }
 

@@ -30,20 +30,18 @@ d3.csv("/data/vg/vgNames.csv").then(function (data) {
         var genre = document.createAttribute("Genre");
         genre.value = vgNames[i].Genre
         option.setAttribute("Genre",genre); */
-        option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre))
+        option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre ))
         list.appendChild(option);
     }
     console.log("video game dataset is now loaded");  
 });
 
 function vgSelected() {
-    console.log("this is called");
     var game = document.getElementById("vgSearch").value;
     console.log(game);
     
-    /* //Save state
+    //Save state
     stateBeforeSelection.genre = vgSelectedGenre;
-    stateBeforeSelection.years = year_filters; */
 
     //updateState
     var gameData = vgNames.filter(function (d) {
@@ -52,7 +50,31 @@ function vgSelected() {
     console.log(gameData[0]);
     
     vgSelectedGenre = gameData[0].Genre.trim();
+    barchart.selectedGameName = game;
+    barchart.selectedGameYear = gameData[0].Year;
 
+    var ul = document.getElementById("selectedGame");
+    var li = document.createElement("li");
+    var span = document.createElement("span");
+    span.setAttribute("class", "close");
+    span.appendChild(document.createTextNode("x"));
+    li.appendChild(span);
+    li.appendChild(document.createTextNode(game));
+    ul.appendChild(li);
+
+    span.addEventListener("click", function () {
+        console.log("close event is called");     
+        this.parentElement.style.display = 'none';
+        barchart.selectedGameName = null;
+        barchart.selectedGameYear = null;
+        vgSelectedGenre = stateBeforeSelection.genre;
+        update_barChart();
+    });
+
+    document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
+    document.getElementById("dropdownbox").setAttribute("value", + vgSelectedGenre);
+    document.getElementById("dropdownbox").setAttribute("selected", vgSelectedGenre);
+    
     /* console.log(year_filters);
     newTimeFrame(gameData[0].Year);
     console.log(year_filters); */

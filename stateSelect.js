@@ -55,6 +55,7 @@ function addState() {
 
     console.log(states);
     update_lineChart();
+    update_top3();
 }
 
 function removeState(state) {
@@ -75,4 +76,5 @@ function removeState(state) {
     }
     console.log(states);
     update_lineChart();
+    update_top3();
 }
