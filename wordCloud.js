@@ -3,13 +3,21 @@
 var cloudWords = [{word: "a", size: 20}];
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
 
-    console.log("DATA FROM MS");
-    console.log(data);
-    console.log("DATA FROM MS END");
-    
     data.forEach(function (d) {
         cloudWords.push({word: d.Word, size: 20});
-        console.log(d.Word + " hello");
+        /*
+        if(d.count < 10 )
+            cloudWords.push({word: d.Word, size: 10});
+        else
+            if(d.cont < 20)
+                cloudWords.push({word: d.Word, size: 20});
+            else
+                if(d.cont < 30)
+                    cloudWords.push({word: d.Word, size: 30});
+                else
+                    cloudWords.push({word: d.Word, size: 40});*/
+                    
+        //console.log(d.Word);
     });
 
     gen_WordCloud();
@@ -27,13 +35,13 @@ function gen_WordCloud() {
             bottom: 10,
             left: 10
         },
-        width = 500 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 500,
+        height = 420;
 
     // append the svg object to the body of the page
     var svg = d3.select("#wordcloud").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width)
+        .attr("height", height)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -70,7 +78,7 @@ function gen_WordCloud() {
             .style("font-size", function (d) {
                 return d.size;
             })
-            .style("fill", "#69b3a2")
+            .style("fill", "steelblue")
             .attr("text-anchor", "middle")
             .style("font-family", "Impact")
             .attr("transform", function (d) {
@@ -81,3 +89,5 @@ function gen_WordCloud() {
             });
     }
 }
+
+
