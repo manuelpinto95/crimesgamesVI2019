@@ -1,36 +1,26 @@
 //------------------------
 
-/* var cloudWords = [{
-    word: "A",
-    size: "10"
-}, {
-    word: "B",
-    size: "20"
-}, {
-    word: "C",
-    size: "50"
-}, {
-    word: "D",
-    size: "30"
-}, {
-    word: "E",
-    size: "60"
-}];
-var i = 0;
-d3.csv("/data/ms/selectedMassShootingsClean.csv").then(function (data) {
+var cloudWords = [{word: "a", size: 20}];
+d3.csv("/data/ms/MSWords.csv").then(function (data) {
 
     data.forEach(function (d) {
-        if (i < 5) {
-            cloudWords[i] = {
-                word: d.Title,
-                size: "10"
-            };
-            i++;
-        }
-
+        cloudWords.push({word: d.Word, size: 20});
+        /*
+        if(d.count < 10 )
+            cloudWords.push({word: d.Word, size: 10});
+        else
+            if(d.cont < 20)
+                cloudWords.push({word: d.Word, size: 20});
+            else
+                if(d.cont < 30)
+                    cloudWords.push({word: d.Word, size: 30});
+                else
+                    cloudWords.push({word: d.Word, size: 40});*/
+                    
+        //console.log(d.Word);
     });
 
-    //gen_WordCloud();
+    gen_WordCloud();
 });
 
 function gen_WordCloud() {
@@ -45,13 +35,13 @@ function gen_WordCloud() {
             bottom: 10,
             left: 10
         },
-        width = 500 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+        width = 500,
+        height = 420;
 
     // append the svg object to the body of the page
     var svg = d3.select("#wordcloud").append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
+        .attr("width", width)
+        .attr("height", height)
         .append("g")
         .attr("transform",
             "translate(" + margin.left + "," + margin.top + ")");
@@ -88,7 +78,7 @@ function gen_WordCloud() {
             .style("font-size", function (d) {
                 return d.size;
             })
-            .style("fill", "#69b3a2")
+            .style("fill", "steelblue")
             .attr("text-anchor", "middle")
             .style("font-family", "Impact")
             .attr("transform", function (d) {
@@ -97,4 +87,7 @@ function gen_WordCloud() {
             .text(function (d) {
                 return d.text;
             });
-    } */
+    }
+}
+
+
