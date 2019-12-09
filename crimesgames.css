@@ -74,16 +74,26 @@ div {
   vertical-align: bottom;
 }
 
-#dropdownbox {
+/* #dropdownbox {
   height: 20;
   width: 133;
   vertical-align: top;
   float: left;
   text-align: left;
+} */
+
+#crimeSelector {
+  height: 20;
+  width: 133;
+  height: 20;
+  width: 133;
+  vertical-align: top;
+  float: left;
+  text-align: center;
   /* here */
 }
 
-#crimeSelector {
+#dropdownbox {
   height: 20;
   width: 133;
   height: 20;
@@ -174,7 +184,7 @@ div {
 } */
 
 
-select option[value="Action"] {
+/* select option[value="Action"] {
   background: #8dd3c7;
 }
 
@@ -252,7 +262,7 @@ select option[value="Strategy"] {
 
 select option[value="Visual_Novel"] {
   background: #b3b3b3;
-}
+} */
 
 /*VIDEO GAME SEARCH BOX*/
 /* Add a black background color to the top navigation bar */

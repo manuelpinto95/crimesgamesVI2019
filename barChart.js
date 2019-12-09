@@ -108,7 +108,7 @@ function genreSelector() {
     vgSelectedGenre = document.getElementById("dropdownbox").value;
     console.log(colorDict[vgSelectedGenre]);
 
-    document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
+    //document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
     update_barChart();
 }
 
@@ -165,7 +165,7 @@ var barchart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 0,
+        top: 20,
         right: 5,
         bottom: 20,
         left: 5
@@ -204,7 +204,8 @@ function gen_barChart() {
 
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(" + (barchart.w / 2 - 50) + ",30)")
+        .attr("transform", "translate(" + (barchart.w / 2) + ",13)")
+        .attr("text-anchor", "middle")
         .text("New Video Games per year");
 
     barchart.yMax = d3.max(barchart.data, function (d) {
@@ -213,7 +214,7 @@ function gen_barChart() {
 
     barchart.yScale = d3.scaleSqrt()
         .domain([barchart.yMax, 0])
-        .range([barchart.padding, barchart.h - barchart.padding]);
+        .range([barchart.margin.top, barchart.h - barchart.margin.bottom]);
 
     barchart.xScale = d3.scaleLinear()
         .domain([0, barchart.data.length - 1])
@@ -240,7 +241,7 @@ function gen_barChart() {
         .call(barchart.yAxis);
 
     barchart.svg.append("g")
-        .attr("transform", "translate(0," + (barchart.h - barchart.padding) + ")")
+        .attr("transform", "translate(0," + (barchart.h - barchart.margin.bottom) + ")")
         .call(barchart.xAxis);
 
     barchartTooltipDiv = d3.select("body").append("div")
@@ -265,7 +266,7 @@ function gen_barChart() {
 
             var rect1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect1.setAttribute('width', barchart.bar_w);
-            rect1.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(d.Total));
+            rect1.setAttribute('height', barchart.h - barchart.margin.bottom - barchart.yScale(d.Total));
             rect1.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect1.setAttribute('y', barchart.yScale(d.Total));
             rect1.setAttribute("fill", d3.schemeCategory10[0]);
@@ -282,12 +283,12 @@ function gen_barChart() {
 
             var rect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
             rect2.setAttribute('width', barchart.bar_w);
-            rect2.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(genre));
+            rect2.setAttribute('height', barchart.h - barchart.margin.bottom - barchart.yScale(genre));
             rect2.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
 
-            rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
+            rect2.setAttribute("fill", d3.schemeSet2[5]);
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
             if (d.Year == barchart.selectedGameYear) {
@@ -316,29 +317,39 @@ function gen_barChart() {
         })
 
     //LEGEND
+
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 146)
+        .attr("x", barchart.w - 240)
         .attr("y", 0)
         .attr("width", 15)
         .attr("height", 15)
+        .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", d3.schemeCategory10[0])
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 125)
-        .attr("y", 12)
+        .attr("x", barchart.w - 222)
+        .attr("y", 14)
         .text("All genres");
 
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 146)
-        .attr("y", 25)
+        .attr("x", barchart.w - 148)
+        .attr("y", 0)
         .attr("width", 15)
         .attr("height", 15)
-        .attr("fill", colorDict[vgSelectedGenre])
+        .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
+        .attr("fill", d3.schemeSet2[5])
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 125)
-        .attr("y", 37)
+        .attr("x", barchart.w - 130)
+        .attr("y", 14)
         .text(genreTextDic[vgSelectedGenre]);
+
+    barchart.svg.append("text")
+        .attr("x", 0)
+        .attr("y", 13)
+        //.attr("transform", "rotate(-90)")
+        .style("text-anchor", "start")
+        .text("Releases");
 
 }
 

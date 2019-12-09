@@ -97,7 +97,7 @@ var lineChart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 0,
+        top: 20,
         right: 5,
         bottom: 20,
         left: 5
@@ -128,7 +128,8 @@ function genLineChart() {
 
     lineChart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(" + (lineChart.w / 2 - 50) + ",40)")
+        .attr("transform", "translate(" + (lineChart.w/2 ) + ",13)")
+        .attr("text-anchor", "middle")
         .text("Crime occurrences per 1000 capita");
 
     filterCrimeData()
@@ -141,14 +142,14 @@ function genLineChart() {
         .call(lineChart.yAxis);
 
     lineChart.svg.append("text")
-        .attr("x", 62)
-        .attr("y", 35)
+        .attr("x", 0)
+        .attr("y", 13)
         //.attr("transform", "rotate(-90)")
-        .style("text-anchor", "middle")
+        .style("text-anchor", "start")
         .text(crimeNameDic[selectedCrimeType]);
 
     lineChart.svg.append("g")
-        .attr("transform", "translate(-10," + (lineChart.h - lineChart.padding) + ")")
+        .attr("transform", "translate(-10," + (lineChart.h - lineChart.margin.bottom) + ")")
         .attr("class", "xaxis")
         .call(lineChart.xAxis);
 
@@ -160,28 +161,30 @@ function genLineChart() {
     if (numStates == 0) {
         lineChart.svg.append("circle")
             .attr("class", "dot") // Assign a class for styling
-            .attr("cx", lineChart.w - 146)
-            .attr("cy", 20)
+            .attr("cx", lineChart.w - 140)
+            .attr("cy", 8)
             .attr("r", 4)
+            .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
             .attr("fill", d3.schemeDark2[3])
         lineChart.svg.append("text")
             .attr("class", "title")
-            .attr("x", lineChart.w - 125)
-            .attr("y", 20 + 4)
+            .attr("x", lineChart.w - 130)
+            .attr("y", 13)
             .text("USA");
     }
     else {
         for (let index = 0; index < numStates; index++) {
             lineChart.svg.append("circle")
                 .attr("class", "dot") // Assign a class for styling
-                .attr("cx", lineChart.w - 60)
-                .attr("cy", 20 * (index + 1))
+                .attr("cx", lineChart.w - 140 - 92*index)
+                .attr("cy", 8)
                 .attr("r", 4)
+                .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
                 .attr("fill", d3.schemeDark2[index])
             lineChart.svg.append("text")
                 .attr("class", "title")
-                .attr("x", lineChart.w - 50)
-                .attr("y", 20 * (index + 1) + 4)
+                .attr("x", lineChart.w - 130 - 92*index)
+                .attr("y", 13)
                 .text(states[index]);
         }
     }
@@ -362,7 +365,7 @@ function defineLineChartAxis() {
 
     lineChart.yScale = d3.scaleLinear()
         .domain([lineChart.yMax, 0])
-        .range([lineChart.padding, lineChart.h - lineChart.padding]);
+        .range([lineChart.margin.top, lineChart.h - lineChart.margin.bottom]);
 
 
     lineChart.xScale = d3.scaleLinear()

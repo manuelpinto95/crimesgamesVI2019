@@ -27,7 +27,7 @@ Multi-Line Chart
 [X] alinhar eixo dos X
 [ ] tip a mostrar o valor para todas a lines e não apenas uma
 [ ] add the USA as a comparable state
-[ ] default type of crime should be mass shootings
+[ ] default type of crime should be mass shootings !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [ ] add the USA as a comparable state
 
 Lista de top 3 mass shootings

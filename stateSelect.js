@@ -48,7 +48,8 @@ function addState() {
     }
     var ul = document.getElementById("stateList");
     var li = document.createElement("li");
-    li.setAttribute("color","red")
+    li.setAttribute("style","color:" + statesColors[i]);
+    li.setAttribute("id","id"+i);
     var span = document.createElement("span");
     span.setAttribute("class", "close");
     var text = document.createTextNode(stateDic[newState])
@@ -59,13 +60,26 @@ function addState() {
 
     span.addEventListener("click", function () {
         console.log("close event is called");     
-        this.parentElement.style.display = 'none';
+        this.parentElement.remove();
         removeState(newState);
     });
 
     console.log(states);
+    //update_colors()
     update_lineChart();
     update_top3();
+}
+
+function update_colors() {
+    var i = 0;
+    for (i = 0; i < 3; i++) {
+        var index = findState(states[i])
+        if (index!=-1) {
+            var li = document.getElementById("id"+i);
+            li.setAttribute("style","color:" + statesColors[i]);
+            li.setAttribute("id","id"+i);
+        }
+    }
 }
 
 function removeState(state) {
@@ -82,9 +96,14 @@ function removeState(state) {
         if (states[i] == "" && states[i + 1] != "") {
             states[i] = states[i + 1];
             states[i + 1] = "";
+            var li = document.getElementById("id"+(i+1));
+            li.setAttribute("style","color:" + statesColors[i]);
+            li.setAttribute("id","id"+i);
+
         }
     }
     console.log(states);
+    //update_colors()
     update_lineChart();
     update_top3();
 }

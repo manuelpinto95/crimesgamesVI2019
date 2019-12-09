@@ -33,20 +33,6 @@ function genTop3() {
         left: 5
     };
 
-    document.getElementById("masslist").style.height = window.innerHeight / 2 - 160 - 60 - 40;
-
-    top3Tip = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-
-    var w = 481 // Use the window's width 
-    var h = 605; // Use the window's height
-
-    top3svg = d3.select("#masslist")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h);
-
     var filteredData = msTop3data.filter(function (d, key) {
         if (countStates() == 0) {
 
@@ -63,10 +49,22 @@ function genTop3() {
         return d3.descending(x.Fatalities, y.Fatalities);
     })
 
-
-
-
     var top3 = filteredData.slice(0, 10);
+
+    document.getElementById("masslist").style.height = window.innerHeight / 2 - 160 - 60 - 40;
+
+    top3Tip = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    var w = 481 // Use the window's width 
+    var h = 60.5 * top3.length; // Use the window's height
+
+    top3svg = d3.select("#masslist")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h);
+
 
     console.log(top3);
 
@@ -99,19 +97,9 @@ function genTop3() {
             .attr("x", 3 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 2)
             .on("mouseover", function (d, i) {
-                barchartTooltipDiv.transition()
-                    .duration(200)
-                    .style("opacity", .9);
-                var text = top3[index].Year + "<br/>" + "Fatalities:" + top3[index].Fatalities + "<br/>" + top3[index].Desc;
-                barchartTooltipDiv.html(text)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
                 dispatch.call("yearEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
-                barchartTooltipDiv.transition()
-                    .duration(500)
-                    .style("opacity", 0);
                 dispatch.call("yearEvent", 0, 0);
             });
     }
@@ -119,10 +107,32 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
             .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
-            .attr("width", xScale(top3[index].Fatalities)-3)
+            .attr("width", xScale(top3[index].Fatalities) - 3)
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 4)
+            .on("mouseover", function (d, i) {
+                dispatch.call("yearEvent", top3[index], top3[index]);
+            })
+            .on("mouseout", function (d) {
+                dispatch.call("yearEvent", 0, 0);
+            });
+    }
+
+    for (let index = 0; index < top3.length; index++) {
+        top3svg.append("text")
+            .attr("x", 5)
+            .attr("y", index * 60 + 27)
+            .attr("text-anchor", "start")
+            .attr("font-weight", "normal")
+            .style('fill', function () {
+                var state = findState(top3[index].state_abbr)
+                if (state != -1)
+                    return statesColors[state];
+                else
+                    return "black";
+            })
+            .text("#" + (index + 1) + ":       " + top3[index].Title)
             .on("mouseover", function (d, i) {
                 barchartTooltipDiv.transition()
                     .duration(200)
@@ -139,22 +149,6 @@ function genTop3() {
                     .style("opacity", 0);
                 dispatch.call("yearEvent", 0, 0);
             });
-    }
-
-    for (let index = 0; index < top3.length; index++) {
-        top3svg.append("text")
-            .attr("x", 5)
-            .attr("y", index * 60 + 27)
-            .attr("text-anchor", "start")
-            .attr("font-weight", "bold")
-            .style('fill', function () {
-                var state = findState(top3[index].state_abbr)
-                if(state!=-1)
-                    return statesColors[state];
-                else
-                    return "black";
-            })
-            .text("#" + (index + 1) + ":       " + top3[index].Title);
     }
 }
 
