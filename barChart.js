@@ -165,9 +165,9 @@ var barchart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 1,
+        top: 5,
         right: 5,
-        bottom: 1,
+        bottom: 5,
         left: 5
     },
     w: 0,
@@ -184,7 +184,7 @@ var barchartTooltipDiv;
 function gen_barChart() {
 
     barchart.w = window.innerWidth - barchart.margin.left - barchart.margin.right // Use the window's width 
-    barchart.h = 200 - barchart.margin.top - barchart.margin.bottom; // Use the window's height
+    barchart.h = (window.innerHeight / 2 - 85)/2 - barchart.margin.top - barchart.margin.bottom -15; // Use the window's height
 
     barchart.padding = 40;
 

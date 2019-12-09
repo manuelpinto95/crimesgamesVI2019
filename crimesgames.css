@@ -23,10 +23,9 @@ div {
   flex: 1;
 }
  */
-#map {
-  height: 650;
+/* #map {
   width: 700;
-}
+} */
 
 #selectors {
   height: 450;
@@ -44,10 +43,9 @@ div {
   overflow: scroll;
 }
 
-#wordcloud {
-  height: 650;
+/* #wordcloud {
   width: 600;
-}
+} */
 
 #linechart {
 /*   height: 200; */

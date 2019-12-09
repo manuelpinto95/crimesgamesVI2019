@@ -33,6 +33,8 @@ function genTop3() {
         left: 5
     };
 
+    document.getElementById("masslist").style.height = window.innerHeight / 2 - 220;
+
     top3Tip = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);

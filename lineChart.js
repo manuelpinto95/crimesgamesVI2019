@@ -97,7 +97,7 @@ var lineChart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 1,
+        top: 5,
         right: 5,
         bottom: 5,
         left: 5
@@ -112,7 +112,7 @@ var lineChart = {
 function genLineChart() {
 
     lineChart.w = window.innerWidth - lineChart.margin.left - lineChart.margin.right // Use the window's width 
-    lineChart.h = 200 - lineChart.margin.top - lineChart.margin.bottom; // Use the window's height
+    lineChart.h = (window.innerHeight / 2 - 85)/2 - lineChart.margin.top - lineChart.margin.bottom - 15; // Use the window's height
 
     lineChart.padding = 40;
     lineChart.r = 4;

@@ -24,7 +24,8 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
 });
 
 function gen_WordCloud() {
-
+    console.log("cloud");
+    
     // List of words
     var myWords = cloudWords; //[{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
 
@@ -35,8 +36,9 @@ function gen_WordCloud() {
             bottom: 10,
             left: 10
         },
-        width = 500,
-        height = 420;
+        height = (window.innerHeight / 2 - 60);
+        var mapW = height * 1.6;
+        width = window.innerWidth - mapW - 500 - margin.right - margin.left;
 
     // append the svg object to the body of the page
     var svg = d3.select("#wordcloud").append("svg")

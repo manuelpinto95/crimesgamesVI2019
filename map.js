@@ -1,4 +1,6 @@
-/* d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
+d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
+    console.log("hey");
+    
     gen_map()
 });
 
@@ -18,21 +20,25 @@ var map = {
     bar_w: 20
 };
 function gen_map() {
-    map.w = 600
-    map.h = 450
+    console.log("map");
+
+    map.h = (window.innerHeight / 2 - 60);
+    map.w = map.h * 1.6;
+    
+    document.getElementById("wordcloud").style.width = window.innerWidth - map.w - 500;
 
     map.padding = 40;
     map.r = 4;
 
-    var unemployment = d3.map();
-    var stateNames = d3.map();
+    /* var unemployment = d3.map();
+    var stateNames = d3.map(); */
 
     map.svg = d3.select("#map")
         .append("svg")
         .attr("width", map.w)
         .attr("height", map.h);
 
-    var path = d3.geoPath();
+    /* var path = d3.geoPath();
 
     var x = d3.scaleLinear()
         .domain([1, 10])
@@ -125,5 +131,5 @@ function gen_map() {
             .datum(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; }))
             .attr("class", "states")
             .attr("d", path);
-    }
-} */
+    } */
+}

@@ -9,8 +9,10 @@ TODOs
 
 DashBoard
 [ ] Usar tamanhos relativos para definir o tamanho das divs
+[ ] add mouse out events to reduce the border width 
 
 Barchart
+[ ] add label to y axis 
 [ ] alinhar eixo do x com o meio das barras
 [ ] animação das barras
 [ ] remover genres irrelevantes
@@ -19,9 +21,11 @@ Barchart
 [ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
 
 Multi-Line Chart
+[ ] center axis label 
 [ ] alinhar eixo dos X
 [ ] tip a mostrar o valor para todas a lines e não apenas uma
 [ ] add the USA as a comparable state
+[ ] default type of crime should be mass shootings
 
 Lista de top 3 mass shootings
 [ ] mostrar mais de 3?
