@@ -1,3 +1,6 @@
+#title {
+  height: 60px;
+}
 h1 {
   font-size: 18pt;
   font-family: calibri, arial, sans serif;
@@ -16,19 +19,18 @@ div {
   display: flex;
 }
 
-.container>div {
+/* .container>div {
   flex: 1;
-  /*grow*/
 }
-
+ */
 #map {
-  height: 450;
-  width: 600;
+  height: 650;
+  width: 700;
 }
 
 #selectors {
   height: 450;
-  width: 500;
+  /* width: 500; */
 }
 
 #stateselect {
@@ -37,12 +39,13 @@ div {
 }
 
 #masslist {
-  height: 290;
+  height: 490;
   width: 500;
+  overflow: scroll;
 }
 
 #wordcloud {
-  height: 450;
+  height: 650;
   width: 600;
 }
 

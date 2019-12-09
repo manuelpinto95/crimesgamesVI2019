@@ -38,7 +38,7 @@ function genTop3() {
         .style("opacity", 0);
 
     var w = 500 // Use the window's width 
-    var h = 200; // Use the window's height
+    var h = 650; // Use the window's height
 
     top3svg = d3.select("#masslist")
         .append("svg")
@@ -64,7 +64,7 @@ function genTop3() {
     
 
 
-    var top3 = filteredData.slice(0, 3);
+    var top3 = filteredData.slice(0, 10);
 
     console.log(top3);
 
@@ -85,16 +85,15 @@ function genTop3() {
         .attr("y", index*h/3);
     } */
     
-
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
         .attr("Year", top3[index].Year)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
-        .attr("fill",podiumL[index])
+        .attr("fill", index<3?podiumL[index]:"white")
         .attr("width", w - 6/* xScale(max - top3[index].Fatalities) */)
-        .attr("height", h / 3 - 6)
+        .attr("height", 58)
         .attr("x",  3 /* xScale(top3[index].Fatalities) */ )
-        .attr("y", index*h/3)
+        .attr("y", index*60 + 5)
         .on("mouseover", function (d, i) {
             barchartTooltipDiv.transition()
                 .duration(200)
@@ -115,7 +114,7 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("text")
         .attr("x", 5 )
-        .attr("y", index*h/3 + 27)
+        .attr("y", index*60 + 27)
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
         .text("#"+(index+1) + ":       " + top3[index].Title);
