@@ -97,9 +97,9 @@ var lineChart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 5,
+        top: 0,
         right: 5,
-        bottom: 5,
+        bottom: 20,
         left: 5
     },
     w: 0,
@@ -112,10 +112,14 @@ var lineChart = {
 function genLineChart() {
 
     lineChart.w = window.innerWidth - lineChart.margin.left - lineChart.margin.right // Use the window's width 
-    lineChart.h = (window.innerHeight / 2 - 85)/2 - lineChart.margin.top - lineChart.margin.bottom - 15; // Use the window's height
+    lineChart.h = (window.innerHeight / 2 - 85) / 2 - lineChart.margin.top - lineChart.margin.bottom - 15; // Use the window's height
 
     lineChart.padding = 40;
     lineChart.r = 4;
+
+    lineChart.bar_w = Math.floor((lineChart.w - lineChart.padding * 2) / (year_filters[1] - year_filters[0] + 1)) - 10;
+    console.log(lineChart.bar_w);
+
 
     lineChart.svg = d3.select("#linechart")
         .append("svg")
@@ -156,13 +160,13 @@ function genLineChart() {
     if (numStates == 0) {
         lineChart.svg.append("circle")
             .attr("class", "dot") // Assign a class for styling
-            .attr("cx", lineChart.w - 60)
+            .attr("cx", lineChart.w - 146)
             .attr("cy", 20)
             .attr("r", 4)
             .attr("fill", d3.schemeDark2[3])
         lineChart.svg.append("text")
             .attr("class", "title")
-            .attr("x", lineChart.w - 50)
+            .attr("x", lineChart.w - 125)
             .attr("y", 20 + 4)
             .text("USA");
     }
@@ -226,6 +230,7 @@ function genLineChart() {
                 div.transition()
                     .duration(500)
                     .style("opacity", 0);
+                dispatch.call("yearEvent", 0, 0);
             })
     }
     else {
@@ -272,6 +277,7 @@ function genLineChart() {
                     div.transition()
                         .duration(500)
                         .style("opacity", 0);
+                    dispatch.call("yearEvent", 0, 0);
                 })
         }
     }
@@ -360,8 +366,8 @@ function defineLineChartAxis() {
 
 
     lineChart.xScale = d3.scaleLinear()
-        .domain([0, lineChart.data[0].values.length])
-        .range([lineChart.padding, lineChart.w - lineChart.padding]);
+        .domain([0, lineChart.data[0].values.length - 1])
+        .range([lineChart.padding + lineChart.bar_w / 2, lineChart.w - lineChart.padding - lineChart.bar_w / 2]);
 
     lineChart.yAxis = d3.axisLeft()
         .scale(lineChart.yScale)
@@ -375,10 +381,13 @@ function defineLineChartAxis() {
 
     lineChart.xAxis = d3.axisBottom()
         .scale(d3.scaleLinear()
-            .domain([lineChart.data[0].values[0].Year, lineChart.data[0].values[lineChart.data[0].values.length - 1].Year])
-            .range([lineChart.padding + lineChart.bar_w / 2, lineChart.w - lineChart.padding - lineChart.bar_w / 2]))
+            .domain([year_filters[0], year_filters[1]])
+            .range([lineChart.padding + lineChart.bar_w / 2 + 10, lineChart.w - lineChart.padding - lineChart.bar_w / 2 + 10]))
         .tickFormat(d3.format("d"))
-        .ticks(lineChart.data[0].values.length);
+        .ticks(year_filters[1] - year_filters[0] + 1);
+
+    console.log(year_filters[1] - year_filters[0] + 1);
+
 }
 
 function crimeSelector() {

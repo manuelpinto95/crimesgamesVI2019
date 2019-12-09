@@ -1,6 +1,11 @@
-#title {
+/* #title {
   height: 60px;
+} */
+
+#title2 {
+  height: 40px;
 }
+
 h1 {
   font-size: 18pt;
   font-family: calibri, arial, sans serif;
@@ -15,6 +20,17 @@ div {
   border: 1px solid grey;
 }
 
+/* div.scroll {
+  margin: 4px, 4px;
+  padding: 4px;
+  background-color: green;
+  width: 500px;
+  height: 110px;
+  overflow-x: hidden;
+  overflow-x: auto;
+  text-align: justify;
+} */
+
 .container {
   display: flex;
 }
@@ -28,7 +44,7 @@ div {
 } */
 
 #selectors {
-  height: 450;
+  /* height: 450; */
   /* width: 500; */
 }
 
@@ -38,7 +54,7 @@ div {
 }
 
 #masslist {
-  height: 490;
+  height: 410;
   width: 500;
   overflow: scroll;
 }
@@ -48,9 +64,10 @@ div {
 } */
 
 #linechart {
-/*   height: 200; */
+  /*   height: 200; */
   text-align: center;
 }
+
 #barchart {
   /* height: 230; */
   text-align: center;
@@ -279,7 +296,9 @@ select option[value="Visual_Novel"] {
 
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
-  .topnav a, .topnav input[type=text] {
+
+  .topnav a,
+  .topnav input[type=text] {
     float: none;
     display: block;
     text-align: left;
@@ -287,6 +306,7 @@ select option[value="Visual_Novel"] {
     margin: 0;
     padding: 14px;
   }
+
   .topnav input[type=text] {
     border: 1px solid #ccc;
   }
@@ -305,11 +325,13 @@ ul {
 
 ul li {
   border: 1px solid #ddd;
-  margin-top: -1px; /* Prevent double borders */
+  width: 498;
+  margin-top: -1px;
+  /* Prevent double borders */
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
-  color: black;
+  /* color: black; */
   display: block;
   position: relative;
 }
@@ -327,7 +349,9 @@ ul li:hover {
   transform: translate(0%, -50%);
 }
 
-.close:hover {background: #bbb;}
+.close:hover {
+  background: #bbb;
+}
 
 /* LINE CHART */
 
@@ -337,30 +361,31 @@ ul li:hover {
 }
 
 .overlay {
-fill: none;
-pointer-events: all;
+  fill: none;
+  pointer-events: all;
 }
+
 /* Style the dots by assigning a fill and stroke */
 .dot {
   stroke: #fff;
 }
 
 .focus circle {
-fill: none;
-stroke: steelblue;
+  fill: none;
+  stroke: steelblue;
 }
 
 /*Tool tip*/
 
-div.tooltip {	
-  position: absolute;			
-  text-align: center;			
-  width: auto;					
-  height: auto;					
-  padding: 2px;				
-  font: 20px sans-serif;		
-  background: lightsteelblue;	
-  border: 0px;		
-  border-radius: 8px;			
-  pointer-events: none;			
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  width: auto;
+  height: auto;
+  padding: 2px;
+  font: 20px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
 }

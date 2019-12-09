@@ -1,6 +1,6 @@
 d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
     console.log("hey");
-    
+
     gen_map()
 });
 
@@ -24,21 +24,21 @@ function gen_map() {
 
     map.h = (window.innerHeight / 2 - 60);
     map.w = map.h * 1.6;
-    
+
     document.getElementById("wordcloud").style.width = window.innerWidth - map.w - 500;
 
     map.padding = 40;
     map.r = 4;
-
-    /* var unemployment = d3.map();
-    var stateNames = d3.map(); */
 
     map.svg = d3.select("#map")
         .append("svg")
         .attr("width", map.w)
         .attr("height", map.h);
 
-    /* var path = d3.geoPath();
+    var unemployment = d3.map();
+    var stateNames = d3.map();
+
+    var path = d3.geoPath();
 
     var x = d3.scaleLinear()
         .domain([1, 10])
@@ -47,7 +47,6 @@ function gen_map() {
     var color = d3.scaleThreshold()
         .domain(d3.range(0, 10))
         .range(d3.schemeReds[9]);
-    
 
     var g = map.svg.append("g")
         .attr("class", "key")
@@ -73,7 +72,7 @@ function gen_map() {
         .attr("fill", "#000")
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
-        .text("Crime");
+        .text("Mass Shooting Fatalities"); //TODO this legend must correspond to what crime type we are visualizing
 
     g.call(d3.axisBottom(x)
         .tickSize(13)
@@ -81,55 +80,4 @@ function gen_map() {
         .tickValues(color.domain()))
         .select(".domain")
         .remove();
-
-    var promises = [
-        d3.json("states.json"),
-        d3.tsv("us-state-names.tsv", function (d) {
-            stateNames.set(d.id, d.name)
-        }),
-        d3.tsv("map.tsv", function (d) {
-            console.log("d in map", d);
-            unemployment.set(d.name, +d.value);
-        })
-    ]
-    console.log("before promises")
-    Promise.all(promises).then(ready)
-
-    function ready([us]) {
-        console.log("in ready", topojson.feature(us, us.objects.states).features)
-        console.log("statenames", stateNames)
-        console.log("employment", unemployment)
-        svg.append("g")
-            .attr("class", "counties")
-            .selectAll("path")
-            .data(topojson.feature(us, us.objects.states).features)
-            .enter().append("path")
-            .attr("fill", function (d) {
-                console.log("d", d)
-                console.log("unemployment", unemployment)
-                var sn = stateNames.get(d.id)
-                console.log("sn", sn)
-                d.rate = unemployment.get(stateNames.get(d.id)) || 0
-                console.log("rate", d.rate)
-                var col = color(d.rate);
-                console.log("col", col)
-                if (col) {
-                    console.log("found col", col, "for d", d)
-                    return col
-                } else {
-                    return '#ffffff'
-                }
-            })
-            .attr("d", path)
-            .append("title")
-            .text(function (d) {
-                console.log("title", d)
-                return d.rate + "%";
-            });
-
-        svg.append("path")
-            .datum(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; }))
-            .attr("class", "states")
-            .attr("d", path);
-    } */
 }

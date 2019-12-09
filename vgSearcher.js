@@ -55,6 +55,7 @@ function vgSelected() {
 
     var ul = document.getElementById("selectedGame");
     var li = document.createElement("li");
+    li.setAttribute("padding", 50);
     var span = document.createElement("span");
     span.setAttribute("class", "close");
     span.appendChild(document.createTextNode("x"));

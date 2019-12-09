@@ -1,19 +1,21 @@
-Dúvidas para a aual de feedback
-- no bar chart vale a pena termos apenas 1 cor que contraste bem com o azul para todos os genres ou está bem com 1 cor para cada genre?
-- mais de 3 no top 3 mass shootings?
-- add the USA as a comparable state?
--perguntar ao professor qual o tamanho da janela dele
-
-
 TODOs
 
+state selector
+[ ] add text saying use list above to add states when to state is selected
+[ ] font-color dos estados correponder á cor da linha do line chart
+
 DashBoard
-[ ] Usar tamanhos relativos para definir o tamanho das divs
-[ ] add mouse out events to reduce the border width 
+[X] Usar tamanhos relativos para definir o tamanho das divs
+[X] add mouse out events to reduce the border width 
+[X] espaçamento do abr chart e line chart mais centrado
+[ ] font igual para tudo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+[ ] dropdown buttons todos iguais
+[ ] animacoes em todos os charts
 
 Barchart
-[ ] add label to y axis 
-[ ] alinhar eixo do x com o meio das barras
+[ ] add label to y axis
+[ ] basta 1 cor para a subgenre
+[X] alinhar eixo do x com o meio das barras
 [ ] animação das barras
 [ ] remover genres irrelevantes
 [ ] iniciar a genre com shooter
@@ -22,18 +24,25 @@ Barchart
 
 Multi-Line Chart
 [ ] center axis label 
-[ ] alinhar eixo dos X
+[X] alinhar eixo dos X
 [ ] tip a mostrar o valor para todas a lines e não apenas uma
 [ ] add the USA as a comparable state
 [ ] default type of crime should be mass shootings
+[ ] add the USA as a comparable state
 
 Lista de top 3 mass shootings
-[ ] mostrar mais de 3?
+[X] mostrar mais de 3
+[X] barchart em vez de cor
 
 Mapa
 [ ] border dos estados seleccionados com a cor do esado seleccionados
 
-State selector
-[ ] font-color dos estados correponder á cor da linha do line chart
-
 WordCloud
+
+Game selector
+[X] make game appear to the right of the search box insted of below
+[ ] make game box with red borders to make it more intuitive
+[ ] add search icon
+
+Time Line
+Impor limite minimo de 15 anos no time frame

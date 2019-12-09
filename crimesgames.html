@@ -21,15 +21,20 @@
 </head>
 
 <body style="background-color:white;">
-  <div class="container" id="title">
-    <h1 class=row id="row0">Crime, Video Games and Mass Shootings in the USA
-      <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
-        placeholder="Search a Video Game...               ">
+  <div class="container" height="60px">
+    <div>
+      <h1 class=row id="row0">Crime, Video Games and Mass Shootings in the USA
+        <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
+          placeholder="Search a Video Game...               ">
+      </h1>
+
       <datalist id="vgList">
       </datalist>
+    </div>
+    <div>
       <ul id=selectedGame>
       </ul>
-    </h1>
+    </div>
 
   </div>
 
@@ -92,8 +97,11 @@
         <ul id=stateList>
         </ul>
       </div>
+      <div class="container" id="title2">
+        <h2 class=row id="row0">TOP10 mass shootings</h2>
+      </div>
+
       <div id="masslist">
-        <h2 class=row id="row0">TOP10 mass shootings </h2>
       </div>
     </div>
     <div id="map"></div>

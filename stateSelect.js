@@ -13,6 +13,14 @@ function countStates() {
     return count;
 }
 
+function findState(name) {
+    for (i = 0; i < 3; i++) {
+        if (states[i] == name)
+            return i;
+    }
+    return -1;
+}
+
 function addState() {
     var newState = document.getElementById("c1").value;
     if (newState=="") return;
@@ -40,11 +48,13 @@ function addState() {
     }
     var ul = document.getElementById("stateList");
     var li = document.createElement("li");
+    li.setAttribute("color","red")
     var span = document.createElement("span");
     span.setAttribute("class", "close");
+    var text = document.createTextNode(stateDic[newState])
     span.appendChild(document.createTextNode("x"));
     li.appendChild(span);
-    li.appendChild(document.createTextNode(stateDic[newState]));
+    li.appendChild(text);
     ul.appendChild(li);
 
     span.addEventListener("click", function () {
