@@ -346,6 +346,26 @@ ul li {
   position: relative;
 }
 
+li.game_button{
+  border: 2px solid rgb(184, 3, 3);
+  width: 498;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  /* Prevent double borders */
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: rgb(184, 3, 3);
+  /* background-color: rgb(255, 184, 184); */
+  display: block;
+  position: relative;
+}
+
+li.game_button:hover {
+  background-color: rgb(255, 184, 184);
+}
+
 ul li:hover {
   background-color: #eee;
 }

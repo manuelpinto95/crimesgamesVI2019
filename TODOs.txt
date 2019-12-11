@@ -11,6 +11,7 @@ DashBoard
 [ ] font igual para tudo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [ ] dropdown buttons todos iguais
 [ ] animacoes em todos os charts
+[ ] AO FAZER CLICK, FAZER LOCK IN DO EVENTO YEAR PARA FICAR VISIVEL E DEIXAR O USER EXPLORAR
 
 Barchart
 [ ] add label to y axis
@@ -19,20 +20,26 @@ Barchart
 [ ] animação das barras
 [ ] remover genres irrelevantes
 [ ] iniciar a genre com shooter
-[ ] fazer fix á feature do highlight a vermelho do jogo
 [ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
+[ ] add year label to the x axis
 
 Multi-Line Chart
+[ ] na tip por também a região para facilitar comparaçoes em zonas cluttered
 [ ] center axis label 
 [X] alinhar eixo dos X
 [ ] tip a mostrar o valor para todas a lines e não apenas uma
 [ ] add the USA as a comparable state
 [ ] default type of crime should be mass shootings !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 [ ] add the USA as a comparable state
+[ ] add year label to the x axis
+[X] add tip to the legend that says the full name of the state
+[ ] add total crime as an option
 
 Lista de top 3 mass shootings
 [X] mostrar mais de 3
 [X] barchart em vez de cor
+[ ] add text saying there are no mass shootings for this time perior and for theses regions quando não há
+[ ] reduzir o tamanho do titulo "TOP10 mass shootings"
 
 Mapa
 [ ] border dos estados seleccionados com a cor do esado seleccionados
@@ -45,4 +52,10 @@ Game selector
 [ ] add search icon
 
 Time Line
-Impor limite minimo de 15 anos no time frame
+[ ] Impor limite minimo de 15 anos no time frame
+
+vgEvent
+[ ] fazer fix á feature do highlight a vermelho do jogo
+[ ] adicionar feature vermelha ao line chart
+[ ] adicionar feature vermelha ao line top3
+[ ] adicionar feature vermelha ao mapa

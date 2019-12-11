@@ -20,7 +20,8 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
         //console.log(d.Word);
     });
 
-    gen_WordCloud();
+    //TODO: uncomment
+    //gen_WordCloud();
 });
 
 function gen_WordCloud() {

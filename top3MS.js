@@ -20,7 +20,7 @@ d3.csv("/data/ms/MSselected2.csv").then(function (data) {
         d.Year = +d.Year;
     });
     msTop3data = data;
-    console.log(msTop3data);
+    //console.log(msTop3data);
 
     genTop3();
 });
@@ -43,7 +43,7 @@ function genTop3() {
         }
     })
 
-    console.log(filteredData);
+    //console.log(filteredData);
 
     filteredData.sort(function (x, y) {
         return d3.descending(x.Fatalities, y.Fatalities);
@@ -66,7 +66,7 @@ function genTop3() {
         .attr("height", h);
 
 
-    console.log(top3);
+    //console.log(top3);
 
     var max = 30
 
@@ -121,7 +121,7 @@ function genTop3() {
 
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("text")
-            .attr("x", 5)
+            .attr("x", 8)
             .attr("y", index * 60 + 27)
             .attr("text-anchor", "start")
             .attr("font-weight", "normal")

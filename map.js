@@ -1,5 +1,6 @@
+var stateGeo;
+
 d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
-    console.log("hey");
 
     gen_map()
 });
@@ -20,7 +21,6 @@ var map = {
     bar_w: 20
 };
 function gen_map() {
-    console.log("map");
 
     map.h = (window.innerHeight / 2 - 60);
     map.w = map.h * 1.6;
@@ -35,12 +35,32 @@ function gen_map() {
         .attr("width", map.w)
         .attr("height", map.h);
 
-    var unemployment = d3.map();
-    var stateNames = d3.map();
+    var projection = d3.geoEqualEarth()
+        .scale(map.w / 1.3 / Math.PI)
+        .translate([map.w / 2, map.h / 2]);
 
-    var path = d3.geoPath();
+    console.log(stateGeo);
 
-    var x = d3.scaleLinear()
+    d3.json("data/USA/states.json").then(function (data) {
+        console.log("states data is loaded");
+        stateGeo = data;
+        console.log(stateGeo);
+
+        map.svg.append("g")
+            .selectAll("path")
+            .data(stateGeo.objects.states)
+            .enter().append("path")
+            .attr("fill", "red")
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            .style("stroke", "#fff")
+
+    });
+
+
+
+    /* var x = d3.scaleLinear()
         .domain([1, 10])
         .rangeRound([600, 860]);
 
@@ -79,5 +99,5 @@ function gen_map() {
         .tickFormat(function (x, i) { return i ? x : x + "%"; })
         .tickValues(color.domain()))
         .select(".domain")
-        .remove();
+        .remove(); */
 }

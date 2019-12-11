@@ -118,7 +118,7 @@ function genLineChart() {
     lineChart.r = 4;
 
     lineChart.bar_w = Math.floor((lineChart.w - lineChart.padding * 2) / (year_filters[1] - year_filters[0] + 1)) - 10;
-    console.log(lineChart.bar_w);
+    //console.log(lineChart.bar_w);
 
 
     lineChart.svg = d3.select("#linechart")
@@ -142,10 +142,11 @@ function genLineChart() {
         .call(lineChart.yAxis);
 
     lineChart.svg.append("text")
-        .attr("x", 0)
+        .attr("x", 3)
         .attr("y", 13)
         //.attr("transform", "rotate(-90)")
         .style("text-anchor", "start")
+        .attr("font-size","15px")
         .text(crimeNameDic[selectedCrimeType]);
 
     lineChart.svg.append("g")
@@ -224,7 +225,7 @@ function genLineChart() {
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
+                div.html("USA"+ "<br/>" + d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
                     .style("left", (d3.event.pageX) + "px")
                     .style("top", (d3.event.pageY - 28) + "px");
                 dispatch.call("yearEvent", d, d);
@@ -271,7 +272,7 @@ function genLineChart() {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
+                    div.html(d.state_abbr + "<br/>" + d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 28) + "px");
                     dispatch.call("yearEvent", d, d);
@@ -389,13 +390,13 @@ function defineLineChartAxis() {
         .tickFormat(d3.format("d"))
         .ticks(year_filters[1] - year_filters[0] + 1);
 
-    console.log(year_filters[1] - year_filters[0] + 1);
+    //console.log(year_filters[1] - year_filters[0] + 1);
 
 }
 
 function crimeSelector() {
     selectedCrimeType = document.getElementById("crimeSelector").value;
-    console.log(selectedCrimeType);
+    //console.log(selectedCrimeType);
     update_lineChart();
 }
 

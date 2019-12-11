@@ -61,18 +61,20 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             else
                 vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
 
-
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot.attr("r", 6);
-        crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+
         if (vg.Year != barchart.selectedGameYear)
             vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
         else
             vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
+
+        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot.attr("r", 6);
+        crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+
     })
     // convert from string to number
     data.forEach(function (d) {
@@ -106,7 +108,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 
 function genreSelector() {
     vgSelectedGenre = document.getElementById("dropdownbox").value;
-    console.log(colorDict[vgSelectedGenre]);
+    //console.log(colorDict[vgSelectedGenre]);
 
     //document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
     update_barChart();
@@ -195,7 +197,7 @@ function gen_barChart() {
     //console.log(barchart.data);
 
     barchart.bar_w = Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10;
-    console.log(barchart.bar_w);
+    //console.log(barchart.bar_w);
 
     barchart.svg = d3.select("#barchart")
         .append("svg")
@@ -219,12 +221,18 @@ function gen_barChart() {
     barchart.xScale = d3.scaleLinear()
         .domain([0, barchart.data.length - 1])
         .range([barchart.padding + barchart.bar_w / 2, barchart.w - barchart.padding - barchart.bar_w / 2]);
-    console.log(barchart.padding + barchart.bar_w / 2);
+    //console.log(barchart.padding + barchart.bar_w / 2);
 
 
 
     barchart.yAxis = d3.axisLeft()
         .scale(barchart.yScale)
+        .tickFormat(function (d) {
+            if ((d / 1000) >= 1) {
+                d = d / 1000 + "K";
+            }
+            return d;
+        })
         .ticks(5);
 
     barchart.xAxis = d3.axisBottom()
@@ -345,10 +353,11 @@ function gen_barChart() {
         .text(genreTextDic[vgSelectedGenre]);
 
     barchart.svg.append("text")
-        .attr("x", 0)
+        .attr("x", 3)
         .attr("y", 13)
         //.attr("transform", "rotate(-90)")
         .style("text-anchor", "start")
+        .attr("font-size", "15px")
         .text("Releases");
 
 }
