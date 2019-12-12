@@ -147,9 +147,12 @@ function removeState(state) {
         if (states[i] == "" && states[i + 1] != "") {
             states[i] = states[i + 1];
             states[i + 1] = "";
+            /*UPDATE IDs */
             var li = document.getElementById("id"+(i+1));
             li.setAttribute("style","color:" + statesColors[i]);
             li.setAttribute("id","id"+i);
+            var span = document.getElementById("span"+(i+1));
+            span.setAttribute("id","span" + i);
 
         }
     }

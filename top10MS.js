@@ -107,7 +107,7 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
             .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
-            .attr("width", (xScale(top3[index].Fatalities)-8 >0 ? xScale(top3[index].Fatalities): 0 ) )
+            .attr("width", (xScale(top3[index].Fatalities)-8 >0 ? xScale(top3[index].Fatalities)-8: 0 ) )
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 4)
@@ -122,7 +122,7 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("text")
             .attr("x", 8)
-            .attr("y", index * 60 + 27)
+            .attr("y", index * 60 + 35)
             .attr("text-anchor", "start")
             .attr("font-weight", "normal")
             .style('fill', function () {
