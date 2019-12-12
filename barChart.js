@@ -205,8 +205,8 @@ function gen_barChart() {
         .attr("height", barchart.h);
 
     barchart.svg.append("text")
-        .attr("class", "title")
-        .attr("transform", "translate(" + (barchart.w / 2) + ",13)")
+        .attr("font-size", "20px")
+        .attr("transform", "translate(" + (barchart.w / 2) + ",15)")
         .attr("text-anchor", "middle")
         .text("New Video Games per year");
 

@@ -184,7 +184,8 @@ function genLineChart() {
 
     lineChart.svg.append("text")
         .attr("class", "title")
-        .attr("transform", "translate(" + (lineChart.w / 2) + ",13)")
+        .attr("font-size", "20px")
+        .attr("transform", "translate(" + (lineChart.w / 2) + ",15)")
         .attr("text-anchor", "middle")
         .text("Crime occurrences per 1000 capita");
 

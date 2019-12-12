@@ -24,7 +24,11 @@ function findState(name) {
 function addState() {
     var newState = document.getElementById("c1").value;
     if (newState=="") return;
-    
+
+    /* var tip = document.getElementById("statetip")
+    if (tip!=null) {
+        tip.remove();
+    } */
 
     var i = 0;
     for (i = 0; i < 3; i++) {
@@ -73,6 +77,11 @@ function addState() {
 
 function addStatebyName(newState) {
     if (newState=="") return;
+
+    /* var tip = document.getElementById("statetip")
+    if (tip!=null) {
+        tip.remove();
+    } */
 
     var i = 0;
     for (i = 0; i < 3; i++) {
@@ -156,6 +165,12 @@ function removeState(state) {
 
         }
     }
+    /* if (countStates()==0) {
+        var tip = document.createTextNode("Use the map to the right to select states you wish to compare....")
+        tip.setAttribute("id","statetip")
+        var div = document.getElementById("stateselect")
+        div.appendChild(tip)
+    } */
     /*UPDATE IDIOMS*/
     console.log(states);
     update_lineChart();

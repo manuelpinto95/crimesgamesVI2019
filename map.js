@@ -43,6 +43,13 @@ function gen_map() {
         .attr("width", w)
         .attr("height", h);
 
+    map.svg.append("text")
+        .attr("class", "title")
+        .attr("font-size", "20px")
+        .attr("transform", "translate(" + (w / 2) + ",35)")
+        .attr("text-anchor", "middle")
+        .text("Average crime in the USA");
+
     var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state", "valueDataColumn": "crime" }
 
     var COLOR_COUNTS = 9;

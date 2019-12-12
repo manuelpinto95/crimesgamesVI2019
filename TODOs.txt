@@ -13,6 +13,7 @@ DashBoard
 
 state selector
 [X] font-color dos estados correponder á cor da linha do line chart
+[ ] move selector to the map div
 
 
 Barchart
@@ -21,6 +22,7 @@ Barchart
 [X] alinhar eixo do x com o meio das barras
 [ ] remover genres irrelevantes
 [ ] iniciar a genre com shooter
+[ ] fazer o append dos rectangulos como deve de ser
 
 Multi-Line Chart
 [ ] add "over the year" in the title
@@ -56,6 +58,7 @@ vgEvent
 
 ADICIONAL:
 state selector
+[ ] click on mass shooting to select the state in which it happened
 [ ] add text saying use list above to add states when to state is selected
 [ ] remover estados dos quais nao temos data de crime
 [ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
