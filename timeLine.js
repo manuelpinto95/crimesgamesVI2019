@@ -114,6 +114,7 @@ function gen_timeline() {
             update_barChart();
             update_lineChart();
             update_top3();
+            update_map();
         });;
 
     // this is the bar on top of above tracks with stroke = transparent and on which the drag behaviour is actually called

@@ -51,6 +51,9 @@
 
     d3.csv("population.csv", function (err, data) {
 
+        console.log(data);
+        
+
         var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state_or_territory", "valueDataColumn": "population_estimate_for_july_1_2013_number" }
 
         var WIDTH = 800, HEIGHT = 500;
@@ -147,7 +150,7 @@
             .attr("width", width)
             .attr("height", height);
 
-        d3.tsv("https://s3-us-west-2.amazonaws.com/vida-public/geo/us-state-names.tsv", function (error, names) {
+        d3.csv("us-state-names.csv", function (error, names) {
             
             name_id_map = {};
             id_name_map = {};
@@ -166,14 +169,13 @@
                  
                 valueById.set(id, +d[MAP_VALUE]);
             });
-
             console.log(valueById);
 
             quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
             d3.max(data, function (d) { return +d[MAP_VALUE] })]);
-            console.log(quantize);
+
             
-            d3.json("https://s3-us-west-2.amazonaws.com/vida-public/geo/us.json", function (error, us) {
+            d3.json("us.json", function (error, us) {
                 svg.append("g")
                     .attr("class", "states-choropleth")
                     .selectAll("path")

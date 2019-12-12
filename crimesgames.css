@@ -19,6 +19,36 @@ h2 {
 div {
   border: 1px solid grey;
 }
+/*---------------------MAP------------------------*/
+.states {
+  fill: none;
+  stroke: "black";
+  stroke-linejoin: round;
+}
+
+.states-choropleth {
+  fill: #ccc;
+}
+
+#tooltip-container {
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  padding: 10px;
+  border: 1px solid;
+  display: none;
+}
+
+/*---------------------MAP------------------------*/
+
+.tooltip_key {
+  font-weight: bold;
+}
+
+.tooltip_value {
+  margin-left: 20px;
+  float: right;
+}
 
 /* div.scroll {
   margin: 4px, 4px;
@@ -45,7 +75,7 @@ div {
 
 #selectors {
   /* height: 450; */
-  /* width: 500; */
+  width: 500;
 }
 
 #stateselect {
@@ -57,6 +87,7 @@ div {
   height: 410;
   width: 500;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 /* #wordcloud {

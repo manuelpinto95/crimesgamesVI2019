@@ -1,10 +1,4 @@
 <html>
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v5.js"></script>
-
-<!-- Load d3-cloud -->
-<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
-
 
 <head>
   <title>Crime vs Video Games</title>
@@ -17,7 +11,11 @@
   <script src="lineChart.js"></script>
   <script src="vgSearcher.js"></script>
   <script src="map.js"></script>
-  <script src="top3MS.js"></script>
+  <script src="top10MS.js"></script>
+  <script src="libs/d3.js"></script>
+  <script src="libs/topojson.js"></script>
+  <script src="libs/jquerry.js"></script>
+  <script src="libs/cloud.js"></script>
 </head>
 
 <body style="background-color:white;">
@@ -44,7 +42,7 @@
   <div class="container">
     <div id=selectors>
       <div id="stateselect">
-        <select id="c1" onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
+        <select id="c1" onchange="addState()" style="background-color:#eeeeee" name="FipsCode" label="Choose States to Compare"> ==$0
           <option hidden default="">Choose States to Compare</option>
           <option value="AL">Alabama</option>
           <option value="AK">Alaska</option>
@@ -107,7 +105,9 @@
       <div id="masslist">
       </div>
     </div>
-    <div id="map"></div>
+    <div id="map">
+      <!-- <div id="tooltip-container"></div> -->
+    </div>
     <div id="wordcloud"></div>
   </div>
 

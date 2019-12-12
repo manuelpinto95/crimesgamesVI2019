@@ -1,103 +1,235 @@
-var stateGeo;
+var mapData;
 
-d3.csv("/data/crime/crimesoriginal.csv").then(function (data) {
+d3.csv("data/crime/crimeFinal2.csv").then(function (data) {
+    mapData = data;
+    gen_map();
+})
 
-    gen_map()
-});
-
+function update_map() {
+    map.svg.remove();
+    gen_map();
+}
 var map = {
-    data: 0,
-    svg: 0,
-    margin: {
-        top: 1,
-        right: 5,
-        bottom: 5,
-        left: 5
-    },
-    w: 0,
-    h: 0,
-    padding: 40,
-    r: 3,
-    bar_w: 20
-};
+    svg: 0
+}
 function gen_map() {
 
-    map.h = (window.innerHeight / 2 - 60);
-    map.w = map.h * 1.6;
+    var data = mapData.filter(function (d, key) {
+        return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
 
-    document.getElementById("wordcloud").style.width = window.innerWidth - map.w - 500;
+    })
+    data = d3.nest()
+        .key(function (d) { return d.name.trim(); })
+        .rollup(function (leaves) {
+            return d3.sum(leaves, function (d) {
+                return getCrime(selectedCrimeType, d) / d.population * 1000;
+            });
+        }).entries(data)
+        .map(function (d) {
+            return { state: d.key, crime: d.value };
+        });
+    //console.log(data);
 
-    map.padding = 40;
-    map.r = 4;
+    h = (window.innerHeight / 2 - 60);
+    w = h * 1.6;
+
+    document.getElementById("wordcloud").style.width = window.innerWidth - w - 500;
+
+    padding = 40;
+    r = 4;
 
     map.svg = d3.select("#map")
         .append("svg")
-        .attr("width", map.w)
-        .attr("height", map.h);
+        .attr("width", w)
+        .attr("height", h);
 
-    var projection = d3.geoEqualEarth()
-        .scale(map.w / 1.3 / Math.PI)
-        .translate([map.w / 2, map.h / 2]);
+    var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state", "valueDataColumn": "crime" }
 
-    console.log(stateGeo);
+    var COLOR_COUNTS = 9;
 
-    d3.json("data/USA/states.json").then(function (data) {
-        console.log("states data is loaded");
-        stateGeo = data;
-        console.log(stateGeo);
+    var SCALE = 0.8;
 
-        map.svg.append("g")
-            .selectAll("path")
-            .data(stateGeo.objects.states)
-            .enter().append("path")
-            .attr("fill", "red")
-            .attr("d", d3.geoPath()
-                .projection(projection)
-            )
-            .style("stroke", "#fff")
+    var COLOR_FIRST = config.color1, COLOR_LAST = config.color2;
+
+    var rgb = hexToRgb(COLOR_FIRST);
+
+    var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
+
+    rgb = hexToRgb(COLOR_LAST);
+    var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
+
+    var MAP_STATE = config.stateDataColumn;
+    var MAP_VALUE = config.valueDataColumn;
+
+    var valueById = d3.map();
+
+    var startColors = COLOR_START.getColors(),
+        endColors = COLOR_END.getColors();
+
+    var colors = [];
+
+    for (var i = 0; i < COLOR_COUNTS; i++) {
+        var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
+        var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
+        var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
+        colors.push(new Color(r, g, b));
+    }
+
+    var quantize = d3.scaleQuantize()
+        .domain([0, 1.0])
+        .range(d3.range(COLOR_COUNTS).map(function (i) { return i }));
+
+    var projection = d3.geoAlbers().rotate([90, 0, 0]).translate([530, 300]);
+    var path = d3.geoPath().projection(projection);
+
+    function getKeyByValue(object, value) {
+        return Object.keys(object).find(key => object[key] === value);
+    }
+
+    d3.csv("data/USA/us-state-names.csv").then(function (names) {
+
+        name_id_map = {};
+        id_name_map = {};
+        //console.log(names);
+
+        for (var i = 0; i < names.length; i++) {
+            name_id_map[names[i].name] = names[i].id;
+            id_name_map[names[i].id] = names[i].name;
+        }
+        //console.log(name_id_map);
+        //console.log(id_name_map);
+
+        data.forEach(function (d) {
+            var id = name_id_map[d[MAP_STATE]];
+
+            valueById.set(id, +d[MAP_VALUE]);
+        });
+        //console.log(valueById);
+
+        quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
+        d3.max(data, function (d) { return +d[MAP_VALUE] })]);
+
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        d3.json("data/USA/us.json").then(function (us) {
+
+            map.svg.append("g")
+                .attr("class", "states-choropleth")
+                .selectAll("path")
+                .data(topojson.feature(us, us.objects.states).features)
+                .enter().append("path")
+                .attr("transform", "scale(" + SCALE + ")")
+                .attr("style", function (d) {
+                    var state = id_name_map[d.id];
+                    //console.log(state);
+                    var code = codeDic[state];
+                    //console.log(code);
+                    var stateIndex = findState(code);
+                    if (stateIndex != -1)
+                        return ("stroke-width:6;stroke:" + statesColors[stateIndex]);
+
+                    return "style", "stroke-width:0.5;stroke:rgb(0,0,0)";
+                })
+                .style("fill", function (d) {
+                    if (valueById.get(d.id)) {
+                        var i = quantize(valueById.get(d.id));
+
+                        var color = colors[i].getColors(); //TODO must quantize
+                        return "rgb(" + color.r + "," + color.g +
+                            "," + color.b + ")";
+                    } else {
+                        return "";
+                    }
+                })
+                .attr("d", path)
+                .on("mousemove", function (d) {
+                    var sel = d3.select(this);
+                    sel.raise()
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html(id_name_map[d.id] + "<br/>" + "avg. " + crimeNameDic[selectedCrimeType] + " per 1k capita:" + (valueById.get(d.id) ? valueById.get(d.id).toFixed(2) : ""))
+                        .style("left", (d3.event.pageX + 10) + "px")
+                        .style("top", (d3.event.pageY + 10) + "px");
+                })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                })
+                .on("click", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+
+                    var index = findState(codeDic[id_name_map[d.id]])
+                    if (index == -1) {
+                        addStatebyName(codeDic[id_name_map[d.id]]);
+                    }
+                    else {
+                        console.log("removing state: " + "span" + index);
+                        var span = document.getElementById("span" + index);
+                        span.parentElement.remove();
+                        removeState(codeDic[id_name_map[d.id]]);
+                    }
+
+                })
+
+            map.svg.append("path")
+                .datum(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; }))
+                .attr("class", "states")
+                .attr("transform", "scale(" + SCALE + ")")
+                .attr("d", path);
+        });
 
     });
+};
 
+function Interpolate(start, end, steps, count) {
+    var s = start,
+        e = end,
+        final = s + (((e - s) / steps) * count);
+    return Math.floor(final);
+}
 
+function Color(_r, _g, _b) {
+    var r, g, b;
+    var setColors = function (_r, _g, _b) {
+        r = _r;
+        g = _g;
+        b = _b;
+    };
 
-    /* var x = d3.scaleLinear()
-        .domain([1, 10])
-        .rangeRound([600, 860]);
+    setColors(_r, _g, _b);
+    this.getColors = function () {
+        var colors = {
+            r: r,
+            g: g,
+            b: b
+        };
+        return colors;
+    };
+}
 
-    var color = d3.scaleThreshold()
-        .domain(d3.range(0, 10))
-        .range(d3.schemeReds[9]);
+function hexToRgb(hex) {
+    var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+    } : null;
+}
 
-    var g = map.svg.append("g")
-        .attr("class", "key")
-        .attr("transform", "translate(0,40)");
-
-    g.selectAll("rect")
-        .data(color.range().map(function (d) {
-            d = color.invertExtent(d);
-            if (d[0] == null) d[0] = x.domain()[0];
-            if (d[1] == null) d[1] = x.domain()[1];
-            return d;
-        }))
-        .enter().append("rect")
-        .attr("height", 8)
-        .attr("x", function (d) { return x(d[0]); })
-        .attr("width", function (d) { return x(d[1]) - x(d[0]); })
-        .attr("fill", function (d) { return color(d[0]); });
-
-    g.append("text")
-        .attr("class", "caption")
-        .attr("x", x.range()[0])
-        .attr("y", -6)
-        .attr("fill", "#000")
-        .attr("text-anchor", "start")
-        .attr("font-weight", "bold")
-        .text("Mass Shooting Fatalities"); //TODO this legend must correspond to what crime type we are visualizing
-
-    g.call(d3.axisBottom(x)
-        .tickSize(13)
-        .tickFormat(function (x, i) { return i ? x : x + "%"; })
-        .tickValues(color.domain()))
-        .select(".domain")
-        .remove(); */
+function valueFormat(d) {
+    if (d > 1000000000) {
+        return Math.round(d / 1000000000 * 10) / 10 + "B";
+    } else if (d > 1000000) {
+        return Math.round(d / 1000000 * 10) / 10 + "M";
+    } else if (d > 1000) {
+        return Math.round(d / 1000 * 10) / 10 + "K";
+    } else {
+        return d;
+    }
 }

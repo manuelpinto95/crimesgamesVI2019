@@ -1,61 +1,68 @@
-TODOs
-
-state selector
-[ ] add text saying use list above to add states when to state is selected
-[ ] font-color dos estados correponder á cor da linha do line chart
+Data
+[ ] remove rape
+[ ] fix data for the map as some states are missing
+[ ] try to add MS as a row in the crime dataset
 
 DashBoard
 [X] Usar tamanhos relativos para definir o tamanho das divs
 [X] add mouse out events to reduce the border width 
-[X] espaçamento do abr chart e line chart mais centrado
-[ ] font igual para tudo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-[ ] dropdown buttons todos iguais
-[ ] animacoes em todos os charts
-[ ] AO FAZER CLICK, FAZER LOCK IN DO EVENTO YEAR PARA FICAR VISIVEL E DEIXAR O USER EXPLORAR
+[X] espaçamento do barchart chart e line chart mais centrado
+[X] dropdown buttons todos iguais
+[ ] font igual para tudo
+[ ] font igual para todos os titulos dos graficos
+
+state selector
+[X] font-color dos estados correponder á cor da linha do line chart
+
 
 Barchart
-[ ] add label to y axis
-[ ] basta 1 cor para a subgenre
+[X] add label to y axis
+[X] basta 1 cor para a subgenre
 [X] alinhar eixo do x com o meio das barras
-[ ] animação das barras
 [ ] remover genres irrelevantes
 [ ] iniciar a genre com shooter
-[ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
-[ ] add year label to the x axis
 
 Multi-Line Chart
-[ ] na tip por também a região para facilitar comparaçoes em zonas cluttered
-[ ] center axis label 
+[ ] add "over the year" in the title
+[ ] fix region tip (ou então esconder para nao dar a percebr que há bug)
+[X] na tip por também a região para facilitar comparaçoes em zonas cluttered
+[X] center axis label 
 [X] alinhar eixo dos X
-[ ] tip a mostrar o valor para todas a lines e não apenas uma
-[ ] add the USA as a comparable state
-[ ] default type of crime should be mass shootings !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-[ ] add the USA as a comparable state
-[ ] add year label to the x axis
+[ ] default type of crime should be mass shootings
 [X] add tip to the legend that says the full name of the state
-[ ] add total crime as an option
 
 Lista de top 3 mass shootings
 [X] mostrar mais de 3
 [X] barchart em vez de cor
-[ ] add text saying there are no mass shootings for this time perior and for theses regions quando não há
-[ ] reduzir o tamanho do titulo "TOP10 mass shootings"
 
 Mapa
-[ ] border dos estados seleccionados com a cor do esado seleccionados
+[X] border dos estados seleccionados com a cor do esado seleccionados
+[ ] remove Puerto Rico and Virgin Islands, add hawaii and Alaska
+[X] fix tips
+[ ] add coordinates of top10 MS
+[ ] add scale
 
 WordCloud
 
+
 Game selector
 [X] make game appear to the right of the search box insted of below
-[ ] make game box with red borders to make it more intuitive
-[ ] add search icon
+[X] make game box with red borders to make it more intuitive
 
-Time Line
-[ ] Impor limite minimo de 15 anos no time frame
 
 vgEvent
-[ ] fazer fix á feature do highlight a vermelho do jogo
-[ ] adicionar feature vermelha ao line chart
-[ ] adicionar feature vermelha ao line top3
-[ ] adicionar feature vermelha ao mapa
+[ ] implementar como deve de ser
+
+
+ADICIONAL:
+state selector
+[ ] add text saying use list above to add states when to state is selected
+[ ] remover estados dos quais nao temos data de crime
+[ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
+[ ] animacoes em todos os charts
+[ ] AO FAZER CLICK, FAZER LOCK IN DO EVENTO YEAR PARA FICAR VISIVEL E DEIXAR O USER EXPLORAR
+[ ] tip a mostrar o valor para todas a lines e não apenas uma no multi-line chart
+[ ] add the USA as a comparable state
+[ ] add text saying there are no mass shootings for this time perior and for theses regions quando não há
+[ ] add search icon to the cg searcher
+[ ] Impor limite minimo de 15 anos na time line

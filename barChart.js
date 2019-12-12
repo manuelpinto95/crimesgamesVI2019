@@ -296,7 +296,7 @@ function gen_barChart() {
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
 
-            rect2.setAttribute("fill", d3.schemeSet2[5]);
+            rect2.setAttribute("fill","rgb(188, 208, 238)");
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
             if (d.Year == barchart.selectedGameYear) {
@@ -345,7 +345,7 @@ function gen_barChart() {
         .attr("width", 15)
         .attr("height", 15)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
-        .attr("fill", d3.schemeSet2[5])
+        .attr("fill", "rgb(188, 208, 238)")
     barchart.svg.append("text")
         .attr("class", "title")
         .attr("x", barchart.w - 130)

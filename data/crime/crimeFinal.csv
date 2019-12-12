@@ -1,4 +1,4 @@
-NAME,Postal Code,year,state_abbr,population,violent_crime,homicide,rape_legacy,rape_revised,robbery,aggravated_assault,property_crime,burglary,larceny,motor_vehicle_theft,TotalCrime
+name,state_abbr,Year,state_abbr,population,violent_crime,homicide,rape_legacy,rape_revised,robbery,aggravated_assault,property_crime,burglary,larceny,motor_vehicle_theft,TotalCrime
 Alabama       ,AL,1979,AL,3769000,15578,496,1037,               ,4127,9918,144372,48517,83791,12064,319900
 Alabama       ,AL,1980,AL,3861466,17320,509,1158,               ,5102,10551,173191,58952,102029,12210,381022
 Alabama       ,AL,1981,AL,3916000,18423,465,1021,               ,4952,11985,173411,56811,105471,11129,383668

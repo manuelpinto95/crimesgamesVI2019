@@ -12,7 +12,7 @@
 
     .states {
         fill: none;
-        stroke: #fff;
+        stroke: "black";
         stroke-linejoin: round;
     }
 
@@ -49,11 +49,30 @@
 
 <script>
 
-    d3.csv("population.csv").then(function (data) {
-        console.log("population data:");
+    var states = ["CA", "TX", ""];
+    var year_filters = [2000, 2010];
+    var selectedCrimeType = "violent_crime";
+
+    d3.csv("crimeFinal.csv").then(function (data) {
+
+        data = data.filter(function (d, key) {
+            return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
+
+        })
+        data = d3.nest()
+            .key(function (d) { return d.name.trim(); })
+            .rollup(function (leaves) {
+                return d3.sum(leaves, function (d) {
+                    return getCrime(selectedCrimeType, d) / d.population * 1000;
+                });
+            }).entries(data)
+            .map(function (d) {
+                return { state: d.key, crime: d.value };
+            });
+
         console.log(data);
-        
-        var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state_or_territory", "valueDataColumn": "population_estimate_for_july_1_2013_number" }
+
+        var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state", "valueDataColumn": "crime" }
 
         var WIDTH = 600, HEIGHT = 400;
 
@@ -153,39 +172,45 @@
             name_id_map = {};
             id_name_map = {};
             console.log(names);
-            
+
             for (var i = 0; i < names.length; i++) {
                 name_id_map[names[i].name] = names[i].id;
                 id_name_map[names[i].id] = names[i].name;
             }
-            console.log(name_id_map["Delaware"]);
+            console.log(name_id_map);
             console.log(id_name_map);
-            
+
             data.forEach(function (d) {
                 var id = name_id_map[d[MAP_STATE]];
-                 
+
                 valueById.set(id, +d[MAP_VALUE]);
             });
             console.log(valueById);
-            
 
             quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
             d3.max(data, function (d) { return +d[MAP_VALUE] })]);
 
-            console.log(quantize.domain);
 
-            d3.json("us.json").then(function(us) {
-                
+            d3.json("us.json").then(function (us) {
+
                 svg.append("g")
                     .attr("class", "states-choropleth")
                     .selectAll("path")
                     .data(topojson.feature(us, us.objects.states).features)
                     .enter().append("path")
                     .attr("transform", "scale(" + SCALE + ")")
+                    .attr("stroke", function(d){
+                        console.log(id_name_map[d.id]);
+                        
+                        if(id_name_map[d.id]=="California")
+                            return "red";
+                            
+                        return "none";
+                    })
                     .style("fill", function (d) {
                         if (valueById.get(d.id)) {
                             var i = quantize(valueById.get(d.id));
-                            
+
                             var color = colors[i].getColors(); //TODO must quantize
                             return "rgb(" + color.r + "," + color.g +
                                 "," + color.b + ")";
@@ -230,7 +255,7 @@
                         $(this).attr("fill-opacity", "1.0");
                         $("#tooltip-container").hide();
                     });
-                
+
                 svg.append("path")
                     .datum(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; }))
                     .attr("class", "states")
@@ -240,5 +265,43 @@
 
         });
     });
+
+    function getCrime(name, d) {
+        var crime;
+        switch (name) {
+            case "violent_crime":
+                crime = d.violent_crime
+                break;
+            case "homicide":
+                crime = d.homicide
+                break;
+            case "rape_legacy":
+                crime = d.rape_legacy
+                break;
+            case "robbery":
+                crime = d.robbery
+                break;
+            case "aggravated_assault":
+                crime = d.aggravated_assault
+                break;
+            case "property_crime":
+                crime = d.property_crime
+                break;
+            case "burglary":
+                crime = d.burglary
+                break;
+            case "larceny":
+                crime = d.larceny
+                break;
+            case "motor_vehicle_theft":
+                crime = d.motor_vehicle_theft
+                break;
+            default:
+                crime = d.violent_crime;
+                break;
+        }
+        //console.log(crime);
+        return crime;
+    }
 
 </script>
