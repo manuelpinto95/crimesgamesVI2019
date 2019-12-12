@@ -73,6 +73,7 @@ function addState() {
     update_lineChart();
     update_top3();
     update_map();
+    update_wordCloud();
 }
 
 function addStatebyName(newState) {

@@ -1,20 +1,17 @@
 //------------------------
 
+var wordsDS;
+
 var wordCloud = {
+    data: 0,
     svg : 0,
-    words: []
+    words: [],
+    layout: 0
 };
 
 
-wordCloud.words = [{word: "A", size: 20}];
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
-
-    data.forEach(function (d) {
-        wordCloud.words.push({word: d.Word, size: d.count*10});
-        
-    });
-
-    //TODO: uncomment
+    wordsDS = data;
     gen_WordCloud();
 });
 
@@ -37,26 +34,42 @@ function gen_WordCloud() {
         .attr("width", width)
         .attr("height", height)
         .append("g")
-        .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+    //filter the data to match the time period
+    filterData();
+
+    wordCloud.data.forEach(function(d){
+        d.values.forEach(function(d2){
+            if(d2.Word in wordCloud.words){
+                wordCloud.words[d2.Word].count += 1;
+            }
+            else{
+                wordCloud.words.push({word: d2.Word, count: 1})
+            }
+
+        })
+        
+    })
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here
-    var layout = d3.layout.cloud()
+    wordCloud.layout = d3.layout.cloud()
         .size([width, height])
-        .words(wordCloud.words.map(function(d) { return {text: d.word, size:d.size}; }))
+        .words(wordCloud.words.map(function(d) { return {text: d.word, size:d.count*10}; }))
         .padding(5)        //space between words
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })      // font size of words
         .on("end", draw);
-    layout.start();
+    wordCloud.layout.start();
 
     // This function takes the output of 'layout' above and draw the words
     // Wordcloud features that are THE SAME from one word to the other can be here
+
     function draw(words) {
   wordCloud.svg
     .append("g")
-      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+      .attr("transform", "translate(" + wordCloud.layout.size()[0] / 2 + "," + wordCloud.layout.size()[1] / 2 + ")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
@@ -68,12 +81,35 @@ function gen_WordCloud() {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
         .text(function(d) { return d.text; });
+
+    }
+
 }
-}
-/*
-update_wordCloud(){
+
+function update_wordCloud(){
     wordCloud.svg.remove();
+    d3.select("svg").remove();
+    wordCloud.words = [];
     gen_WordCloud();
-}*/
+}
 
 
+function filterData() {
+    //console.log("states");
+    //console.log(states);
+    var filteredData = wordsDS.filter(function (d, key) {
+    
+        if (countStates() == 0) {
+            return (d.year >= year_filters[0] && d.year <= year_filters[1]);
+        } else {
+            return (d.year >= year_filters[0] && d.year <= year_filters[1] && (d.CODE == states[0] || d.CODE == states[1] || d.CODE == states[2]));
+        }
+    });
+
+    var entries = d3.nest()
+        .key(function (d) { return d.CODE; })
+        .entries(filteredData);
+
+    wordCloud.data = entries;
+
+}
