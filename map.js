@@ -129,7 +129,7 @@ function gen_map() {
         /*LEGEND*/
         var legend = map.svg.append("g")
             .attr("class", "key")
-            .attr("transform", "translate(" + (w - 300) + ",40)");
+            .attr("transform", "translate(" + (w - 310) + ",40)");
 
         map.svg.append("text")
             .attr("class", "title")
@@ -159,6 +159,11 @@ function gen_map() {
                     div.html("[" + (min + index * interval).toFixed(0) + " - " + (min + (index + 1) * interval).toFixed(0) + "]")
                         .style("left", (d3.event.pageX + 10) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
+                })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
                 })
 
         }
