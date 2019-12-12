@@ -1,15 +1,13 @@
 <html>
-<!-- Load d3.js -->
-<script src="https://d3js.org/d3.v5.js"></script>
-
-<!-- Load d3-cloud -->
-<script src="https://cdn.jsdelivr.net/gh/holtzy/D3-graph-gallery@master/LIB/d3.layout.cloud.js"></script>
-
 
 <head>
   <title>Crime vs Video Games</title>
   <link rel="stylesheet" href="crimesgames.css">
-  <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
+  <!-- <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script> -->
+  <script src="libs/d3.js"></script>
+  <script src="libs/topojson.js"></script>
+  <script src="libs/jquerry.js"></script>
+  <script src="libs/cloud.js"></script>
   <script src="barChart.js"></script>
   <script src="stateSelect.js"></script>
   <script src="timeLine.js"></script>
@@ -17,90 +15,109 @@
   <script src="lineChart.js"></script>
   <script src="vgSearcher.js"></script>
   <script src="map.js"></script>
-  <script src="top3MS.js"></script>
+  <script src="top10MS.js"></script>
 </head>
 
 <body style="background-color:white;">
-  <div class="container" id="title">
-    <h1 class=row id="row0">Crime, Video Games and Mass Shootings in the USA
-      <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
-        placeholder="Search a Video Game...               ">
+  <div class="container" height="60px">
+    <div>
+      <h1 class=row id="row0">Crime, Video Games and Mass Shootings in the USA
+      </h1>
+    </div>
+    <div>
+      <div>
+        <input id="vgSearch" onchange="vgSelected()" list="vgList" name="videogames" class="form-control"
+          placeholder="Search a Video Game...               ">
+      </div>
+    </div>
+    <div>
       <datalist id="vgList">
       </datalist>
       <ul id=selectedGame>
       </ul>
-    </h1>
+    </div>
 
   </div>
 
   <div class="container">
     <div id=selectors>
-      <div id="stateselect">
-        <select id="c1" onchange="addState()" name="FipsCode" label="Choose States to Compare"> ==$0
-          <option hidden default="">Choose States to Compare</option>
-          <option value="AL">Alabama</option>
-          <option value="AK">Alaska</option>
-          <option value="AR">Arkansas</option>
-          <option value="AZ">Arizona</option>
-          <option value="CA">California</option>
-          <option value="CO">Colorado</option>
-          <option value="CT">Connecticut</option>
-          <option value="DE">Delaware</option>
-          <option value="FL">Florida</option>
-          <option value="GA">Georgia</option>
-          <option value="HI">Hawaii</option>
-          <option value="ID">Idaho</option>
-          <option value="IL">Illinois</option>
-          <option value="IN">Indiana</option>
-          <option value="IA">Iowa</option>
-          <option value="KS">Kansas</option>
-          <option value="KY">Kentucky</option>
-          <option value="LA">Louisiana</option>
-          <option value="ME">Maine</option>
-          <option value="MD">Maryland</option>
-          <option value="MA">Massachusetts</option>
-          <option value="MI">Michigan</option>
-          <option value="MN">Minnesota</option>
-          <option value="MS">Mississippi</option>
-          <option value="MO">Missouri</option>
-          <option value="MT">Montana</option>
-          <option value="NE">Nebraska</option>
-          <option value="NV">Nevada</option>
-          <option value="NH">New Hampshire</option>
-          <option value="NJ">New Jersey</option>
-          <option value="NM">New Mexico</option>
-          <option value="NY">New York</option>
-          <option value="NC">North Carolina</option>
-          <option value="ND">North Dakota</option>
-          <option value="OH">Ohio</option>
-          <option value="OK">Oklahoma</option>
-          <option value="OR">Oregon</option>
-          <option value="PA">Pennsylvania</option>
-          <option value="RI">Rhode Island</option>
-          <option value="SC">South Carolina</option>
-          <option value="SD">South Dakota</option>
-          <option value="TN">Tennessee</option>
-          <option value="TX">Texas</option>
-          <option value="UT">Utah</option>
-          <option value="VT">Vermont</option>
-          <option value="VA">Virginia</option>
-          <option value="WA">Washington</option>
-          <option value="WV">West Virginia</option>
-          <option value="WI">Wisconsin</option>
-          <option value="WY">Wyoming</option>
-        </select>
+      <div id="stateselect" style="border: 1px solid grey;" text-align="center" font-color="grey">
+        <div id="statetip" text-align="center">
+          Use the map to the right to select states you wish to compare....
+        </div>
         <ul id=stateList>
         </ul>
       </div>
-      <div id="masslist">
-        <h2 class=row id="row0">TOP10 mass shootings </h2>
+
+      <div id="box" style="border: 1px solid grey;">
+        <div id=top10title style="border: 1px solid grey;">
+          <h2 id="row0" text-align="center">Top 10 mass shootings</h2>
+        </div>
+        <div id="masslist">
+        </div>
       </div>
     </div>
-    <div id="map"></div>
-    <div id="wordcloud"></div>
+
+    <div id="map" style="border: 1px solid grey;">
+      <select id="c1" onchange="addState()" style="background-color:#eeeeee" name="FipsCode"
+        label="Choose States to Compare"> ==$0
+        <option hidden default="">Choose States to Compare</option>
+        <option value="AL">Alabama</option>
+        <option value="AK">Alaska</option>
+        <option value="AR">Arkansas</option>
+        <option value="AZ">Arizona</option>
+        <option value="CA">California</option>
+        <option value="CO">Colorado</option>
+        <option value="CT">Connecticut</option>
+        <option value="DE">Delaware</option>
+        <option value="FL">Florida</option>
+        <option value="GA">Georgia</option>
+        <option value="HI">Hawaii</option>
+        <option value="ID">Idaho</option>
+        <option value="IL">Illinois</option>
+        <option value="IN">Indiana</option>
+        <option value="IA">Iowa</option>
+        <option value="KS">Kansas</option>
+        <option value="KY">Kentucky</option>
+        <option value="LA">Louisiana</option>
+        <option value="ME">Maine</option>
+        <option value="MD">Maryland</option>
+        <option value="MA">Massachusetts</option>
+        <option value="MI">Michigan</option>
+        <option value="MN">Minnesota</option>
+        <option value="MS">Mississippi</option>
+        <option value="MO">Missouri</option>
+        <option value="MT">Montana</option>
+        <option value="NE">Nebraska</option>
+        <option value="NV">Nevada</option>
+        <option value="NH">New Hampshire</option>
+        <option value="NJ">New Jersey</option>
+        <option value="NM">New Mexico</option>
+        <option value="NY">New York</option>
+        <option value="NC">North Carolina</option>
+        <option value="ND">North Dakota</option>
+        <option value="OH">Ohio</option>
+        <option value="OK">Oklahoma</option>
+        <option value="OR">Oregon</option>
+        <option value="PA">Pennsylvania</option>
+        <option value="RI">Rhode Island</option>
+        <option value="SC">South Carolina</option>
+        <option value="SD">South Dakota</option>
+        <option value="TN">Tennessee</option>
+        <option value="TX">Texas</option>
+        <option value="UT">Utah</option>
+        <option value="VT">Vermont</option>
+        <option value="VA">Virginia</option>
+        <option value="WA">Washington</option>
+        <option value="WV">West Virginia</option>
+        <option value="WI">Wisconsin</option>
+        <option value="WY">Wyoming</option>
+      </select>
+    </div>
+    <div id="wordcloud" style="border: 1px solid grey;"></div>
   </div>
 
-  <div id="linechart">
+  <div id="linechart" style="border: 1px solid grey;">
     <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector" label="Choose Type of Crime">
       ==$0
       <option hidden default="">Type of Crime</option>
@@ -117,11 +134,11 @@
     </select>
   </div>
 
-  <div id="barchart">
+  <div id="barchart" style="border: 1px solid grey;">
     <!-- <select id="c2" name="FipsCode" label="Search for a video game..."> ==$0
       <option hidden default="">Search for a video game...</option>
     </select> -->
-    <select onchange="genreSelector()" vertical-align="top" style="background-color:#8dd3c7" id="dropdownbox"> ==$0
+    <select onchange="genreSelector()" style="background-color:#eeeeee" vertical-align="top" id="dropdownbox"> ==$0
       <option value="Action">Action </option>
       <option value="Action_Adventure">Action Adventure</option>
       <option value="Adventure">Adventure</option>

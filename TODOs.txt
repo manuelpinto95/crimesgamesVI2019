@@ -1,39 +1,71 @@
-Dúvidas para a aual de feedback
-- no bar chart vale a pena termos apenas 1 cor que contraste bem com o azul para todos os genres ou está bem com 1 cor para cada genre?
-- mais de 3 no top 3 mass shootings?
-- add the USA as a comparable state?
--perguntar ao professor qual o tamanho da janela dele
-
-
-TODOs
+Data
+[ ] remove rape
+[ ] fix data for the map as some states are missing
+[ ] try to add MS as a row in the crime dataset
 
 DashBoard
-[ ] Usar tamanhos relativos para definir o tamanho das divs
-[ ] add mouse out events to reduce the border width 
+[X] Usar tamanhos relativos para definir o tamanho das divs
+[X] add mouse out events to reduce the border width 
+[X] espaçamento do barchart chart e line chart mais centrado
+[X] dropdown buttons todos iguais
+[ ] font igual para tudo
+[ ] font igual para todos os titulos dos graficos
+
+state selector
+[X] font-color dos estados correponder á cor da linha do line chart
+[ ] move selector to the map div
+
 
 Barchart
-[ ] add label to y axis 
-[ ] alinhar eixo do x com o meio das barras
-[ ] animação das barras
+[X] add label to y axis
+[X] basta 1 cor para a subgenre
+[X] alinhar eixo do x com o meio das barras
 [ ] remover genres irrelevantes
 [ ] iniciar a genre com shooter
-[ ] fazer fix á feature do highlight a vermelho do jogo
-[ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
+[ ] fazer o append dos rectangulos como deve de ser
 
 Multi-Line Chart
-[ ] center axis label 
-[ ] alinhar eixo dos X
-[ ] tip a mostrar o valor para todas a lines e não apenas uma
-[ ] add the USA as a comparable state
+[ ] add "over the year" in the title
+[ ] fix region tip (ou então esconder para nao dar a percebr que há bug)
+[X] na tip por também a região para facilitar comparaçoes em zonas cluttered
+[X] center axis label 
+[X] alinhar eixo dos X
 [ ] default type of crime should be mass shootings
+[X] add tip to the legend that says the full name of the state
 
 Lista de top 3 mass shootings
-[ ] mostrar mais de 3?
+[X] mostrar mais de 3
+[X] barchart em vez de cor
 
 Mapa
-[ ] border dos estados seleccionados com a cor do esado seleccionados
-
-State selector
-[ ] font-color dos estados correponder á cor da linha do line chart
+[X] border dos estados seleccionados com a cor do esado seleccionados
+[ ] remove Puerto Rico and Virgin Islands, add hawaii and Alaska
+[X] fix tips
+[ ] add coordinates of top10 MS
+[ ] add scale
 
 WordCloud
+
+
+Game selector
+[X] make game appear to the right of the search box insted of below
+[X] make game box with red borders to make it more intuitive
+
+
+vgEvent
+[ ] implementar como deve de ser
+
+
+ADICIONAL:
+state selector
+[ ] click on mass shooting to select the state in which it happened
+[ ] add text saying use list above to add states when to state is selected
+[ ] remover estados dos quais nao temos data de crime
+[ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
+[ ] animacoes em todos os charts
+[ ] AO FAZER CLICK, FAZER LOCK IN DO EVENTO YEAR PARA FICAR VISIVEL E DEIXAR O USER EXPLORAR
+[ ] tip a mostrar o valor para todas a lines e não apenas uma no multi-line chart
+[ ] add the USA as a comparable state
+[ ] add text saying there are no mass shootings for this time perior and for theses regions quando não há
+[ ] add search icon to the cg searcher
+[ ] Impor limite minimo de 15 anos na time line

@@ -61,18 +61,20 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             else
                 vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
 
-            
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
         vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
-        crimeSelectedDot.attr("r", 6);
-        crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+
         if (vg.Year != barchart.selectedGameYear)
             vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
         else
             vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
+
+        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot.attr("r", 6);
+        crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+
     })
     // convert from string to number
     data.forEach(function (d) {
@@ -106,9 +108,9 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 
 function genreSelector() {
     vgSelectedGenre = document.getElementById("dropdownbox").value;
-    console.log(colorDict[vgSelectedGenre]);
+    //console.log(colorDict[vgSelectedGenre]);
 
-    document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
+    //document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
     update_barChart();
 }
 
@@ -165,9 +167,9 @@ var barchart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 5,
+        top: 20,
         right: 5,
-        bottom: 5,
+        bottom: 20,
         left: 5
     },
     w: 0,
@@ -183,8 +185,8 @@ var barchartTooltipDiv;
 
 function gen_barChart() {
 
-    barchart.w = window.innerWidth - barchart.margin.left - barchart.margin.right // Use the window's width 
-    barchart.h = (window.innerHeight / 2 - 85)/2 - barchart.margin.top - barchart.margin.bottom -15; // Use the window's height
+    barchart.w = window.innerWidth - barchart.margin.left - barchart.margin.right;
+    barchart.h = (window.innerHeight / 2 - 85) / 2 - barchart.margin.top - barchart.margin.bottom - 15; // Use the window's height
 
     barchart.padding = 40;
 
@@ -194,17 +196,19 @@ function gen_barChart() {
     })
     //console.log(barchart.data);
 
+    barchart.bar_w = Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10;
+    //console.log(barchart.bar_w);
+
     barchart.svg = d3.select("#barchart")
         .append("svg")
         .attr("width", barchart.w)
         .attr("height", barchart.h);
 
     barchart.svg.append("text")
-        .attr("class", "title")
-        .attr("transform", "translate(" + (barchart.w / 2 - 50) + ",30)")
+        .attr("font-size", "20px")
+        .attr("transform", "translate(" + (barchart.w / 2) + ",15)")
+        .attr("text-anchor", "middle")
         .text("New Video Games per year");
-
-
 
     barchart.yMax = d3.max(barchart.data, function (d) {
         return +d.Total;
@@ -212,14 +216,23 @@ function gen_barChart() {
 
     barchart.yScale = d3.scaleSqrt()
         .domain([barchart.yMax, 0])
-        .range([barchart.padding, barchart.h - barchart.padding]);
+        .range([barchart.margin.top, barchart.h - barchart.margin.bottom]);
 
     barchart.xScale = d3.scaleLinear()
-        .domain([0, barchart.data.length])
-        .range([barchart.padding, barchart.w - barchart.padding]);
+        .domain([0, barchart.data.length - 1])
+        .range([barchart.padding + barchart.bar_w / 2, barchart.w - barchart.padding - barchart.bar_w / 2]);
+    //console.log(barchart.padding + barchart.bar_w / 2);
+
+
 
     barchart.yAxis = d3.axisLeft()
         .scale(barchart.yScale)
+        .tickFormat(function (d) {
+            if ((d / 1000) >= 1) {
+                d = d / 1000 + "K";
+            }
+            return d;
+        })
         .ticks(5);
 
     barchart.xAxis = d3.axisBottom()
@@ -236,7 +249,7 @@ function gen_barChart() {
         .call(barchart.yAxis);
 
     barchart.svg.append("g")
-        .attr("transform", "translate(0," + (barchart.h - barchart.padding) + ")")
+        .attr("transform", "translate(0," + (barchart.h - barchart.margin.bottom) + ")")
         .call(barchart.xAxis);
 
     barchartTooltipDiv = d3.select("body").append("div")
@@ -260,9 +273,9 @@ function gen_barChart() {
             var rects = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
             var rect1 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect1.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10);
-            rect1.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(d.Total));
-            rect1.setAttribute('x', barchart.xScale(i));
+            rect1.setAttribute('width', barchart.bar_w);
+            rect1.setAttribute('height', barchart.h - barchart.margin.bottom - barchart.yScale(d.Total));
+            rect1.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect1.setAttribute('y', barchart.yScale(d.Total));
             rect1.setAttribute("fill", d3.schemeCategory10[0]);
             rect1.setAttribute("Year", d.Year);
@@ -277,13 +290,13 @@ function gen_barChart() {
             var genre = getGenre(vgSelectedGenre, d);
 
             var rect2 = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-            rect2.setAttribute('width', Math.floor((barchart.w - barchart.padding * 2) / barchart.data.length) - 10);
-            rect2.setAttribute('height', barchart.h - barchart.padding - barchart.yScale(genre));
-            rect2.setAttribute('x', barchart.xScale(i));
+            rect2.setAttribute('width', barchart.bar_w);
+            rect2.setAttribute('height', barchart.h - barchart.margin.bottom - barchart.yScale(genre));
+            rect2.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
 
-            rect2.setAttribute("fill", colorDict[vgSelectedGenre]);
+            rect2.setAttribute("fill","rgb(188, 208, 238)");
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
             if (d.Year == barchart.selectedGameYear) {
@@ -308,32 +321,44 @@ function gen_barChart() {
             barchartTooltipDiv.transition()
                 .duration(500)
                 .style("opacity", 0);
+            dispatch.call("yearEvent", 0, 0);
         })
 
     //LEGEND
+
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 146)
+        .attr("x", barchart.w - 240)
         .attr("y", 0)
         .attr("width", 15)
         .attr("height", 15)
+        .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", d3.schemeCategory10[0])
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 125)
-        .attr("y", 12)
+        .attr("x", barchart.w - 222)
+        .attr("y", 14)
         .text("All genres");
 
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 146)
-        .attr("y", 25)
+        .attr("x", barchart.w - 148)
+        .attr("y", 0)
         .attr("width", 15)
         .attr("height", 15)
-        .attr("fill", colorDict[vgSelectedGenre])
+        .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
+        .attr("fill", "rgb(188, 208, 238)")
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 125)
-        .attr("y", 37)
+        .attr("x", barchart.w - 130)
+        .attr("y", 14)
         .text(genreTextDic[vgSelectedGenre]);
+
+    barchart.svg.append("text")
+        .attr("x", 3)
+        .attr("y", 13)
+        //.attr("transform", "rotate(-90)")
+        .style("text-anchor", "start")
+        .attr("font-size", "15px")
+        .text("Releases");
 
 }
 

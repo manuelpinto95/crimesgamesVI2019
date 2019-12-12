@@ -19,21 +19,16 @@ d3.csv("/data/vg/vgNames.csv").then(function (data) {
     data.forEach(function (d) {
         d.Year = +d.Year;
     });
-    vgNames = data;
+    //TODO descomentar isto para procurar jogos
+    /* vgNames = data;
     var list = document.getElementById("vgList");
     for(var i=0;i<vgNames.length;i++) {
         var option = document.createElement("option");
         option.setAttribute("value",vgNames[i].Name);
-        /* var year = document.createAttribute("Year");
-        year.value = vgNames[i].Year;
-        option.setAttribute("Year",year);
-        var genre = document.createAttribute("Genre");
-        genre.value = vgNames[i].Genre
-        option.setAttribute("Genre",genre); */
         option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre ))
         list.appendChild(option);
     }
-    console.log("video game dataset is now loaded");  
+    console.log("video game dataset is now loaded");  */ 
 });
 
 function vgSelected() {
@@ -55,11 +50,15 @@ function vgSelected() {
 
     var ul = document.getElementById("selectedGame");
     var li = document.createElement("li");
+    /* li.setAttribute("style","font-color:" + "red");
+    li.setAttribute("style","font-weight:bold"); */
+    li.setAttribute("class","game_button");
+    li.setAttribute("padding", 50);
     var span = document.createElement("span");
     span.setAttribute("class", "close");
     span.appendChild(document.createTextNode("x"));
     li.appendChild(span);
-    li.appendChild(document.createTextNode(game));
+    li.appendChild(document.createTextNode(barchart.selectedGameName + " - " + barchart.selectedGameYear));
     ul.appendChild(li);
 
     span.addEventListener("click", function () {
@@ -69,11 +68,13 @@ function vgSelected() {
         barchart.selectedGameYear = null;
         vgSelectedGenre = stateBeforeSelection.genre;
         update_barChart();
+        update_lineChart();
+        //TODO maybe need to update more stuff
     });
 
-    document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
+    /* document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
     document.getElementById("dropdownbox").setAttribute("value", + vgSelectedGenre);
-    document.getElementById("dropdownbox").setAttribute("selected", vgSelectedGenre);
+    document.getElementById("dropdownbox").setAttribute("selected", vgSelectedGenre); */
     
     /* console.log(year_filters);
     newTimeFrame(gameData[0].Year);

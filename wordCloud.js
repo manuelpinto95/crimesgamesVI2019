@@ -14,7 +14,8 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
         
     });
 
-    gen_WordCloud();
+    //TODO: uncomment
+    //gen_WordCloud();
 });
 
 function gen_WordCloud() {

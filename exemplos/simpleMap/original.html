@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        width: 960px;
+        height: 500px;
+        position: relative;
+    }
+
+    /* stylesheet for your custom graph */
+
+    .states {
+        fill: none;
+        stroke: "black";
+        stroke-linejoin: round;
+    }
+
+    .states-choropleth {
+        fill: #ccc;
+    }
+
+    #tooltip-container {
+        position: absolute;
+        background-color: #fff;
+        color: #000;
+        padding: 10px;
+        border: 1px solid;
+        display: none;
+    }
+
+    .tooltip_key {
+        font-weight: bold;
+    }
+
+    .tooltip_value {
+        margin-left: 20px;
+        float: right;
+    }
+</style>
+
+<div id="tooltip-container"></div>
+
+<div id="canvas-svg"></div>
+
+<script src="libs/d3.js"></script>
+<script src="libs/topojson.js"></script>
+<script src="libs/jquerry.js"></script>
+
+<script>
+
+    var states = ["CA", "TX", ""];
+    var year_filters = [2000, 2010];
+    var selectedCrimeType = "violent_crime";
+
+    d3.csv("crimeFinal.csv").then(function (data) {
+
+        data = data.filter(function (d, key) {
+            return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
+
+        })
+        data = d3.nest()
+            .key(function (d) { return d.name.trim(); })
+            .rollup(function (leaves) {
+                return d3.sum(leaves, function (d) {
+                    return getCrime(selectedCrimeType, d) / d.population * 1000;
+                });
+            }).entries(data)
+            .map(function (d) {
+                return { state: d.key, crime: d.value };
+            });
+
+        console.log(data);
+
+        var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state", "valueDataColumn": "crime" }
+
+        var WIDTH = 600, HEIGHT = 400;
+
+        var COLOR_COUNTS = 9;
+
+        var SCALE = 0.7;
+
+        function Interpolate(start, end, steps, count) {
+            var s = start,
+                e = end,
+                final = s + (((e - s) / steps) * count);
+            return Math.floor(final);
+        }
+
+        function Color(_r, _g, _b) {
+            var r, g, b;
+            var setColors = function (_r, _g, _b) {
+                r = _r;
+                g = _g;
+                b = _b;
+            };
+
+            setColors(_r, _g, _b);
+            this.getColors = function () {
+                var colors = {
+                    r: r,
+                    g: g,
+                    b: b
+                };
+                return colors;
+            };
+        }
+
+        function hexToRgb(hex) {
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+
+        function valueFormat(d) {
+            if (d > 1000000000) {
+                return Math.round(d / 1000000000 * 10) / 10 + "B";
+            } else if (d > 1000000) {
+                return Math.round(d / 1000000 * 10) / 10 + "M";
+            } else if (d > 1000) {
+                return Math.round(d / 1000 * 10) / 10 + "K";
+            } else {
+                return d;
+            }
+        }
+
+        var COLOR_FIRST = config.color1, COLOR_LAST = config.color2;
+
+        var rgb = hexToRgb(COLOR_FIRST);
+
+        var COLOR_START = new Color(rgb.r, rgb.g, rgb.b);
+
+        rgb = hexToRgb(COLOR_LAST);
+        var COLOR_END = new Color(rgb.r, rgb.g, rgb.b);
+
+        var MAP_STATE = config.stateDataColumn;
+        var MAP_VALUE = config.valueDataColumn;
+
+        var width = WIDTH,
+            height = HEIGHT;
+
+        var valueById = d3.map();
+
+        var startColors = COLOR_START.getColors(),
+            endColors = COLOR_END.getColors();
+
+        var colors = [];
+
+        for (var i = 0; i < COLOR_COUNTS; i++) {
+            var r = Interpolate(startColors.r, endColors.r, COLOR_COUNTS, i);
+            var g = Interpolate(startColors.g, endColors.g, COLOR_COUNTS, i);
+            var b = Interpolate(startColors.b, endColors.b, COLOR_COUNTS, i);
+            colors.push(new Color(r, g, b));
+        }
+
+        var quantize = d3.scaleQuantize()
+            .domain([0, 1.0])
+            .range(d3.range(COLOR_COUNTS).map(function (i) { return i }));
+
+        var projection = d3.geoAlbers().rotate([90, 0, 0]);
+        var path = d3.geoPath().projection(projection);
+
+        var svg = d3.select("#canvas-svg").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+        d3.csv("us-state-names.csv").then(function (names) {
+
+            name_id_map = {};
+            id_name_map = {};
+            console.log(names);
+
+            for (var i = 0; i < names.length; i++) {
+                name_id_map[names[i].name] = names[i].id;
+                id_name_map[names[i].id] = names[i].name;
+            }
+            console.log(name_id_map);
+            console.log(id_name_map);
+
+            data.forEach(function (d) {
+                var id = name_id_map[d[MAP_STATE]];
+
+                valueById.set(id, +d[MAP_VALUE]);
+            });
+            console.log(valueById);
+
+            quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
+            d3.max(data, function (d) { return +d[MAP_VALUE] })]);
+
+
+            d3.json("us.json").then(function (us) {
+
+                svg.append("g")
+                    .attr("class", "states-choropleth")
+                    .selectAll("path")
+                    .data(topojson.feature(us, us.objects.states).features)
+                    .enter().append("path")
+                    .attr("transform", "scale(" + SCALE + ")")
+                    .attr("stroke", function(d){
+                        console.log(id_name_map[d.id]);
+                        
+                        if(id_name_map[d.id]=="California")
+                            return "red";
+                            
+                        return "none";
+                    })
+                    .style("fill", function (d) {
+                        if (valueById.get(d.id)) {
+                            var i = quantize(valueById.get(d.id));
+
+                            var color = colors[i].getColors(); //TODO must quantize
+                            return "rgb(" + color.r + "," + color.g +
+                                "," + color.b + ")";
+                        } else {
+                            return "";
+                        }
+                    })
+                    .attr("d", path)
+                    .on("mousemove", function (d) {
+                        var html = "";
+
+                        html += "<div class=\"tooltip_kv\">";
+                        html += "<span class=\"tooltip_key\">";
+                        html += id_name_map[d.id];
+                        html += "</span>";
+                        html += "<span class=\"tooltip_value\">";
+                        html += (valueById.get(d.id) ? valueFormat(valueById.get(d.id)) : "");
+                        html += "";
+                        html += "</span>";
+                        html += "</div>";
+
+                        $("#tooltip-container").html(html);
+                        $(this).attr("fill-opacity", "0.8");
+                        $("#tooltip-container").show();
+
+                        var coordinates = d3.mouse(this);
+
+                        var map_width = $('.states-choropleth')[0].getBoundingClientRect().width;
+
+                        if (d3.event.layerX < map_width / 2) {
+                            d3.select("#tooltip-container")
+                                .style("top", (d3.event.layerY + 15) + "px")
+                                .style("left", (d3.event.layerX + 15) + "px");
+                        } else {
+                            var tooltip_width = $("#tooltip-container").width();
+                            d3.select("#tooltip-container")
+                                .style("top", (d3.event.layerY + 15) + "px")
+                                .style("left", (d3.event.layerX - tooltip_width - 30) + "px");
+                        }
+                    })
+                    .on("mouseout", function () {
+                        $(this).attr("fill-opacity", "1.0");
+                        $("#tooltip-container").hide();
+                    });
+
+                svg.append("path")
+                    .datum(topojson.mesh(us, us.objects.states, function (a, b) { return a !== b; }))
+                    .attr("class", "states")
+                    .attr("transform", "scale(" + SCALE + ")")
+                    .attr("d", path);
+            });
+
+        });
+    });
+
+    function getCrime(name, d) {
+        var crime;
+        switch (name) {
+            case "violent_crime":
+                crime = d.violent_crime
+                break;
+            case "homicide":
+                crime = d.homicide
+                break;
+            case "rape_legacy":
+                crime = d.rape_legacy
+                break;
+            case "robbery":
+                crime = d.robbery
+                break;
+            case "aggravated_assault":
+                crime = d.aggravated_assault
+                break;
+            case "property_crime":
+                crime = d.property_crime
+                break;
+            case "burglary":
+                crime = d.burglary
+                break;
+            case "larceny":
+                crime = d.larceny
+                break;
+            case "motor_vehicle_theft":
+                crime = d.motor_vehicle_theft
+                break;
+            default:
+                crime = d.violent_crime;
+                break;
+        }
+        //console.log(crime);
+        return crime;
+    }
+
+</script>
