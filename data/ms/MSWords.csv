@@ -1,1505 +1,306 @@
-Word,count
-The,378
-A,308
-And,307
-In,184
-On,166
-He,145
-His,142
-Of,123
-At,115
-To,104
-Killed,92
-Shot,89
-Was,80
-Two,77
-Before,76
-Shooter,61
-Shooting,57
-Killing,52
-Man,50
-People,47
-Were,46
-Three,44
-Police,43
-Four,42
-Then,42
-Fire,39
-Student,39
-With,39
-An,36
-Injured,35
-By,34
-Others,33
-After,32
-Home,32
-School,32
-Wounded,32
-Suicide,31
-Began,30
-Their,28
-Entered,27
-Had,27
-One,27
-Himself,26
-Wounding,26
-From,25
-Her,25
-Opened,25
-For,24
-Students,24
-Another,23
-Arrested,23
-Old,23
-Former,22
-2015,21
-Five,21
-Later,21
-When,21
-Wife,21
-That,20
-Committing,19
-Fired,19
-Other,19
-Arrived,18
-House,18
-They,18
-Where,18
-Into,17
-February,16
-Office,16
-Out,16
-Been,15
-Being,15
-Family,15
-High,15
-Him,15
-Children,14
-Mother,14
-University,14
-,13
-Coworkers,13
-December,13
-Gun,13
-Six,13
-April,12
-August,12
-Morning,12
-Outside,12
-Scene,12
-Them,12
-Went,12
-2013,11
-California,11
-Car,11
-Dead,11
-Gunman,11
-Officer,11
-Who,11
-But,10
-Drove,10
-Fatally,10
-Found,10
-October,10
-15,9
-3,9
-Apartment,9
-Campus,9
-Day,9
-Died,9
-During,9
-Employee,9
-Group,9
-Injuring,9
-Members,9
-New,9
-Teacher,9
-Victims,9
-Woman,9
-24,8
-All,8
-Both,8
-January,8
-March,8
-Men,8
-More,8
-No,8
-Postal,8
-Set,8
-Several,8
-Station,8
-Street,8
-Sunday,8
-Unemployed,8
-Up,8
-1,7
-19,7
-20,7
-29,7
-7,7
-About,7
-Between,7
-Building,7
-Bus,7
-Club,7
-Early,7
-Father,7
-Fled,7
-Friday,7
-Head,7
-Inside,7
-July,7
-Left,7
-May,7
-Party,7
-Post,7
-Returned,7
-Seven,7
-South,7
-Texas,7
-Worker,7
-1997,6
-2014,6
-21,6
-College,6
-Committed,6
-Dance,6
-Eight,6
-Gas,6
-Hours,6
-June,6
-Local,6
-Next,6
-Night,6
-November,6
-Principal,6
-Pulled,6
-Saturday,6
-State,6
-Supervisors,6
-While,6
-11,5
-12,5
-14,5
-16-Year-Old,5
-1993,5
-26,5
-6,5
-Approached,5
-Are,5
-Attempted,5
-Boyfriend,5
-Boys,5
-Broke,5
-Brother,5
-Clinic,5
-Couple,5
-Days,5
-Death,5
-Evening,5
-Fort,5
-Have,5
-Hospital,5
-Husband,5
-Illinois,5
-Incident,5
-Including,5
-Is,5
-It,5
-Minutes,5
-Officers,5
-Or,5
-Parents,5
-Parking,5
-Person,5
-Pm,5
-Said,5
-San,5
-Santa,5
-September,5
-Shooter'S,5
-Sister,5
-Started,5
-Suspects,5
-Teachers,5
-There,5
-Truck,5
-Tuesday,5
-Turning,5
-Until,5
-Women,5
-Work,5
-Workplace,5
-14-Year-Old,4
-16,4
-18,4
-18-Year-Old,4
-1998,4
-2007,4
-23,4
-30,4
-8,4
-9,4
-Alabama,4
-Apparently,4
-Around,4
-Away,4
-Boy,4
-Business,4
-Called,4
-Carolina,4
-Cleveland,4
-County,4
-Daughter,4
-Dispute,4
-Down,4
-Employees,4
-Ex-Wife,4
-Ex-Wife'S,4
-Factory,4
-First,4
-Florida,4
-Front,4
-Girlfriend,4
-Hall,4
-Handgun,4
-Infant,4
-Just,4
-Law,4
-Leave,4
-Lot,4
-Meeting,4
-Middle,4
-Military,4
-Near,4
-Nearby,4
-Neighbors,4
-Nine,4
-Off,4
-Planned,4
-Protesters,4
-Restaurant,4
-Shoot,4
-Shootout,4
-Spree,4
-Suspect,4
-Taking,4
-Technician,4
-Theater,4
-Third,4
-Told,4
-Took,4
-Turned,4
-Upon,4
-Victim,4
-Washington,4
-Wednesday,4
-Which,4
-York,4
-Young,4
-17,3
-17-Year-Old,3
-1991,3
-1992,3
-1999,3
-2003,3
-2008,3
-22,3
-36-Year-Old,3
-42-Year-Old,3
-5,3
-Air,3
-Apprehended,3
-Arguing,3
-Arizona,3
-As,3
-Asked,3
-Black,3
-Cabin,3
-Came,3
-Cars,3
-Central,3
-Chicago,3
-Child,3
-Church,3
-Class,3
-Co-Workers,3
-Continued,3
-Coworker,3
-Critically,3
-Crowd,3
-Daughters,3
-Door,3
-Drive-By,3
-Ended,3
-Escaped,3
-Fight,3
-Firearms,3
-Fleeing,3
-Following,3
-Freshman,3
-Friend,3
-Get,3
-Goddard,3
-Got,3
-Grandmother,3
-Gunfire,3
-Guns,3
-Hostage,3
-Isla,3
-Kill,3
-Las,3
-Life,3
-Lives,3
-Monday,3
-Monica,3
-Murdered,3
-Murders,3
-Northern,3
-Not,3
-Ohio,3
-Once,3
-Open,3
-Over,3
-Own,3
-Park,3
-Passengers,3
-Place,3
-Players,3
-Prior,3
-Professor,3
-Random,3
-Randomly,3
-Rifle,3
-Room,3
-Rural,3
-Security,3
-She,3
-Shooters,3
-Shootings,3
-Stopped,3
-Supervisor,3
-Survived,3
-Suv,3
-Thought,3
-Through,3
-Train,3
-Trooper,3
-Twenty-Three,3
-Unknown,3
-Vegas,3
-Virginia,3
-Vista,3
-Waited,3
-Walked,3
-Way,3
-Window,3
-Witnesses,3
-Worked,3
-Workers,3
-10,2
-13-Year-Old,2
-18-Year,2
-1966,2
-1982,2
-1983,2
-1984,2
-1985,2
-1989,2
-1994,2
-20-Year,2
-20-Year-Old,2
-2000,2
-2006,2
-2009,2
-2010,2
-2012,2
-23-Year,2
-25-Year-Old,2
-27,2
-27-Year,2
-31,2
-34-Year-Old,2
-41-Year-Old,2
-44-Year-Old,2
-55-Year-Old,2
-90,2
-911,2
-Additional,2
-Afternoon,2
-Afterwards,2
-Against,2
-Also,2
-Altercation,2
-Any,2
-Area,2
-Armed,2
-Atlanta,2
-Attack,2
-Attending,2
-Austin,2
-Basketball,2
-Bay,2
-Be,2
-Beach,2
-Beauty,2
-Beer,2
-Begin,2
-Bethel,2
-Bethune-Cookman,2
-Boom,2
-Bystanders,2
-Cafeteria,2
-Call,2
-Calmly,2
-Captured,2
-Cash,2
-Classmates,2
-Commits,2
-Commuters,2
-Complex,2
-Confrontation,2
-Confronted,2
-Connecticut,2
-Copeland,2
-Cousins,2
-Crime,2
-Custody,2
-Daytona,2
-Deputy,2
-Diego,2
-Different,2
-Discharged,2
-Domestic,2
-Dozen,2
-Driver,2
-Drop,2
-Drug,2
-Dying,2
-Each,2
-Elementary,2
-Employer,2
-Encounter,2
-Engineering,2
-Enter,2
-Escorted,2
-Female,2
-Few,2
-Fighting,2
-Financial,2
-Firm,2
-Followed,2
-Force,2
-Forced,2
-Ford,2
-Fourteen,2
-Garage,2
-Gathered,2
-Georgia,2
-Gibson,2
-Girl,2
-Glen,2
-Graduate,2
-Groups,2
-Guard,2
-Having,2
-Heading,2
-Herself,2
-Hill,2
-Holding,2
-Holed,2
-Hood,2
-Hotel,2
-Hurt,2
-If,2
-Insanity,2
-Instead,2
-Kansas,2
-Kentucky,2
-Lake,2
-Lapd,2
-Large,2
-Late,2
-Least,2
-Likely,2
-Location,2
-Lunch,2
-Male,2
-Mall,2
-Manchester,2
-Martin,2
-Mass,2
-Massachusetts,2
-Matter,2
-Medication,2
-Mentally,2
-Met,2
-Mississippi,2
-Monastery,2
-Monks,2
-Months,2
-Motivated,2
-Motorist,2
-Multiple,2
-Murdering,2
-Nearly,2
-Neighbor,2
-Nevada,2
-Niece,2
-Nightclub,2
-Nineteen,2
-North,2
-Off-Campus,2
-Oklahoma,2
-Opening,2
-Orange,2
-Order,2
-Oregon,2
-Orleans,2
-Parenthood,2
-Pearl,2
-Personnel,2
-Policeman,2
-Postmaster,2
-Prayer,2
-Previously,2
-Prison,2
-Proceeded,2
-Psychiatrist,2
-Pulling,2
-Quickly,2
-Reason,2
-Recently,2
-Red,2
-Relatives,2
-Residence,2
-Retired,2
-Roof,2
-Rose-Mar,2
-Rounds,2
-Second,2
-Seconds,2
-See,2
-Services,2
-Seventeen,2
-Shoots,2
-Shopping,2
-Shortly,2
-Sitting,2
-Soldier,2
-Someone,2
-Son,2
-Sons,2
-St,2
-Stabbed,2
-Stand-Off,2
-Steal,2
-Stealing,2
-Stolen,2
-Stop,2
-Stripper,2
-Surrendered,2
-Swat,2
-Table,2
-Taken,2
-Talked,2
-Targets,2
-Team,2
-Thirteen,2
-Thursday,2
-Training,2
-Troopers,2
-Twelve,2
-Valley,2
-Village,2
-Waiting,2
-Walk,2
-Walking,2
-Walmart,2
-White,2
-Wisconsin,2
-Witness,2
-Woman'S,2
-Years,2
-Younger,2
-"""Hey",1
-"""Model""",1
-&,1
-(Lax),1
-(One,1
-11-Year-Old,1
-11:10,1
-11:20,1
-12-Year-Old,1
-13,1
-13-Minute,1
-15-Year,1
-15-Year-Old,1
-151999,1
-16th,1
-1971,1
-1972,1
-1973,1
-1979,1
-1986,1
-1987,1
-1988,1
-1995,1
-1996,1
-19th,1
-2,1
-2001,1
-2005,1
-2016,1
-22-Year-Old,1
-23-Year-Old,1
-24-Year,1
-24-Year-Old,1
-25,1
-26-Year-Old,1
-27th,1
-28-Year,1
-29-Year-Old,1
-2:45,1
-30-Year-Old,1
-31-Year,1
-33-Year,1
-34-Year,1
-35,1
-35-Year,1
-35-Year-Old,1
-37-Year-Old,1
-38-Year-Old,1
-39-Year-Old,1
-3:35,1
-4,1
-40,1
-40-Year,1
-400,1
-41-Year,1
-42-Year,1
-43-Year,1
-43-Year-Old,1
-44-Year,1
-45-Year,1
-45-Year-Old,1
-47-Year-Old,1
-48-Year-Old,1
-4th,1
-50-Year-Old,1
-51-Year-Old,1
-52-Year-Old,1
-57-Year-Old,1
-59-Year-Old,1
-6-Year-Old,1
-64-Year,1
-66-Year-Old,1
-68-Year-Old,1
-?,1
-Abandoned,1
-Ablaze,1
-Able,1
-Abuse,1
-Academy,1
-Accompanied,1
-Accused,1
-Acquaintances,1
-Across,1
-Act,1
-Actress,1
-Acura,1
-Adoptive,1
-Adults,1
-Age,1
-Aged,1
-Ages,1
-Ago,1
-Aid,1
-Aiken,1
-Airport,1
-Al-Shakeem,1
-Alarm,1
-Alaska,1
-Alleged,1
-Along,1
-Aloysius,1
-Altercations,1
-Amarillo,1
-Ammunition,1
-Analytics,1
-Angeles,1
-Angry,1
-Ankle,1
-Annual,1
-Anxiety,1
-Anyone,1
-Apparent,1
-Appeared,1
-Approaching,1
-Arby'S,1
-Argument,1
-Arising,1
-Arkansas,1
-Army,1
-Arrive,1
-Arriving,1
-Asking,1
-Assault-Style,1
-Assistant,1
-Atlantis,1
-Atm,1
-Attempting,1
-Attendance,1
-Audience,1
-Aurora,1
-Autopsy,1
-Avail,1
-Avenue,1
-Azana,1
-Baby,1
-Back,1
-Back-Payments,1
-Bad,1
-Bag,1
-Bags,1
-Balcony,1
-Banquet,1
-Baptist,1
-Barbershop,1
-Bard,1
-Barrington,1
-Base,1
-Because,1
-Bedroom,1
-Behind,1
-Believe,1
-Believed,1
-Belonging,1
-Below,1
-Bernardino,1
-Bicyclist,1
-Binghamton,1
-Birthday,1
-Block,1
-Blocks,1
-Boarded,1
-Booby-Trapped,1
-Boulevard,1
-Bracelet,1
-Brain,1
-Brazenly,1
-Break,1
-Bridge,1
-Brief,1
-Briefly,1
-Broad,1
-Brookfield,1
-Brother'S,1
-Brother-In-Law,1
-Brothers,1
-Brought,1
-Buddhist,1
-Building'S,1
-Bumped,1
-Burn,1
-Burned,1
-Calling,1
-Caltrans,1
-Cameras,1
-Camping,1
-Cancer,1
-Canisters,1
-Captain,1
-Career,1
-Caretaker,1
-Carjacking,1
-Carnation,1
-Carried,1
-Case,1
-Catholic,1
-Caught,1
-Center,1
-Centers,1
-Chapel,1
-Charges,1
-Chase,1
-Chased,1
-Chattanooga,1
-Circle,1
-Citizen,1
-City,1
-Civilian,1
-Civilians,1
-Claimed,1
-Clara,1
-Classes,1
-Classroom,1
-Claus,1
-Clear,1
-Co,1
-Colerain,1
-Colleagues,1
-Colorado,1
-Come,1
-Commencing,1
-Commit,1
-Community,1
-Commuter,1
-Company,1
-Computer,1
-Confessed,1
-Considered,1
-Construction,1
-Consultation,1
-Cops,1
-Core,1
-Corner,1
-Costume,1
-Could,1
-Court,1
-Cousin,1
-Covina,1
-Crossfire,1
-Custodian,1
-Cycling,1
-Dakota,1
-Dallas,1
-Dana,1
-Dark,1
-Daylight,1
-Dealer,1
-Decided,1
-Deep,1
-Defend,1
-Defense,1
-Dekalb,1
-Demanded,1
-Denied,1
-Dental,1
-Denver,1
-Department,1
-Depression,1
-Described,1
-Device,1
-Devices,1
-Diagnosed,1
-Did,1
-Didn'T,1
-Disciplinary,1
-Disgruntled,1
-Disorder,1
-Distributors,1
-District,1
-Ditch,1
-Diversity,1
-Do,1
-Dog,1
-Dormitory,1
-Downtown,1
-Dressed,1
-Drive,1
-Drivers,1
-Dropping,1
-Due,1
-Duquesne,1
-Edgewater,1
-Edinboro,1
-Edmond,1
-Education,1
-Elder,1
-Employed,1
-Employment,1
-Encampment,1
-End-Of-The-Year,1
-Endeavors,1
-Enforcement,1
-Ensued,1
-Entering,1
-Entrance,1
-Entrepreneur,1
-Erupted,1
-Escalated,1
-Escondido,1
-Estate,1
-Estranged,1
-Evacuation,1
-Eve,1
-Event,1
-Eventually,1
-Every,1
-Ex-Fiance,1
-Ex-Girlfriend,1
-Ex-Girlfriend'S,1
-Ex-Navy,1
-Exchange,1
-Excusing,1
-Exercise,1
-Explosive,1
-F-150,1
-Facilities,1
-Facility,1
-Fact,1
-Faculty,1
-Failed,1
-Failing,1
-Fairchild,1
-Families,1
-Family'S,1
-Father'S,1
-Feb,1
-Federal,1
-Fedex,1
-Feud,1
-Fiance,1
-Field,1
-Fifty-Eight,1
-Filmed,1
-Finally,1
-Firing,1
-Fist-Fight,1
-Five-Hour,1
-Floor,1
-Football,1
-Forcefully,1
-Forcing,1
-Francisco,1
-Frequented,1
-Friendly,1
-Friends,1
-Gambling,1
-Game,1
-Gang,1
-Garnished,1
-Gate,1
-Genesee,1
-Getaway,1
-Getting,1
-Girls,1
-Go,1
-Goers,1
-Golden,1
-Gomez,1
-Gonzaga,1
-Good,1
-Grandfather,1
-Grandfather'S,1
-Great,1
-Greyhound,1
-Grievance,1
-Grocer,1
-Ground,1
-Grounds,1
-Grover,1
-Growing,1
-Guilty,1
-Gunned,1
-Gunning,1
-Gunshot,1
-Gym,1
-Halls,1
-Handler,1
-Happening,1
-Harbor,1
-Hartford,1
-Hatred,1
-He'D,1
-Headed,1
-Health,1
-Heard,1
-Hearing,1
-Heath,1
-Held,1
-Henderson,1
-Herd,1
-Herkimer,1
-Hialeah,1
-Hiding,1
-Highway,1
-Hillsborough,1
-Hit,1
-Homecoming,1
-Homeschooled,1
-Hour,1
-"House,",1
-Houseguests,1
-Howard,1
-Huntsville,1
-Ianni'S,1
-Identified,1
-Ill,1
-Immigration,1
-Inappropriately,1
-Included,1
-Injure,1
-Injures,1
-Injuries,1
-Inn,1
-Insecticide,1
-Insomnia,1
-Instigator,1
-Intended,1
-Intending,1
-International,1
-Investigate,1
-Involvement,1
-Iraq,1
-Irvine,1
-Island,1
-Its,1
-Johnson,1
-Johnston,1
-Jonesboro,1
-Junior,1
-Kennesaw,1
-Kicked,1
-Kids,1
-Killeen,1
-Kit,1
-Known,1
-La,1
-Lafayette,1
-Landlord'S,1
-Lansdale,1
-Last,1
-Lawn,1
-Lawsuit,1
-Lawyers,1
-Lay,1
-Leads,1
-Leaves,1
-Lecture,1
-Librarian,1
-Library,1
-Like,1
-Liquor,1
-Live,1
-Lived,1
-Loaded,1
-Locations,1
-Lockheed,1
-Lockup,1
-Lond,1
-Long-Running,1
-Looting,1
-Los,1
-Lost,1
-Lottery,1
-Love,1
-Lower,1
-Luby'S,1
-Luggage,1
-Lung,1
-Macy'S,1
-Made,1
-Mail,1
-Manager,1
-Managers,1
-Mandated,1
-Manhunt,1
-Marine,1
-Marines,1
-Marking,1
-Married,1
-Marysville-Pilchuck,1
-Master'S,1
-Mcdonald'S,1
-Mechanical,1
-Mee,1
-Melrose,1
-Member,1
-Memorial,1
-Mental,1
-Meridian,1
-Mesa,1
-Mexico,1
-Miami,1
-Michigan,1
-Miles,1
-Milwaukee,1
-Minnesota,1
-Mit,1
-Mlk,1
-Mobile,1
-Mohawk,1
-Mojave,1
-Moments,1
-Monitored,1
-Monroeville,1
-Mother'S,1
-Mother-In-Law,1
-Motivation,1
-Motive,1
-Motorcycle,1
-Mountains,1
-Moved,1
-Movie,1
-Moving,1
-Mower,1
-Murder-Suicide,1
-Nassau,1
-Navistar,1
-Navy,1
-Nazis,1
-Neighbor'S,1
-Neighborhood,1
-Neighborhoodthe,1
-Neighboring,1
-Nephew,1
-Nephews,1
-Newington,1
-News,1
-Nice,1
-Nj,1
-Noise,1
-Non-Life-Threatening,1
-Non-Student,1
-Note,1
-Nothing,1
-Nov,1
-Number,1
-Oak,1
-Obsessed,1
-Occupants,1
-Occurred,1
-Oceanography,1
-Oct,1
-Odgen,1
-Off-Camera,1
-Off-Duty,1
-Offices,1
-Onto,1
-Ordeal,1
-Ordering,1
-Orlando,1
-Other'S,1
-Outdoor,1
-Overdose,1
-Overlooking,1
-Overnight,1
-Owned,1
-Package,1
-Packed,1
-Paducah,1
-Palm,1
-Papers,1
-Paranoid,1
-Paraphernalia,1
-Parent'S,1
-Parents',1
-Part,1
-Part-Time,1
-Participating,1
-Particular,1
-Partner,1
-Partner'S,1
-Parts,1
-Passenger,1
-Passersby,1
-Past,1
-Pastor,1
-Path,1
-Patients,1
-Patrons,1
-Pennsylvania,1
-People:,1
-Perched,1
-Permitted,1
-Perpetrator,1
-Pettit,1
-Phelon,1
-Physical,1
-Physically,1
-Picked,1
-Pistol,1
-Planning,1
-Plant,1
-Plastics,1
-Player,1
-Playing,1
-Plea,1
-Pocket,1
-Point,1
-Popular,1
-Porch,1
-Possibly,1
-Post-Traumatic,1
-Precinct,1
-Pregnant),1
-Premises,1
-Presenting,1
-Preterm,1
-Preventing,1
-Probation,1
-Professors,1
-Program,1
-Protect,1
-Protecting,1
-Protection,1
-Protest,1
-Psychiatric,1
-Psychologist,1
-Purposes,1
-Pursued,1
-Put,1
-Quietly,1
-Racially,1
-Radisson,1
-Rail,1
-Raising,1
-Rally,1
-Rampage,1
-Re,1
-Real,1
-Received,1
-Receiving,1
-Receptionist,1
-Regarding,1
-Regards,1
-Regional,1
-Rejected,1
-Released,1
-Religion,1
-Religious,1
-Remote,1
-Removed,1
-Reprimanded,1
-Required,1
-Reserve,1
-Residences,1
-Resident,1
-Residential,1
-Resignation,1
-Resigned,1
-Restrain,1
-Result,1
-Resulted,1
-Return,1
-Returning,1
-Returns,1
-Rival,1
-Road,1
-Roamed,1
-Rob,1
-Robbed,1
-Rochester,1
-Rock,1
-Roman,1
-Roommates,1
-Rotc,1
-Roughly,1
-Royal,1
-Ruins,1
-Run,1
-Rushed,1
-Salford,1
-Samaritan,1
-Same,1
-Sat,1
-Say,1
-Scheduled,1
-Schizophrenia,1
-School'S,1
-Schuyler,1
-Seaman,1
-Season,1
-Seattle,1
-Seems,1
-Seen,1
-Selena,1
-Semi-Automatic,1
-Semiautomatic,1
-Sent,1
-Sentence,1
-Separated,1
-Seriously,1
-Served,1
-Service,1
-Serviceman,1
-Servicing,1
-Setting,1
-Settled,1
-Seventh,1
-Sheridan,1
-Sheriff,1
-Sheriff'S,1
-Sherman,1
-Shoot-Out,1
-Shop,1
-Shore,1
-Shotgun,1
-Shots,1
-Showed,1
-Siblings,1
-Sidewalk,1
-Sidewalks,1
-Signed,1
-Simon'S,1
-Since,1
-Sister-In-Law,1
-Sisters,1
-Site,1
-Sites,1
-Sixteen,1
-Sixth,1
-Slashing,1
-Smoke,1
-Sniper,1
-Snyder,1
-Social,1
-Something,1
-Sorority,1
-Sorority'S,1
-Sorting,1
-Souderton,1
-Spa,1
-Spanning,1
-Specialist,1
-Specific,1
-Spokane,1
-Spoke,1
-Spreethe,1
-Spring,1
-Springfield,1
-Springs,1
-Staff,1
-Stand,1
-Standing,1
-Standoff,1
-Star,1
-Starting,1
-Stashed,1
-Stationed,1
-Step-Father,1
-Stepfather,1
-Still,1
-Stint,1
-Stock,1
-Stockton,1
-Stole,1
-Store,1
-Storming,1
-Story,1
-Streets,1
-Stress,1
-Striking,1
-Strip,1
-Subdue,1
-Successtech,1
-Suffered,1
-Suffering,1
-Supply,1
-Support,1
-Supremacists,1
-Suspended,1
-Take,1
-Tampa,1
-Target,1
-Targeted,1
-Tear,1
-Technology,1
-Teen,1
-Teenage,1
-Teenager,1
-Tell,1
-Ten,1
-Tennessee,1
-Terminal,1
-Testify,1
-Than,1
-Thesis,1
-Thirty,1
-Thirty-Two,1
-This,1
-Throughout,1
-Thurston,1
-Time,1
-Time-Traveler,1
-Times,1
-Tip,1
-Top,1
-Total,1
-Totaling,1
-Touched,1
-Tourism,1
-Tower,1
-Town,1
-Township,1
-Trader,1
-Traveled,1
-Trenton,1
-Triggered,1
-Trip,1
-Trips,1
-True,1
-Tsa,1
-"Tsa?""",1
-Tumor,1
-Turns,1
-Tv,1
-Twenty,1
-Twenty-Five,1
-Twenty-One,1
-Twitter,1
-Tx,1
-Uber,1
-Unfit,1
-Unhappy,1
-Unidentified,1
-University'S,1
-Unstable,1
-Unsuccessful,1
-Unsupervised,1
-Uploaded,1
-Upset,1
-Us,1
-Used,1
-Utah,1
-Vehicle,1
-Verbal,1
-Videos,1
-Violence,1
-Violent,1
-Visitors,1
-Wages,1
-Wah,1
-Waist,1
-Wakefield,1
-Walls,1
-Wanted,1
-Warehouse,1
-Watkins,1
-Weapon,1
-Wear,1
-Web,1
-Weber,1
-Wedgwood,1
-Weeks,1
-Welding,1
-West,1
-Western,1
-Westside,1
-Wetumpka,1
-What,1
-Whereabouts,1
-Windy,1
-Wiping,1
-Within,1
-Witnessing,1
-Wives,1
-Won,1
-Woodson,1
-Workshop,1
-Worth,1
-Wouldn'T,1
-Wound,1
-Wounds,1
-Writing,1
-Wrote,1
-Wyoming,1
-Yahoo!,1
-Year,1
-Year'S,1
-Year-Old,1
-You,1
-Ysidro,1
-Â€”,1
+CODE,Title,year,Word,count
+AZ,Rose-Mar College of Beauty                                      ,1966,12,1
+AZ,Rose-Mar College of Beauty                                      ,1966,18,1
+AZ,Rose-Mar College of Beauty                                      ,1966,1966,1
+AZ,Rose-Mar College of Beauty                                      ,1966,A,4
+AZ,Rose-Mar College of Beauty                                      ,1966,An,2
+AZ,Rose-Mar College of Beauty                                      ,1966,And,4
+AZ,Rose-Mar College of Beauty                                      ,1966,Another,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Arizona,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Beauty,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Child,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Circle,1
+AZ,Rose-Mar College of Beauty                                      ,1966,College,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Considered,1
+AZ,Rose-Mar College of Beauty                                      ,1966,D,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Entered,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Few,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Finally,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Four,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Get,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Ground,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Group,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Gunman,1
+AZ,Rose-Mar College of Beauty                                      ,1966,He,5
+AZ,Rose-Mar College of Beauty                                      ,1966,High,1
+AZ,Rose-Mar College of Beauty                                      ,1966,His,2
+AZ,Rose-Mar College of Beauty                                      ,1966,In,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Infant,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Injured,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Killed,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Large,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Lay,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Like,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Mar,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Mesa,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Nice,1
+AZ,Rose-Mar College of Beauty                                      ,1966,November,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Of,4
+AZ,Rose-Mar College of Beauty                                      ,1966,Old,1
+AZ,Rose-Mar College of Beauty                                      ,1966,On,3
+AZ,Rose-Mar College of Beauty                                      ,1966,Ordering,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Out,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Rose,2
+AZ,Rose-Mar College of Beauty                                      ,1966,School,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Settled,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Shot,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Sites,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Student,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Teachers,1
+AZ,Rose-Mar College of Beauty                                      ,1966,The,5
+AZ,Rose-Mar College of Beauty                                      ,1966,Thought,2
+AZ,Rose-Mar College of Beauty                                      ,1966,To,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Victims,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Where,2
+AZ,Rose-Mar College of Beauty                                      ,1966,Wiping,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Woman,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Women,1
+AZ,Rose-Mar College of Beauty                                      ,1966,Year,1
+TX,University of Texas at Austin                                   ,1966,1,1
+TX,University of Texas at Austin                                   ,1966,1966,1
+TX,University of Texas at Austin                                   ,1966,25,1
+TX,University of Texas at Austin                                   ,1966,A,1
+TX,University of Texas at Austin                                   ,1966,And,4
+TX,University of Texas at Austin                                   ,1966,Around,1
+TX,University of Texas at Austin                                   ,1966,At,2
+TX,University of Texas at Austin                                   ,1966,August,1
+TX,University of Texas at Austin                                   ,1966,Austin,2
+TX,University of Texas at Austin                                   ,1966,Both,1
+TX,University of Texas at Austin                                   ,1966,Commencing,1
+TX,University of Texas at Austin                                   ,1966,Engineering,1
+TX,University of Texas at Austin                                   ,1966,Former,1
+TX,University of Texas at Austin                                   ,1966,Had,1
+TX,University of Texas at Austin                                   ,1966,His,1
+TX,University of Texas at Austin                                   ,1966,In,3
+TX,University of Texas at Austin                                   ,1966,Killed,1
+TX,University of Texas at Austin                                   ,1966,Marine,1
+TX,University of Texas at Austin                                   ,1966,Mass,1
+TX,University of Texas at Austin                                   ,1966,Mother,1
+TX,University of Texas at Austin                                   ,1966,Murdered,1
+TX,University of Texas at Austin                                   ,1966,Of,3
+TX,University of Texas at Austin                                   ,1966,Old,1
+TX,University of Texas at Austin                                   ,1966,On,1
+TX,University of Texas at Austin                                   ,1966,Others,1
+TX,University of Texas at Austin                                   ,1966,People,1
+TX,University of Texas at Austin                                   ,1966,Prior,1
+TX,University of Texas at Austin                                   ,1966,S,1
+TX,University of Texas at Austin                                   ,1966,Shootings,1
+TX,University of Texas at Austin                                   ,1966,Sixteen,1
+TX,University of Texas at Austin                                   ,1966,Student,2
+TX,University of Texas at Austin                                   ,1966,Texas,3
+TX,University of Texas at Austin                                   ,1966,The,6
+TX,University of Texas at Austin                                   ,1966,Thirty,1
+TX,University of Texas at Austin                                   ,1966,To,1
+TX,University of Texas at Austin                                   ,1966,Tower,1
+TX,University of Texas at Austin                                   ,1966,Two,1
+TX,University of Texas at Austin                                   ,1966,U,1
+TX,University of Texas at Austin                                   ,1966,University,3
+TX,University of Texas at Austin                                   ,1966,Wife,1
+TX,University of Texas at Austin                                   ,1966,Wounded,1
+TX,University of Texas at Austin                                   ,1966,Year,1
+WA,St. Aloysius Church                                             ,1971,11,1
+WA,St. Aloysius Church                                             ,1971,1971,1
+WA,St. Aloysius Church                                             ,1971,A,1
+WA,St. Aloysius Church                                             ,1971,Aloysius,1
+WA,St. Aloysius Church                                             ,1971,And,1
+WA,St. Aloysius Church                                             ,1971,Before,1
+WA,St. Aloysius Church                                             ,1971,By,1
+WA,St. Aloysius Church                                             ,1971,Campus,1
+WA,St. Aloysius Church                                             ,1971,Caretaker,1
+WA,St. Aloysius Church                                             ,1971,Catholic,1
+WA,St. Aloysius Church                                             ,1971,Church,1
+WA,St. Aloysius Church                                             ,1971,Entered,1
+WA,St. Aloysius Church                                             ,1971,Former,1
+WA,St. Aloysius Church                                             ,1971,Four,1
+WA,St. Aloysius Church                                             ,1971,Gonzaga,1
+WA,St. Aloysius Church                                             ,1971,He,1
+WA,St. Aloysius Church                                             ,1971,Killed,2
+WA,St. Aloysius Church                                             ,1971,Mit,1
+WA,St. Aloysius Church                                             ,1971,More,1
+WA,St. Aloysius Church                                             ,1971,November,1
+WA,St. Aloysius Church                                             ,1971,On,2
+WA,St. Aloysius Church                                             ,1971,People,1
+WA,St. Aloysius Church                                             ,1971,Police,1
+WA,St. Aloysius Church                                             ,1971,Roman,1
+WA,St. Aloysius Church                                             ,1971,Shooter,1
+WA,St. Aloysius Church                                             ,1971,St,1
+WA,St. Aloysius Church                                             ,1971,Student,1
+WA,St. Aloysius Church                                             ,1971,The,3
+WA,St. Aloysius Church                                             ,1971,University,1
+WA,St. Aloysius Church                                             ,1971,Was,1
+WA,St. Aloysius Church                                             ,1971,Wounded,1
+LA,New Orleans Police Shootings                                    ,1972,1972,1
+LA,New Orleans Police Shootings                                    ,1972,1973,1
+LA,New Orleans Police Shootings                                    ,1972,23,1
+LA,New Orleans Police Shootings                                    ,1972,7,1
+LA,New Orleans Police Shootings                                    ,1972,A,2
+LA,New Orleans Police Shootings                                    ,1972,And,2
+LA,New Orleans Police Shootings                                    ,1972,At,1
+LA,New Orleans Police Shootings                                    ,1972,Before,1
+LA,New Orleans Police Shootings                                    ,1972,Central,1
+LA,New Orleans Police Shootings                                    ,1972,Day,1
+LA,New Orleans Police Shootings                                    ,1972,Days,1
+LA,New Orleans Police Shootings                                    ,1972,Dental,1
+LA,New Orleans Police Shootings                                    ,1972,Department,1
+LA,New Orleans Police Shootings                                    ,1972,Downtown,1
+LA,New Orleans Police Shootings                                    ,1972,Entered,1
+LA,New Orleans Police Shootings                                    ,1972,Eve,1
+LA,New Orleans Police Shootings                                    ,1972,Ex,1
+LA,New Orleans Police Shootings                                    ,1972,Four,1
+LA,New Orleans Police Shootings                                    ,1972,Grocer,1
+LA,New Orleans Police Shootings                                    ,1972,He,1
+LA,New Orleans Police Shootings                                    ,1972,Him,1
+LA,New Orleans Police Shootings                                    ,1972,Hotel,2
+LA,New Orleans Police Shootings                                    ,1972,Howard,1
+LA,New Orleans Police Shootings                                    ,1972,In,1
+LA,New Orleans Police Shootings                                    ,1972,January,1
+LA,New Orleans Police Shootings                                    ,1972,Johnson,1
+LA,New Orleans Police Shootings                                    ,1972,Killed,1
+LA,New Orleans Police Shootings                                    ,1972,Later,1
+LA,New Orleans Police Shootings                                    ,1972,Lockup,1
+LA,New Orleans Police Shootings                                    ,1972,Navy,1
+LA,New Orleans Police Shootings                                    ,1972,New,2
+LA,New Orleans Police Shootings                                    ,1972,Of,1
+LA,New Orleans Police Shootings                                    ,1972,Old,1
+LA,New Orleans Police Shootings                                    ,1972,On,2
+LA,New Orleans Police Shootings                                    ,1972,Orleans,1
+LA,New Orleans Police Shootings                                    ,1972,People,1
+LA,New Orleans Police Shootings                                    ,1972,Police,1
+LA,New Orleans Police Shootings                                    ,1972,Policeman,1
+LA,New Orleans Police Shootings                                    ,1972,Roof,1
+LA,New Orleans Police Shootings                                    ,1972,S,1
+LA,New Orleans Police Shootings                                    ,1972,Seven,1
+LA,New Orleans Police Shootings                                    ,1972,Seventeen,1
+LA,New Orleans Police Shootings                                    ,1972,Shooter,1
+LA,New Orleans Police Shootings                                    ,1972,Shot,3
+LA,New Orleans Police Shootings                                    ,1972,Technician,1
+LA,New Orleans Police Shootings                                    ,1972,That,1
+LA,New Orleans Police Shootings                                    ,1972,The,5
+LA,New Orleans Police Shootings                                    ,1972,To,1
+LA,New Orleans Police Shootings                                    ,1972,Top,1
+LA,New Orleans Police Shootings                                    ,1972,Went,1
+LA,New Orleans Police Shootings                                    ,1972,Where,1
+LA,New Orleans Police Shootings                                    ,1972,Year,2
+IL,Clara Barton Elementary School                                  ,1974,14,1
+IL,Clara Barton Elementary School                                  ,1974,17,1
+IL,Clara Barton Elementary School                                  ,1974,1974,1
+IL,Clara Barton Elementary School                                  ,1974,A,3
+IL,Clara Barton Elementary School                                  ,1974,Adjustment,1
+IL,Clara Barton Elementary School                                  ,1974,And,3
+IL,Clara Barton Elementary School                                  ,1974,Angry,1
+IL,Clara Barton Elementary School                                  ,1974,Apparently,1
+IL,Clara Barton Elementary School                                  ,1974,At,1
+IL,Clara Barton Elementary School                                  ,1974,Barton,1
+IL,Clara Barton Elementary School                                  ,1974,Been,1
+IL,Clara Barton Elementary School                                  ,1974,Before,1
+IL,Clara Barton Elementary School                                  ,1974,Both,1
+IL,Clara Barton Elementary School                                  ,1974,By,1
+IL,Clara Barton Elementary School                                  ,1974,Center,1
+IL,Clara Barton Elementary School                                  ,1974,Chicago,1
+IL,Clara Barton Elementary School                                  ,1974,Clara,1
+IL,Clara Barton Elementary School                                  ,1974,Earlier,1
+IL,Clara Barton Elementary School                                  ,1974,Elementary,1
+IL,Clara Barton Elementary School                                  ,1974,Entered,1
+IL,Clara Barton Elementary School                                  ,1974,Expelled,1
+IL,Clara Barton Elementary School                                  ,1974,Fact,1
+IL,Clara Barton Elementary School                                  ,1974,From,1
+IL,Clara Barton Elementary School                                  ,1974,Guns,1
+IL,Clara Barton Elementary School                                  ,1974,Had,1
+IL,Clara Barton Elementary School                                  ,1974,He,2
+IL,Clara Barton Elementary School                                  ,1974,His,1
+IL,Clara Barton Elementary School                                  ,1974,Illinois,1
+IL,Clara Barton Elementary School                                  ,1974,In,1
+IL,Clara Barton Elementary School                                  ,1974,Jammed,1
+IL,Clara Barton Elementary School                                  ,1974,January,1
+IL,Clara Barton Elementary School                                  ,1974,Killed,1
+IL,Clara Barton Elementary School                                  ,1974,Old,1
+IL,Clara Barton Elementary School                                  ,1974,On,1
+IL,Clara Barton Elementary School                                  ,1974,Others,1
+IL,Clara Barton Elementary School                                  ,1974,Principal,1
+IL,Clara Barton Elementary School                                  ,1974,School,2
+IL,Clara Barton Elementary School                                  ,1974,Seized,1
+IL,Clara Barton Elementary School                                  ,1974,Social,1
+IL,Clara Barton Elementary School                                  ,1974,Student,2
+IL,Clara Barton Elementary School                                  ,1974,Teacher,1
+IL,Clara Barton Elementary School                                  ,1974,That,2
+IL,Clara Barton Elementary School                                  ,1974,The,4
+IL,Clara Barton Elementary School                                  ,1974,Three,1
+IL,Clara Barton Elementary School                                  ,1974,To,1
+IL,Clara Barton Elementary School                                  ,1974,Transferred,1
+IL,Clara Barton Elementary School                                  ,1974,Was,2
+IL,Clara Barton Elementary School                                  ,1974,Week,1
+IL,Clara Barton Elementary School                                  ,1974,When,1
+IL,Clara Barton Elementary School                                  ,1974,Wounded,1
+IL,Clara Barton Elementary School                                  ,1974,Year,1
+NY,Olean High School                                               ,1974,17,1
+NY,Olean High School                                               ,1974,1974,1
+NY,Olean High School                                               ,1974,30,1
+NY,Olean High School                                               ,1974,A,4
+NY,Olean High School                                               ,1974,And,3
+NY,Olean High School                                               ,1974,As,2
+NY,Olean High School                                               ,1974,Barbaro,1
+NY,Olean High School                                               ,1974,Bedroom,1
+NY,Olean High School                                               ,1974,Below,1
+NY,Olean High School                                               ,1974,Bomb,1
+NY,Olean High School                                               ,1974,Bombs,1
+NY,Olean High School                                               ,1974,Building,1
+NY,Olean High School                                               ,1974,Custodian,1
+NY,Olean High School                                               ,1974,December,1
+NY,Olean High School                                               ,1974,Detailed,1
+NY,Olean High School                                               ,1974,Entered,1
+NY,Olean High School                                               ,1974,Floor,1
+NY,Olean High School                                               ,1974,Following,1
+NY,Olean High School                                               ,1974,Found,1
+NY,Olean High School                                               ,1974,Had,1
+NY,Olean High School                                               ,1974,He,1
+NY,Olean High School                                               ,1974,High,1
+NY,Olean High School                                               ,1974,Himself,1
+NY,Olean High School                                               ,1974,His,1
+NY,Olean High School                                               ,1974,Homemade,1
+NY,Olean High School                                               ,1974,Honor,1
+NY,Olean High School                                               ,1974,In,2
+NY,Olean High School                                               ,1974,Inside,1
+NY,Olean High School                                               ,1974,Journal,1
+NY,Olean High School                                               ,1974,Looked,1
+NY,Olean High School                                               ,1974,Member,1
+NY,Olean High School                                               ,1974,Nine,1
+NY,Olean High School                                               ,1974,Of,2
+NY,Olean High School                                               ,1974,Old,1
+NY,Olean High School                                               ,1974,Olean,1
+NY,Olean High School                                               ,1974,On,3
+NY,Olean High School                                               ,1974,People,1
+NY,Olean High School                                               ,1974,Plans,1
+NY,Olean High School                                               ,1974,Police,1
+NY,Olean High School                                               ,1974,Propane,1
+NY,Olean High School                                               ,1974,Recipes,1
+NY,Olean High School                                               ,1974,Rifle,1
+NY,Olean High School                                               ,1974,Room,1
+NY,Olean High School                                               ,1974,S,3
+NY,Olean High School                                               ,1974,School,3
+NY,Olean High School                                               ,1974,Shooting,2
+NY,Olean High School                                               ,1974,Shot,1
+NY,Olean High School                                               ,1974,Streets,1
+NY,Olean High School                                               ,1974,Student,1
+NY,Olean High School                                               ,1974,Team,1
+NY,Olean High School                                               ,1974,That,1
+NY,Olean High School                                               ,1974,The,6
+NY,Olean High School                                               ,1974,Third,1
+NY,Olean High School                                               ,1974,Well,1
+NY,Olean High School                                               ,1974,Where,1
+NY,Olean High School                                               ,1974,Year,1
+CA,Cal State Fullerton                                             ,1976,12,1
+CA,Los Angeles Computer Learning Center                            ,1976,18,1
+CA,Los Angeles Computer Learning Center                            ,1976,19,1
+CA,Cal State Fullerton                                             ,1976,1976,2
+CA,Cal State Fullerton                                             ,1976,37,1
+CA,Cal State Fullerton                                             ,1976,A,6
+CA,Cal State Fullerton                                             ,1976,And,3
+CA,Los Angeles Computer Learning Center                            ,1976,Angeles,1
+CA,Los Angeles Computer Learning Center                            ,1976,Apprehended,1
+CA,Cal State Fullerton                                             ,1976,At,4
+CA,Cal State Fullerton                                             ,1976,Building,1
+CA,Los Angeles Computer Learning Center                            ,1976,By,1
+CA,Cal State Fullerton                                             ,1976,California,1
+CA,Cal State Fullerton                                             ,1976,Center,1
+CA,Los Angeles Computer Learning Center                            ,1976,Computer,1
+CA,Los Angeles Computer Learning Center                            ,1976,
