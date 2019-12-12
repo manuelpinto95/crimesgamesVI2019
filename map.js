@@ -46,15 +46,15 @@ function gen_map() {
     map.svg.append("text")
         .attr("class", "title")
         .attr("font-size", "20px")
-        .attr("transform", "translate(" + (w / 2) + ",35)")
-        .attr("text-anchor", "middle")
-        .text("Average crime in the USA");
+        .attr("transform", "translate(" + (20) + ",35)")
+        .attr("text-anchor", "start")
+        .text("Crime in the USA form " + year_filters[0] + " to " + year_filters[1]);
 
     var config = { "color1": "#d3e5ff", "color2": "#08306B", "stateDataColumn": "state", "valueDataColumn": "crime" }
 
-    var COLOR_COUNTS = 9;
+    var COLOR_COUNTS = 10;
 
-    var SCALE = 0.8;
+    var SCALE = 0.85;
 
     var COLOR_FIRST = config.color1, COLOR_LAST = config.color2;
 
@@ -86,12 +86,17 @@ function gen_map() {
         .domain([0, 1.0])
         .range(d3.range(COLOR_COUNTS).map(function (i) { return i }));
 
-    var projection = d3.geoAlbers().rotate([90, 0, 0]).translate([530, 300]);
+    var projection = d3.geoAlbersUsa().translate([530, 300]);
     var path = d3.geoPath().projection(projection);
 
     function getKeyByValue(object, value) {
         return Object.keys(object).find(key => object[key] === value);
     }
+
+    /*TOLLTIP DIV*/
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
 
     d3.csv("data/USA/us-state-names.csv").then(function (names) {
 
@@ -116,9 +121,79 @@ function gen_map() {
         quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
         d3.max(data, function (d) { return +d[MAP_VALUE] })]);
 
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
+        var min = d3.min(data, function (d) { return +d[MAP_VALUE] });
+        var interval = (d3.max(data, function (d) { return +d[MAP_VALUE] }) - d3.min(data, function (d) { return +d[MAP_VALUE] })) / 10;
+        console.log(interval);
+
+
+        /*LEGEND*/
+        var legend = map.svg.append("g")
+            .attr("class", "key")
+            .attr("transform", "translate(" + (w - 310) + ",40)");
+
+        map.svg.append("text")
+            .attr("class", "title")
+            .attr("font-size", "15px")
+            .attr("transform", "translate(" + (w - 150) + ",35)")
+            .attr("text-anchor", "middle")
+            .text(crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita");
+
+
+        var x = d3.scaleLinear()
+            .domain([1, 11])
+            .rangeRound([0, 300])
+
+        for (let index = 0; index < colors.length; index++) {
+            var c = colors[index].getColors();
+            var color = "rgb(" + c.r + "," + c.g + "," + c.b + ")";
+            legend.append("rect")
+                .attr("y", 0)
+                .attr("x", 1 + index * 30)
+                .attr("height", 20)
+                .attr("width", 30)
+                .attr("fill", color)
+                .on("mousemove", function (d) {
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html("[" + (min + index * interval).toFixed(0) + " - " + (min + (index + 1) * interval).toFixed(0) + "]")
+                        .style("left", (d3.event.pageX + 10) + "px")
+                        .style("top", (d3.event.pageY + 10) + "px");
+                })
+                .on("mouseout", function (d) {
+                    div.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                })
+
+        }
+        legend.call(d3.axisBottom(x)
+            .tickFormat(d3.format("d"))
+            .ticks(11)
+            .tickValues(""))
+        /*.tickFormat(function (x, i) { return i ? x : x + "%"; })
+        .tickValues("oi")
+        .select(".domain")
+        .remove(); */
+
+        /*
+        
+        
+        g.append("text")
+            .attr("class", "caption")
+            .attr("x", x.range()[0])
+            .attr("y", -6)
+            .attr("fill", "#000")
+            .attr("text-anchor", "start")
+            .attr("font-weight", "bold")
+            .text("Unemployment rate");
+        
+        g.call(d3.axisBottom(x)
+            .tickSize(13)
+            .tickFormat(function (x, i) { return i ? x : x + "%"; })
+            .tickValues(color.domain()))
+            .select(".domain")
+            .remove(); */
 
         d3.json("data/USA/us.json").then(function (us) {
 
@@ -157,7 +232,7 @@ function gen_map() {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(id_name_map[d.id] + "<br/>" + "avg. " + crimeNameDic[selectedCrimeType] + " per 1k capita:" + (valueById.get(d.id) ? valueById.get(d.id).toFixed(2) : ""))
+                    div.html(id_name_map[d.id] + "<br/>" + (valueById.get(d.id) ? valueById.get(d.id).toFixed(2) : ""))
                         .style("left", (d3.event.pageX + 10) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
                 })

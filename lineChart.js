@@ -153,7 +153,7 @@ var lineChart = {
     data: 0,
     svg: 0,
     margin: {
-        top: 20,
+        top:20,
         right: 5,
         bottom: 20,
         left: 5
@@ -187,7 +187,7 @@ function genLineChart() {
         .attr("font-size", "20px")
         .attr("transform", "translate(" + (lineChart.w / 2) + ",15)")
         .attr("text-anchor", "middle")
-        .text("Crime occurrences per 1000 capita");
+        .text(crimeNameDic[selectedCrimeType] + " over the years");
 
     filterCrimeData()
 
@@ -204,7 +204,7 @@ function genLineChart() {
         //.attr("transform", "rotate(-90)")
         .style("text-anchor", "start")
         .attr("font-size", "15px")
-        .text(crimeNameDic[selectedCrimeType]);
+        .text("Crime ocurrences per 1000 capita");
 
     lineChart.svg.append("g")
         .attr("transform", "translate(-10," + (lineChart.h - lineChart.margin.bottom) + ")")
