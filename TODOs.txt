@@ -1,6 +1,6 @@
 Data
 [ ] remove rape
-[ ] fix data for the map as some states are missing
+[X] fix data for the map as some states are missing
 [ ] try to add MS as a row in the crime dataset
 
 DashBoard
@@ -9,29 +9,31 @@ DashBoard
 [X] espaçamento do barchart chart e line chart mais centrado
 [X] dropdown buttons todos iguais
 [ ] font igual para tudo
-[ ] font igual para todos os titulos dos graficos
+[ ] font igual para todos os titulos dos graficos e butoes
+[ ] a terceira cor roxa é má para distinguir no mapa, mudar para outra
 
 state selector
 [X] font-color dos estados correponder á cor da linha do line chart
-[ ] move selector to the map div
+[X] move selector to the map div
 
 
 Barchart
 [X] add label to y axis
 [X] basta 1 cor para a subgenre
 [X] alinhar eixo do x com o meio das barras
-[ ] remover genres irrelevantes
-[ ] iniciar a genre com shooter
+[X] remover genres irrelevantes
+[X] iniciar a genre com shooter
 [ ] fazer o append dos rectangulos como deve de ser
 
 Multi-Line Chart
-[ ] add "over the year" in the title
-[ ] fix region tip (ou então esconder para nao dar a percebr que há bug)
+[X] add "over the year" in the title
+[X] fix region tip (ou então esconder para nao dar a percebr que há bug)
 [X] na tip por também a região para facilitar comparaçoes em zonas cluttered
 [X] center axis label 
 [X] alinhar eixo dos X
 [ ] default type of crime should be mass shootings
 [X] add tip to the legend that says the full name of the state
+[X] add "per year in the title" remove "per 1000 capita and add it to axis label"
 
 Lista de top 3 mass shootings
 [X] mostrar mais de 3
@@ -39,10 +41,11 @@ Lista de top 3 mass shootings
 
 Mapa
 [X] border dos estados seleccionados com a cor do esado seleccionados
-[ ] remove Puerto Rico and Virgin Islands, add hawaii and Alaska
+[X] remove Puerto Rico and Virgin Islands, add hawaii and Alaska
 [X] fix tips
-[ ] add coordinates of top10 MS
-[ ] add scale
+[X] add scale
+[X] move crime selector to map and remove from line chart
+[X] add crime type to the title
 
 WordCloud
 
@@ -54,10 +57,11 @@ Game selector
 
 vgEvent
 [ ] implementar como deve de ser
+[ ] adjust time line so it doesnt miss the year of the video game
 
 
 ADICIONAL:
-state selector
+[ ] add coordinates of top10 MS
 [ ] click on mass shooting to select the state in which it happened
 [ ] add text saying use list above to add states when to state is selected
 [ ] remover estados dos quais nao temos data de crime

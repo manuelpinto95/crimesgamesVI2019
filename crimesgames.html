@@ -113,36 +113,37 @@
         <option value="WI">Wisconsin</option>
         <option value="WY">Wyoming</option>
       </select>
+      <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector"
+        label="Choose Type of Crime">
+        ==$0
+        <option hidden default="">Type of Crime</option>
+        <option value="violent_crime">Violent crime </option>
+        <option value="homicide">Homicide</option>
+        <option value="rape_legacy">Rape legacy</option>
+        <option value="rape_revised">Rape revised</option>
+        <option value="robbery">Robbery</option>
+        <option value="aggravated_assault">Aggravated assault</option>
+        <option value="property_crime">Property crime</option>
+        <option value="burglary">Burglary</option>
+        <option value="larceny">Larceny</option>
+        <option value="motor_vehicle_theft">Motor vehicle theft</option>
+      </select>
     </div>
     <div id="wordcloud" style="border: 1px solid grey;"></div>
   </div>
 
   <div id="linechart" style="border: 1px solid grey;">
-    <select onchange="crimeSelector()" style="background-color:#eeeeee" id="crimeSelector" label="Choose Type of Crime">
-      ==$0
-      <option hidden default="">Type of Crime</option>
-      <option value="violent_crime">Violent crime </option>
-      <option value="homicide">Homicide</option>
-      <option value="rape_legacy">Rape legacy</option>
-      <option value="rape_revised">Rape revised</option>
-      <option value="robbery">Robbery</option>
-      <option value="aggravated_assault">Aggravated assault</option>
-      <option value="property_crime">Property crime</option>
-      <option value="burglary">Burglary</option>
-      <option value="larceny">Larceny</option>
-      <option value="motor_vehicle_theft">Motor vehicle theft</option>
-    </select>
   </div>
 
   <div id="barchart" style="border: 1px solid grey;">
     <!-- <select id="c2" name="FipsCode" label="Search for a video game..."> ==$0
       <option hidden default="">Search for a video game...</option>
     </select> -->
-    <select onchange="genreSelector()" style="background-color:#eeeeee" vertical-align="top" id="dropdownbox"> ==$0
+    <select onchange="genreSelector()" style="background-color:#eeeeee" vertical-align="top" id="dropdownbox"> ==$14
+      <option hidden default="">Select genre...</option>
       <option value="Action">Action </option>
       <option value="Action_Adventure">Action Adventure</option>
       <option value="Adventure">Adventure</option>
-      <option value="Board_Game">Board Game</option>
       <option value="Education">Education</option>
       <option value="Fighting">Fighting</option>
       <option value="Misc">Misc</option>

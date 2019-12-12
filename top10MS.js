@@ -107,14 +107,24 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
             .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
-            .attr("width", (xScale(top3[index].Fatalities)-8 >0 ? xScale(top3[index].Fatalities)-8: 0 ) )
+            .attr("width", (xScale(top3[index].Fatalities) - 8 > 0 ? xScale(top3[index].Fatalities) - 8 : 0))
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 4)
             .on("mouseover", function (d, i) {
+                barchartTooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                var text = "Fatalities: " + top3[index].Fatalities;
+                barchartTooltipDiv.html(text)
+                    .style("left", (d3.event.pageX) + "px")
+                    .style("top", (d3.event.pageY - 28) + "px");
                 dispatch.call("yearEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
+                barchartTooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
                 dispatch.call("yearEvent", 0, 0);
             });
     }

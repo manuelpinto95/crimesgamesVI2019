@@ -3,7 +3,7 @@ var vgTotal,
     vgAction,
     vgShooter,
     vgSelectedBar = null,
-    vgSelectedGenre = "Action",
+    vgSelectedGenre = "Shooter",
     crimeState,
     vgNames;
 
@@ -208,7 +208,7 @@ function gen_barChart() {
         .attr("font-size", "20px")
         .attr("transform", "translate(" + (barchart.w / 2) + ",15)")
         .attr("text-anchor", "middle")
-        .text("New Video Games per year");
+        .text("New Video Games over the years");
 
     barchart.yMax = d3.max(barchart.data, function (d) {
         return +d.Total;
@@ -312,7 +312,7 @@ function gen_barChart() {
             barchartTooltipDiv.transition()
                 .duration(200)
                 .style("opacity", .9);
-            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + getGenre(vgSelectedGenre, d))
+            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] +":" + getGenre(vgSelectedGenre, d))
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
             dispatch.call("yearEvent", d, d);
@@ -327,28 +327,28 @@ function gen_barChart() {
     //LEGEND
 
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 240)
-        .attr("y", 0)
+        .attr("x", barchart.w - 260)
+        .attr("y", 2)
         .attr("width", 15)
         .attr("height", 15)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", d3.schemeCategory10[0])
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 222)
+        .attr("x", barchart.w - 242)
         .attr("y", 14)
         .text("All genres");
 
     barchart.svg.append("rect")
-        .attr("x", barchart.w - 148)
-        .attr("y", 0)
+        .attr("x", barchart.w - 160)
+        .attr("y", 2)
         .attr("width", 15)
         .attr("height", 15)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", "rgb(188, 208, 238)")
     barchart.svg.append("text")
         .attr("class", "title")
-        .attr("x", barchart.w - 130)
+        .attr("x", barchart.w - 142)
         .attr("y", 14)
         .text(genreTextDic[vgSelectedGenre]);
 
@@ -358,7 +358,7 @@ function gen_barChart() {
         //.attr("transform", "rotate(-90)")
         .style("text-anchor", "start")
         .attr("font-size", "15px")
-        .text("Releases");
+        .text("Number of Releases");
 
 }
 
