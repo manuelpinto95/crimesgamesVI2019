@@ -1,7 +1,8 @@
 Data
-[ ] remove rape
+[X] remove rape
 [X] fix data for the map as some states are missing
-[ ] try to add MS as a row in the crime dataset
+[X] try to add MS as a row in the crime dataset
+[X] dont do per 1000 capita when its MS
 
 DashBoard
 [X] Usar tamanhos relativos para definir o tamanho das divs
@@ -31,9 +32,10 @@ Multi-Line Chart
 [X] na tip por também a região para facilitar comparaçoes em zonas cluttered
 [X] center axis label 
 [X] alinhar eixo dos X
-[ ] default type of crime should be mass shootings
+[X] default type of crime should be mass shootings
 [X] add tip to the legend that says the full name of the state
 [X] add "per year in the title" remove "per 1000 capita and add it to axis label"
+[X] fix year event
 
 top 10
 [X] mostrar mais de 3

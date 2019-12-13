@@ -1,6 +1,6 @@
 var mapData;
 
-d3.csv("data/crime/crimeFinal2.csv").then(function (data) {
+d3.csv("data/crime/crime_and_ms.csv").then(function (data) {
     mapData = data;
     gen_map();
 })
@@ -22,7 +22,7 @@ function gen_map() {
         .key(function (d) { return d.name.trim(); })
         .rollup(function (leaves) {
             return d3.sum(leaves, function (d) {
-                return getCrime(selectedCrimeType, d) / d.population * 1000;
+                return getCrime(selectedCrimeType, d);
             });
         }).entries(data)
         .map(function (d) {
@@ -102,7 +102,6 @@ function gen_map() {
 
         name_id_map = {};
         id_name_map = {};
-        //console.log(names);
 
         for (var i = 0; i < names.length; i++) {
             name_id_map[names[i].name] = names[i].id;
@@ -118,12 +117,13 @@ function gen_map() {
         });
         //console.log(valueById);
 
+        //console.log(valueById.get(38));
+
         quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
         d3.max(data, function (d) { return +d[MAP_VALUE] })]);
 
         var min = d3.min(data, function (d) { return +d[MAP_VALUE] });
         var interval = (d3.max(data, function (d) { return +d[MAP_VALUE] }) - d3.min(data, function (d) { return +d[MAP_VALUE] })) / 10;
-        console.log(interval);
 
 
         /*LEGEND*/
@@ -131,12 +131,13 @@ function gen_map() {
             .attr("class", "key")
             .attr("transform", "translate(" + (w - 310) + ",40)");
 
+        var text = selectedCrimeType=="mass_shootings"?"Number of mass shootings":crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita"
         map.svg.append("text")
             .attr("class", "title")
             .attr("font-size", "15px")
             .attr("transform", "translate(" + (w - 150) + ",35)")
             .attr("text-anchor", "middle")
-            .text(crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita");
+            .text(text);
 
 
         var x = d3.scaleLinear()
@@ -217,12 +218,14 @@ function gen_map() {
                 .style("fill", function (d) {
                     if (valueById.get(d.id)) {
                         var i = quantize(valueById.get(d.id));
-
-                        var color = colors[i].getColors(); //TODO must quantize
+                        //console.log("OK id:" + d.id);
+                        var color = colors[i].getColors();
                         return "rgb(" + color.r + "," + color.g +
                             "," + color.b + ")";
                     } else {
-                        return "";
+                        var color = colors[0].getColors(); //TODO: check why sattes with zero MS fail
+                        return "rgb(" + color.r + "," + color.g +
+                            "," + color.b + ")";
                     }
                 })
                 .attr("d", path)
@@ -232,7 +235,7 @@ function gen_map() {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(id_name_map[d.id] + "<br/>" + (valueById.get(d.id) ? valueById.get(d.id).toFixed(2) : ""))
+                    div.html(id_name_map[d.id] + "<br/>" + (valueById.get(d.id) ? valueById.get(d.id).toFixed(2) : 0)) //TODO: check why sattes with zero MS fail
                         .style("left", (d3.event.pageX + 10) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
                 })
@@ -251,7 +254,7 @@ function gen_map() {
                         addStatebyName(codeDic[id_name_map[d.id]]);
                     }
                     else {
-                        console.log("removing state: " + "span" + index);
+                        //console.log("removing state: " + "span" + index);
                         var span = document.getElementById("span" + index);
                         span.parentElement.remove();
                         removeState(codeDic[id_name_map[d.id]]);
