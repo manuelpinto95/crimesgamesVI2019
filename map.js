@@ -1,8 +1,8 @@
 var mapData;
+var projection;
 
 d3.csv("data/crime/crime_and_ms.csv").then(function (data) {
     mapData = data;
-    gen_map();
 })
 
 function update_map() {
@@ -12,9 +12,60 @@ function update_map() {
 var map = {
     svg: 0
 }
-function gen_map() {
 
-    var data = mapData.filter(function (d, key) {
+function gen_dots() {
+    console.log("dots start");
+    var coordinatesData = msTop3data;
+
+    var filteredData = msTop3data.filter(function (d, key) {
+        if (countStates() == 0) {
+
+            return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
+        } else {
+
+            return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && (d.state_abbr == states[0] || d.state_abbr == states[1] || d.state_abbr == states[2]))
+        }
+    })
+
+    for (let index = 0; index < filteredData.length; index++) {
+        map.svg.append("circle") // Uses the enter().append() method
+            .attr("class", "dot") // Assign a class for styling
+            .attr("cx", function () {
+                return projection([filteredData[index].Longitude, filteredData[index].Latitude])[0];
+            })
+            .attr("cy", function () {
+                return projection([filteredData[index].Longitude, filteredData[index].Latitude])[1];
+            })
+            .attr("r", function () {
+                return Math.sqrt(filteredData[index].Victims * 2);
+            })
+            .attr("fill", d3.schemeSet1[5])
+            .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
+            .attr("Year", function () { return String(filteredData[index].Year).trim(); })
+        .on("mousemove", function (d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+ 
+            div.html(d.state_abbr + "<br/>" + d.Year + "<br/>" + Number(getCrime(selectedCrimeType, d)).toFixed(3))
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY + 10) + "px");
+ 
+            dispatch.call("yearEvent", d, d);
+        })
+        .on("mouseout", function (d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+            dispatch.call("yearEvent", 0, 0);
+        })
+    }
+    console.log("dots done");
+}
+
+function gen_states() {
+    console.log("map start");
+    data = mapData.filter(function (d, key) {
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
 
     })
@@ -86,7 +137,7 @@ function gen_map() {
         .domain([0, 1.0])
         .range(d3.range(COLOR_COUNTS).map(function (i) { return i }));
 
-    var projection = d3.geoAlbersUsa().translate([530, 300]);
+    projection = d3.geoAlbersUsa().translate([w / 2, h / 2]).scale([1000]);
     var path = d3.geoPath().projection(projection);
 
     function getKeyByValue(object, value) {
@@ -97,7 +148,6 @@ function gen_map() {
     var div = d3.select("body").append("div")
         .attr("class", "tooltip")
         .style("opacity", 0);
-
     d3.csv("data/USA/us-state-names.csv").then(function (names) {
 
         name_id_map = {};
@@ -131,7 +181,7 @@ function gen_map() {
             .attr("class", "key")
             .attr("transform", "translate(" + (w - 310) + ",40)");
 
-        var text = selectedCrimeType=="mass_shootings"?"Number of mass shootings":crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita"
+        var text = selectedCrimeType == "mass_shootings" ? "Number of mass shootings" : crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita"
         map.svg.append("text")
             .attr("class", "title")
             .attr("font-size", "15px")
@@ -203,7 +253,7 @@ function gen_map() {
                 .selectAll("path")
                 .data(topojson.feature(us, us.objects.states).features)
                 .enter().append("path")
-                .attr("transform", "scale(" + SCALE + ")")
+                /* .attr("transform", "scale(" + SCALE + ")") */
                 .attr("style", function (d) {
                     var state = id_name_map[d.id];
                     //console.log(state);
@@ -231,7 +281,7 @@ function gen_map() {
                 .attr("d", path)
                 .on("mousemove", function (d) {
                     var sel = d3.select(this);
-                    sel.raise()
+                    //sel.raise() TODO tirar isto maybe
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
@@ -270,6 +320,17 @@ function gen_map() {
         });
 
     });
+    console.log("map done");    
+    /* callback(); */
+}
+
+function gen_map() {
+
+    gen_states()
+    setTimeout(function afterTwoSeconds() {
+        gen_dots()
+      }, 1500)
+
 };
 
 function Interpolate(start, end, steps, count) {

@@ -11,6 +11,8 @@ var top3svg;
 
 var top3Tip;
 
+var msTop3data;
+
 d3.csv("/data/ms/MS_top10.csv").then(function (data) {
     //CONVERT STRINGS TO NUMBERS
     data.forEach(function (d) {
@@ -18,6 +20,8 @@ d3.csv("/data/ms/MS_top10.csv").then(function (data) {
         d.Injured = +d.Injured;
         d.Victims = +d.Victims;
         d.Year = +d.Year;
+        d.Latitude = +d.Latitude;
+        d.Longitude = +d.Longitude
     });
     msTop3data = data;
     //console.log(msTop3data);

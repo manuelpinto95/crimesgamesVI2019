@@ -3,10 +3,10 @@
 var wordsDS;
 
 function update_wordcloud(){
-    wordcloud.svg.remove();
-    d3.selectAll('#wordcloud svg').remove();
+    //wordcloud.svg.remove();
+    //d3.selectAll('#wordcloud svg').remove();
     //wordcloud.words = [];
-    gen_Wordcloud();
+    //gen_Wordcloud();
 }
 
 var wordcloud = {
@@ -19,7 +19,7 @@ var wordcloud = {
 
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
     wordsDS = data;
-    gen_Wordcloud();
+    //gen_Wordcloud();
 });
 
 function gen_Wordcloud() {

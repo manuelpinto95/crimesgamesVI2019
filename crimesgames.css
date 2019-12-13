@@ -455,6 +455,7 @@ ul li:hover {
 /* Style the dots by assigning a fill and stroke */
 .dot {
   stroke: #fff;
+  z-index: 2;
 }
 
 .focus circle {

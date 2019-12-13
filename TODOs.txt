@@ -50,6 +50,10 @@ Mapa
 [X] move crime selector to map and remove from line chart
 [X] add crime type to the title
 
+Coordinates
+[ ] mousemove and out events
+[ ] create new MSevent for the interaction between top10 list and coordinates ()and wordcloud
+
 WordCloud
 
 
@@ -66,15 +70,15 @@ vgEvent
 
 
 ADICIONAL:
-[ ] add coordinates of top10 MS
+[X] add coordinates of top10 MS
 [ ] click on mass shooting to select the state in which it happened
-[ ] add text saying use list above to add states when to state is selected
-[ ] remover estados dos quais nao temos data de crime
+[X] add text saying use list above to add states when to state is selected
+[X] remover estados dos quais nao temos data de crime
 [ ] adicionar um slider-switch para alternar entre linear e quadratic scale para o eixo Y
 [ ] animacoes em todos os charts
 [ ] AO FAZER CLICK, FAZER LOCK IN DO EVENTO YEAR PARA FICAR VISIVEL E DEIXAR O USER EXPLORAR
 [ ] tip a mostrar o valor para todas a lines e não apenas uma no multi-line chart
 [ ] add the USA as a comparable state
 [ ] add text saying there are no mass shootings for this time perior and for theses regions quando não há
-[ ] add search icon to the cg searcher
+[X] add search icon to the Vg searcher
 [ ] Impor limite minimo de 15 anos na time line
