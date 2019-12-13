@@ -1,10 +1,15 @@
 var year_filters = [1979, 2016];
 var year_hovered = null;
-
+var timeline_svg = 0;
 // utility function
 function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
 };
+
+function update_timeline() {
+    timeline_svg.remove();
+    gen_timeline();
+}
 
 function gen_timeline() {
     var margin = {
@@ -12,16 +17,16 @@ function gen_timeline() {
         right: 30
     },
         height = 45,
-        range = [1979, 2016],
+        range = [year_filters[0], year_filters[1]],
         step = 1; // change the step and if null, it'll switch back to a normal slider
 
     width = window.innerWidth - 10; // Use the window's width 
-    var svg = d3.select('#timeline')
+    timeline_svg = d3.select('#timeline')
         .append('svg')
         .attr('width', width)
         .attr('height', height);
 
-    var slider = svg.append("g")
+    var slider = timeline_svg.append("g")
         .classed('slider', true)
         .attr('transform', 'translate(' + margin.left + ', ' + (height / 2) + ')');
 

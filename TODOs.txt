@@ -10,8 +10,8 @@ DashBoard
 [X] espaçamento do barchart chart e line chart mais centrado
 [X] dropdown buttons todos iguais
 [ ] font igual para tudo
-[ ] font igual para todos os titulos dos graficos e butoes
 [ ] a terceira cor roxa é má para distinguir no mapa, mudar para outra
+[ ] cor do texto no top3 nao pode deixar de ser visivel com o vermelho do jogo seleccionado
 
 state selector
 [X] font-color dos estados correponder á cor da linha do line chart
@@ -40,7 +40,7 @@ Multi-Line Chart
 top 10
 [X] mostrar mais de 3
 [X] barchart em vez de cor
-[ ] fix bug where big rectangle is sometimes not shown
+[X] fix bug where big rectangle is sometimes not shown
 
 Mapa
 [X] border dos estados seleccionados com a cor do esado seleccionados
@@ -59,10 +59,10 @@ Game selector
 
 
 vgEvent
-[ ] implementar como deve de ser
-[ ] adjust time line so it doesnt miss the year of the video game
-[ ] impose limite of 1 vg 
-
+[X] implementar como deve de ser
+[X] adjust time line so it doesnt miss the year of the video game
+[X] impose limite of 1 vg
+[ ] make button prettier
 
 
 ADICIONAL:

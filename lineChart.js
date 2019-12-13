@@ -276,7 +276,14 @@ function genLineChart() {
                 return lineChart.yScale(getCrime(selectedCrimeType, d));
             })
             .attr("r", 5)
-            .attr("fill", "rgb(53, 88, 139)")
+            .attr("fill", function(d) {
+                if (d.Year != selectedGameYear) {
+                    return "rgb(53, 88, 139)"  
+                }
+                else {
+                    return d3.schemeCategory10[3];
+                } 
+            })
             .attr("Year", function (d) { return d.Year.trim(); })
             .on("mousemove", function (d, i) {
                 div.transition()
@@ -321,7 +328,14 @@ function genLineChart() {
                     return lineChart.yScale(getCrime(selectedCrimeType, d));
                 })
                 .attr("r", 5)
-                .attr("fill", colorOfLines[index])
+                .attr("fill", function(d) {
+                    if (d.Year != selectedGameYear) {
+                        return colorOfLines[index]  
+                    }
+                    else {
+                        return d3.schemeCategory10[3];
+                    } 
+                })
                 .attr("Year", function (d) { return d.Year.trim(); })
                 .on("mousemove", function (d) {
                     div.transition()

@@ -106,6 +106,14 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
             .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
+            .attr("fill", function() {
+                if (top3[index].Year != selectedGameYear) {
+                    return "#E8E8E8" 
+                }
+                else {
+                    return d3.schemePastel1[0];
+                } 
+            })
             .attr("width", (xScale(top3[index].Victims) - 8 > 0 ? xScale(top3[index].Victims) - 8 : 0))
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Victims) */)
