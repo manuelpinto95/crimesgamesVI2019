@@ -2,9 +2,16 @@
 
 var wordsDS;
 
-var wordCloud = {
+function update_wordcloud(){
+    wordcloud.svg.remove();
+    d3.selectAll('#wordcloud svg').remove();
+    //wordcloud.words = [];
+    gen_Wordcloud();
+}
+
+var wordcloud = {
+    svg: 0,
     data: 0,
-    svg : 0,
     words: [],
     layout: 0
 };
@@ -12,11 +19,11 @@ var wordCloud = {
 
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
     wordsDS = data;
-    gen_WordCloud();
+    gen_Wordcloud();
 });
 
-function gen_WordCloud() {
-    console.log("gen wordCloud");
+function gen_Wordcloud() {
+    console.log("gen wordcloud");
     
     // set the dimensions and margins of the graph
     var margin = {
@@ -30,7 +37,7 @@ function gen_WordCloud() {
     var width = window.innerWidth - mapW - 500 - margin.right - margin.left;
 
     // append the svg object to the body of the page
-   wordCloud.svg = d3.select("#wordcloud").append("svg")
+   wordcloud.svg = d3.select("#wordcloud").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
@@ -39,13 +46,13 @@ function gen_WordCloud() {
     //filter the data to match the time period
     filterData();
 
-    wordCloud.data.forEach(function(d){
+    wordcloud.data.forEach(function(d){
         d.values.forEach(function(d2){
-            if(d2.Word in wordCloud.words){
-                wordCloud.words[d2.Word].count += 1;
+            if(d2.Word in wordcloud.words){
+                wordcloud.words[d2.Word].count += 1;
             }
             else{
-                wordCloud.words.push({word: d2.Word, count: 1})
+                wordcloud.words.push({word: d2.Word, count: 1})
             }
 
         })
@@ -54,22 +61,23 @@ function gen_WordCloud() {
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here
-    wordCloud.layout = d3.layout.cloud()
+    
+    wordcloud.layout = d3.layout.cloud()
         .size([width, height])
-        .words(wordCloud.words.map(function(d) { return {text: d.word, size:d.count*10}; }))
+        .words(wordcloud.words.map(function(d) { return {text: d.word, size:d.count*10}; }))
         .padding(5)        //space between words
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })      // font size of words
         .on("end", draw);
-    wordCloud.layout.start();
+    wordcloud.layout.start();
 
     // This function takes the output of 'layout' above and draw the words
     // Wordcloud features that are THE SAME from one word to the other can be here
 
     function draw(words) {
-  wordCloud.svg
+  wordcloud.svg
     .append("g")
-      .attr("transform", "translate(" + wordCloud.layout.size()[0] / 2 + "," + wordCloud.layout.size()[1] / 2 + ")")
+      .attr("transform", "translate(" + wordcloud.layout.size()[0] / 2 + "," + wordcloud.layout.size()[1] / 2 + ")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
@@ -86,17 +94,9 @@ function gen_WordCloud() {
 
 }
 
-function update_wordCloud(){
-    wordCloud.svg.remove();
-    d3.select("svg").remove();
-    wordCloud.words = [];
-    gen_WordCloud();
-}
-
 
 function filterData() {
-    //console.log("states");
-    //console.log(states);
+
     var filteredData = wordsDS.filter(function (d, key) {
     
         if (countStates() == 0) {
@@ -110,6 +110,5 @@ function filterData() {
         .key(function (d) { return d.CODE; })
         .entries(filteredData);
 
-    wordCloud.data = entries;
-
+    wordcloud.data = entries;
 }

@@ -73,7 +73,7 @@ function addState() {
     update_lineChart();
     update_top3();
     update_map();
-    update_wordCloud();
+    update_wordcloud();
 }
 
 function addStatebyName(newState) {
@@ -129,6 +129,7 @@ function addStatebyName(newState) {
     update_lineChart();
     update_top3();
     update_map();
+    update_wordcloud();
 }
 
 function update_colors() {
@@ -177,4 +178,5 @@ function removeState(state) {
     update_lineChart();
     update_top3();
     update_map();
+    update_wordcloud();
 }
