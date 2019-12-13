@@ -5,7 +5,8 @@ var wordsDS;
 function update_wordcloud(){
     wordcloud.svg.remove();
     d3.selectAll('#wordcloud svg').remove();
-    //wordcloud.words = [];
+    wordcloud.words = [];
+    wordcloud.layout = 0;
     gen_Wordcloud();
 }
 
@@ -18,7 +19,11 @@ var wordcloud = {
 
 
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
+
+
     wordsDS = data;
+    
+
     gen_Wordcloud();
 });
 
