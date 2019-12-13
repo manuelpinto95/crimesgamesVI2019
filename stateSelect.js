@@ -124,7 +124,6 @@ function addStatebyName(newState) {
     });
 
     console.log(states);
-    //update_colors()
     update_lineChart();
     update_top3();
     update_map();

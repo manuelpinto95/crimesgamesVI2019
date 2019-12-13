@@ -55,23 +55,20 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
     dispatch = d3.dispatch("yearEvent");
     dispatch.on("yearEvent", function (vg) {
+        if(vg==0)
+            return;
+
         if (vgSelectedBar != null) {
-            if (vg.Year != barchart.selectedGameYear)
-                vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
-            else
-                vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
+            vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
 
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
-        vgSelectedBar = d3.selectAll("rect[Year=\'" + vg.Year + "\']");
 
-        if (vg.Year != barchart.selectedGameYear)
-            vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
-        else
-            vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(255,0,0)");
+        vgSelectedBar = d3.selectAll("rect[Year=\'" + String(vg.Year).trim() + "\']");
+        vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
 
-        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + vg.Year + "\']");
+        crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + String(vg.Year).trim() + "\']");
         crimeSelectedDot.attr("r", 6);
         crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
 
@@ -296,7 +293,7 @@ function gen_barChart() {
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
 
-            rect2.setAttribute("fill","rgb(188, 208, 238)");
+            rect2.setAttribute("fill", "rgb(188, 208, 238)");
             rect2.setAttribute("Year", d.Year);
             rects.appendChild(rect2);
             if (d.Year == barchart.selectedGameYear) {
@@ -308,13 +305,13 @@ function gen_barChart() {
 
             return rects;
         })
-        .on("mouseover", function (d, i) {
+        .on("mousemove", function (d, i) {
             barchartTooltipDiv.transition()
                 .duration(200)
                 .style("opacity", .9);
-            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] +":" + getGenre(vgSelectedGenre, d))
-                .style("left", (d3.event.pageX) + "px")
-                .style("top", (d3.event.pageY - 28) + "px");
+            barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + ":" + getGenre(vgSelectedGenre, d))
+                .style("left", (d3.event.pageX + 10) + "px")
+                .style("top", (d3.event.pageY + 10) + "px");
             dispatch.call("yearEvent", d, d);
         })
         .on("mouseout", function (d) {

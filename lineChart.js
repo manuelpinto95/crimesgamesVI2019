@@ -1,5 +1,5 @@
 var crimeDS,
-    selectedCrimeType = "violent_crime",
+    selectedCrimeType = "mass_shootings",
     statesColors = [d3.schemeDark2[0], d3.schemeDark2[1], d3.schemeDark2[2]],
     crimeSelectedDot = null;
 
@@ -14,6 +14,7 @@ crimeNameDic["property_crime"] = "Property crime"
 crimeNameDic["burglary"] = "Burglary"
 crimeNameDic["larceny"] = "Larceny"
 crimeNameDic["motor_vehicle_theft"] = "Motor vehicle theft"
+crimeNameDic["mass_shootings"] = "Mass shootings"
 
 var colorOfLines = [d3.schemeDark2[0], d3.schemeDark2[1], d3.schemeDark2[2]]
 
@@ -153,7 +154,7 @@ var lineChart = {
     data: 0,
     svg: 0,
     margin: {
-        top:20,
+        top: 20,
         right: 5,
         bottom: 20,
         left: 5
@@ -198,13 +199,16 @@ function genLineChart() {
         .attr("class", "y axis")
         .call(lineChart.yAxis);
 
+    var yLabel = selectedCrimeType != "mass_shootings" ? "Crime ocurrences per 1000 capita" : "Number of mass shootings";
+
     lineChart.svg.append("text")
         .attr("x", 3)
         .attr("y", 13)
         //.attr("transform", "rotate(-90)")
         .style("text-anchor", "start")
         .attr("font-size", "15px")
-        .text("Crime ocurrences per 1000 capita");
+        .text(yLabel);
+
 
     lineChart.svg.append("g")
         .attr("transform", "translate(-10," + (lineChart.h - lineChart.margin.bottom) + ")")
@@ -253,9 +257,7 @@ function genLineChart() {
         var line = d3.line()
             .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
             .y(function (d) {
-                var crime = getCrime(selectedCrimeType, d);
-                var crimePerCapita = crime / d.population * 1000;
-                return lineChart.yScale(crimePerCapita);
+                return lineChart.yScale(getCrime(selectedCrimeType, d));
             }) // set the y values for the line generator 
             .curve(d3.curveMonotoneX) // apply smoothing to the line
 
@@ -271,20 +273,20 @@ function genLineChart() {
             .attr("class", "dot") // Assign a class for styling
             .attr("cx", function (d, i) { return lineChart.xScale(i); })
             .attr("cy", function (d) {
-                var crime = getCrime(selectedCrimeType, d);
-                crimePerCapita = crime / d.population * 1000;
-                return lineChart.yScale(crimePerCapita);
+                return lineChart.yScale(getCrime(selectedCrimeType, d));
             })
             .attr("r", 5)
             .attr("fill", "rgb(53, 88, 139)")
-            .attr("Year", function (d) { return d.Year; })
-            .on("mouseover", function (d, i) {
+            .attr("Year", function (d) { return d.Year.trim(); })
+            .on("mousemove", function (d, i) {
                 div.transition()
                     .duration(200)
                     .style("opacity", .9);
-                div.html("USA" + "<br/>" + d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+
+                div.html("USA" + "<br/>" + d.Year + "<br/>" + Number(getCrime(selectedCrimeType, d)).toFixed(3))
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
+
                 dispatch.call("yearEvent", d, d);
             })
             .on("mouseout", function (d) {
@@ -300,9 +302,7 @@ function genLineChart() {
             var line = d3.line()
                 .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
                 .y(function (d) {
-                    var crime = getCrime(selectedCrimeType, d);
-                    var crimePerCapita = crime / d.population * 1000;
-                    return lineChart.yScale(crimePerCapita);
+                    return lineChart.yScale(getCrime(selectedCrimeType, d));
                 }) // set the y values for the line generator 
                 .curve(d3.curveMonotoneX) // apply smoothing to the line
 
@@ -318,20 +318,20 @@ function genLineChart() {
                 .attr("class", "dot") // Assign a class for styling
                 .attr("cx", function (d, i) { return lineChart.xScale(i); })
                 .attr("cy", function (d) {
-                    var crime = getCrime(selectedCrimeType, d);
-                    var crimePerCapita = crime / d.population * 1000;
-                    return lineChart.yScale(crimePerCapita);
+                    return lineChart.yScale(getCrime(selectedCrimeType, d));
                 })
                 .attr("r", 5)
                 .attr("fill", colorOfLines[index])
-                .attr("Year", function (d) { return d.Year; })
-                .on("mouseover", function (d) {
+                .attr("Year", function (d) { return d.Year.trim(); })
+                .on("mousemove", function (d) {
                     div.transition()
                         .duration(200)
                         .style("opacity", .9);
-                    div.html(d.state_abbr + "<br/>" + d.Year + "<br/>" + (getCrime(selectedCrimeType, d) / d.population * 1000).toFixed(3))
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
+
+                    div.html(d.state_abbr + "<br/>" + d.Year + "<br/>" + Number(getCrime(selectedCrimeType, d)).toFixed(3))
+                        .style("left", (d3.event.pageX + 10) + "px")
+                        .style("top", (d3.event.pageY + 10) + "px");
+
                     dispatch.call("yearEvent", d, d);
                 })
                 .on("mouseout", function (d) {
@@ -374,7 +374,7 @@ function update_lineChart() {
             })
             .attr("r", 5)
             .attr("fill", colorOfLines[index])
-            .attr("Year", function (d) { return d.Year; });
+            .attr("Year", function (d) { return d.Year.trim(); });
  
         var line = d3.line()
             .x(function (d, i) { return lineChart.xScale(i); }) // set the x values for the line generator
@@ -482,6 +482,7 @@ function filterCrimeData() {
             return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && (d.state_abbr == states[0] || d.state_abbr == states[1] || d.state_abbr == states[2]))
         }
     })
+    console.log(filteredData);
 
     var entries = d3.nest()
         .key(function (d) { return d.state_abbr; })
@@ -489,7 +490,7 @@ function filterCrimeData() {
 
 
     entries.sort(function (x, y) {
-        return d3.ascending(findState(x.key),findState(y.key));
+        return d3.ascending(findState(x.key), findState(y.key));
     })
     console.log(entries);
 
@@ -500,14 +501,14 @@ function filterCrimeData() {
 function getCrime(name, d) {
     var crime;
     switch (name) {
+        case "mass_shootings":
+            crime = d.mass_shootings
+            break;
         case "violent_crime":
             crime = d.violent_crime
             break;
         case "homicide":
             crime = d.homicide
-            break;
-        case "rape_legacy":
-            crime = d.rape_legacy
             break;
         case "robbery":
             crime = d.robbery
@@ -531,24 +532,24 @@ function getCrime(name, d) {
             crime = d.violent_crime;
             break;
     }
-    //console.log(crime);
-    return crime;
+    var pop = d.population
+    if (name != "mass_shootings")
+        return crime / pop * 1000;
+    else
+        return crime;
 }
 
 function getCrimeMax(name, d) {
     var crime;
     switch (name) {
+        case "mass_shootings":
+            crime = +d.mass_shootings
+            break;
         case "violent_crime":
             crime = +d.violent_crime
             break;
         case "homicide":
             crime = +d.homicide
-            break;
-        case "rape_legacy":
-            crime = +d.rape_legacy
-            break;
-        case "robbery":
-            crime = +d.robbery
             break;
         case "aggravated_assault":
             crime = +d.aggravated_assault
@@ -570,5 +571,8 @@ function getCrimeMax(name, d) {
             break;
     }
     var pop = d.population
-    return crime / pop * 1000;
+    if (name != "mass_shootings")
+        return crime / pop * 1000;
+    else
+        return crime;
 }

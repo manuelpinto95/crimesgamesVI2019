@@ -11,7 +11,7 @@ var top3svg;
 
 var top3Tip;
 
-d3.csv("/data/ms/MSselected2.csv").then(function (data) {
+d3.csv("/data/ms/MS_top10.csv").then(function (data) {
     //CONVERT STRINGS TO NUMBERS
     data.forEach(function (d) {
         d.Fatalities = +d.Fatalities;
@@ -67,10 +67,9 @@ function genTop3() {
 
 
     //console.log(top3);
-
-    var max = 30
-
-    max = filteredData[0].Fatalities;
+    var max = 0;
+    if (filteredData.length>0)
+        max = filteredData[0].Fatalities;
 
     xScale = d3.scaleLinear()
         .domain([0, max])
@@ -96,7 +95,7 @@ function genTop3() {
             .attr("height", 58)
             .attr("x", 3 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 2)
-            .on("mouseover", function (d, i) {
+            .on("mousemove", function (d, i) {
                 dispatch.call("yearEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
@@ -111,14 +110,14 @@ function genTop3() {
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Fatalities) */)
             .attr("y", index * 60 + 4)
-            .on("mouseover", function (d, i) {
+            .on("mousemove", function (d, i) {
                 barchartTooltipDiv.transition()
                     .duration(200)
                     .style("opacity", .9);
                 var text = "Fatalities: " + top3[index].Fatalities;
                 barchartTooltipDiv.html(text)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
                 dispatch.call("yearEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
@@ -143,14 +142,14 @@ function genTop3() {
                     return "rgb(53, 88, 139)";
             })
             .text("#" + (index + 1) + ":       " + top3[index].Title)
-            .on("mouseover", function (d, i) {
+            .on("mousemove", function (d, i) {
                 barchartTooltipDiv.transition()
                     .duration(200)
                     .style("opacity", .9);
                 var text = top3[index].Year + "<br/>" + "Fatalities:" + top3[index].Fatalities + "<br/>" + top3[index].Desc;
                 barchartTooltipDiv.html(text)
-                    .style("left", (d3.event.pageX) + "px")
-                    .style("top", (d3.event.pageY - 28) + "px");
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
                 dispatch.call("yearEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
