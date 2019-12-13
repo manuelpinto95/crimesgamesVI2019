@@ -28,7 +28,7 @@ function gen_map() {
         .map(function (d) {
             return { state: d.key, crime: d.value };
         });
-    console.log(data);
+    //console.log(data);
 
     h = (window.innerHeight / 2 - 60);
     w = h * 1.6;
@@ -115,9 +115,9 @@ function gen_map() {
 
             valueById.set(id, +d[MAP_VALUE]);
         });
-        console.log(valueById);
+        //console.log(valueById);
 
-        console.log(valueById.get(38));
+        //console.log(valueById.get(38));
 
         quantize.domain([d3.min(data, function (d) { return +d[MAP_VALUE] }),
         d3.max(data, function (d) { return +d[MAP_VALUE] })]);
@@ -218,7 +218,7 @@ function gen_map() {
                 .style("fill", function (d) {
                     if (valueById.get(d.id)) {
                         var i = quantize(valueById.get(d.id));
-                        console.log("OK id:" + d.id);
+                        //console.log("OK id:" + d.id);
                         var color = colors[i].getColors();
                         return "rgb(" + color.r + "," + color.g +
                             "," + color.b + ")";
@@ -254,7 +254,7 @@ function gen_map() {
                         addStatebyName(codeDic[id_name_map[d.id]]);
                     }
                     else {
-                        console.log("removing state: " + "span" + index);
+                        //console.log("removing state: " + "span" + index);
                         var span = document.getElementById("span" + index);
                         span.parentElement.remove();
                         removeState(codeDic[id_name_map[d.id]]);
