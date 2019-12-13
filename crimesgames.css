@@ -7,7 +7,7 @@
 }
 
 h1 {
-  font-size: 18pt;
+  font-size: 35pt;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -17,6 +17,27 @@ h2 {
   vertical-align: middle;
   font-weight: normal;
   font-family: 'Times New Roman', Times, serif;
+}
+
+#search-icon {
+  margin-left: 402;
+  margin-top: 48;
+}
+
+#container2 { 
+  height: 116;
+  position: relative;
+}
+
+#vgSearch {
+  margin: 0;
+  margin-left: 100px;
+  position: absolute;
+  width: 300;
+  height: 30;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 /* div {

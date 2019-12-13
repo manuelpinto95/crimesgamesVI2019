@@ -1,32 +1,42 @@
-year,mass_shootings
-1966,2
-1972,1
-1974,1
-1976,1
-1982,1
-1984,2
-1986,1
-1988,1
-1989,1
-1992,2
-1993,3
-1994,1
-1995,2
-1996,1
-1997,4
-1999,2
-2000,1
-2003,1
-2004,1
-2005,1
-2006,1
-2007,4
-2008,3
-2009,2
-2010,1
-2011,2
-2012,6
-2013,3
-2014,6
-2015,20
-2016,24
+state_abbr,year,mass_shootings
+1966,"the USA",2
+1971,"the USA",1
+1972,"the USA",1
+1974,"the USA",2
+1976,"the USA",2
+1979,"the USA",2
+1982,"the USA",2
+1983,"the USA",2
+1984,"the USA",3
+1985,"the USA",2
+1986,"the USA",3
+1987,"the USA",1
+1988,"the USA",6
+1989,"the USA",3
+1990,"the USA",1
+1991,"the USA",5
+1992,"the USA",4
+1993,"the USA",9
+1994,"the USA",4
+1995,"the USA",4
+1996,"the USA",3
+1997,"the USA",6
+1998,"the USA",5
+1999,"the USA",7
+2000,"the USA",1
+2001,"the USA",2
+2002,"the USA",2
+2003,"the USA",3
+2004,"the USA",2
+2005,"the USA",3
+2006,"the USA",6
+2007,"the USA",10
+2008,"the USA",6
+2009,"the USA",6
+2010,"the USA",2
+2011,"the USA",6
+2012,"the USA",14
+2013,"the USA",15
+2014,"the USA",13
+2015,"the USA",65
+2016,"the USA",70

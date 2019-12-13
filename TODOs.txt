@@ -35,9 +35,10 @@ Multi-Line Chart
 [X] add tip to the legend that says the full name of the state
 [X] add "per year in the title" remove "per 1000 capita and add it to axis label"
 
-Lista de top 3 mass shootings
+top 10
 [X] mostrar mais de 3
 [X] barchart em vez de cor
+[ ] fix bug where big rectangle is sometimes not shown
 
 Mapa
 [X] border dos estados seleccionados com a cor do esado seleccionados
@@ -58,6 +59,8 @@ Game selector
 vgEvent
 [ ] implementar como deve de ser
 [ ] adjust time line so it doesnt miss the year of the video game
+[ ] impose limite of 1 vg 
+
 
 
 ADICIONAL:
