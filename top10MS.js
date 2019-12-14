@@ -11,6 +11,8 @@ var top3svg;
 
 var top3Tip;
 
+var msTop3data;
+
 d3.csv("/data/ms/MS_top10.csv").then(function (data) {
     //CONVERT STRINGS TO NUMBERS
     data.forEach(function (d) {
@@ -18,6 +20,8 @@ d3.csv("/data/ms/MS_top10.csv").then(function (data) {
         d.Injured = +d.Injured;
         d.Victims = +d.Victims;
         d.Year = +d.Year;
+        d.Latitude = +d.Latitude;
+        d.Longitude = +d.Longitude
     });
     msTop3data = data;
     //console.log(msTop3data);
@@ -106,6 +110,14 @@ function genTop3() {
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
             .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
+            .attr("fill", function() {
+                if (top3[index].Year != selectedGameYear) {
+                    return "#E8E8E8" 
+                }
+                else {
+                    return d3.schemePastel1[0];
+                } 
+            })
             .attr("width", (xScale(top3[index].Victims) - 8 > 0 ? xScale(top3[index].Victims) - 8 : 0))
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Victims) */)

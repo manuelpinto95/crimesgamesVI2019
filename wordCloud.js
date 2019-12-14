@@ -6,10 +6,9 @@ function update_wordcloud(){
     wordcloud.svg.remove();
     d3.selectAll('#wordcloud svg').remove();
     wordcloud.words = [];
-    //console.log("WORDCLOUD WORDS");
-    //console.log(wordcloud.words);
     wordcloud.layout = 0;
     gen_Wordcloud();
+
 }
 
 var wordcloud = {
@@ -38,7 +37,7 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
 
     wordsDS = data;
 
-    //gen_Wordcloud();
+    gen_Wordcloud();
 });
 
 function gen_Wordcloud() {
@@ -78,8 +77,6 @@ function gen_Wordcloud() {
         
     });
 
-    //console.log("WORDS");
-    //console.log(wordcloud.words);
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here

@@ -4,11 +4,16 @@ var stateBeforeSelection = {
     yearEnd: 0
 }
 
+var selectedGameYear = null;
+var selectedGameGenre = null;
+
 function newTimeFrame(year) {
-    var start = year -5;
+    var start = year_filters[0];
+    if (year<year_filters[0]) start = year - 5
     if (start < 1979) start = 1979
 
-    var end = year + 5;
+    var end = year_filters[1]
+    if (year>year_filters[1]) end = year + 5
     if (end > 2016) end = 2016;
 
     year_filters[0] = start;
@@ -19,8 +24,7 @@ d3.csv("/data/vg/vgNames.csv").then(function (data) {
     data.forEach(function (d) {
         d.Year = +d.Year;
     });
-    //TODO descomentar isto para procurar jogos
-    /* vgNames = data;
+    vgNames = data;
     var list = document.getElementById("vgList");
     for(var i=0;i<vgNames.length;i++) {
         var option = document.createElement("option");
@@ -28,25 +32,31 @@ d3.csv("/data/vg/vgNames.csv").then(function (data) {
         option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre ))
         list.appendChild(option);
     }
-    console.log("video game dataset is now loaded");  */
+    console.log("video game dataset is now loaded");
+    gen_map();
 });
 
 function vgSelected() {
+    if (selectedGameYear!=null) {
+        alert("Can only visualize 1 game at a time");
+        return;
+    }
     var game = document.getElementById("vgSearch").value;
     console.log(game);
     
     //Save state
     stateBeforeSelection.genre = vgSelectedGenre;
+    stateBeforeSelection.yearStart = year_filters[0];
+    stateBeforeSelection.yearEnd = year_filters[1];
 
     //updateState
     var gameData = vgNames.filter(function (d) {
         return (d.Name==game)
     })
-    console.log(gameData[0]);
     
-    vgSelectedGenre = gameData[0].Genre.trim();
+    selectedGameGenre = gameData[0].Genre.trim();
     barchart.selectedGameName = game;
-    barchart.selectedGameYear = gameData[0].Year;
+    selectedGameYear = gameData[0].Year;
 
     var ul = document.getElementById("selectedGame");
     var li = document.createElement("li");
@@ -58,29 +68,29 @@ function vgSelected() {
     span.setAttribute("class", "close");
     span.appendChild(document.createTextNode("x"));
     li.appendChild(span);
-    li.appendChild(document.createTextNode(barchart.selectedGameName + " - " + barchart.selectedGameYear));
+    li.appendChild(document.createTextNode(barchart.selectedGameName + " - " + selectedGameYear));
     ul.appendChild(li);
 
     span.addEventListener("click", function () {
         console.log("close event is called");     
         this.parentElement.style.display = 'none';
-        barchart.selectedGameName = null;
-        barchart.selectedGameYear = null;
-        vgSelectedGenre = stateBeforeSelection.genre;
+        selectedGameYear = null;
+        selectedGameGenre = stateBeforeSelection.genre;
+        year_filters[0] = 1979;
+        year_filters[1] = 2016;
+        console.log(year_filters);
+        update_timeline();
         update_barChart();
         update_lineChart();
-        //TODO maybe need to update more stuff
+        update_top3();
     });
 
-    /* document.getElementById("dropdownbox").setAttribute("style", "background-color:" + colorDict[vgSelectedGenre]);
-    document.getElementById("dropdownbox").setAttribute("value", + vgSelectedGenre);
-    document.getElementById("dropdownbox").setAttribute("selected", vgSelectedGenre); */
-    
-    /* console.log(year_filters);
+    console.log(year_filters);
     newTimeFrame(gameData[0].Year);
-    console.log(year_filters); */
+    console.log(year_filters);
     
     update_barChart();
     update_lineChart();
-    //gen_timeline();
+    update_timeline();
+    update_top3();
 }

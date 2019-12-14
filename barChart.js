@@ -55,8 +55,6 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
     dispatch = d3.dispatch("yearEvent");
     dispatch.on("yearEvent", function (vg) {
-        if(vg==0)
-            return;
 
         if (vgSelectedBar != null) {
             vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
@@ -64,6 +62,9 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
         }
+
+        if(vg==0)
+            return;
 
         vgSelectedBar = d3.selectAll("rect[Year=\'" + String(vg.Year).trim() + "\']");
         vgSelectedBar.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
@@ -255,9 +256,9 @@ function gen_barChart() {
     /* 
         if (barchart.selectedGameName != null) {
             barchart.svg.append("line")
-                .attr("x1",  barchart.xScale(barchart.selectedGameYear - year_filters[0]) + barchart.bar_w/2) 
+                .attr("x1",  barchart.xScale(selectedGameYear - year_filters[0]) + barchart.bar_w/2) 
                 .attr("y1", 0)
-                .attr("x2",barchart.xScale(barchart.selectedGameYear - year_filters[0]) + barchart.bar_w/2)  
+                .attr("x2",barchart.xScale(selectedGameYear - year_filters[0]) + barchart.bar_w/2)  
                 .attr("y2", 20)
                 .style("stroke-width", 2)
                 .style("stroke", "red")
@@ -274,14 +275,16 @@ function gen_barChart() {
             rect1.setAttribute('height', barchart.h - barchart.margin.bottom - barchart.yScale(d.Total));
             rect1.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect1.setAttribute('y', barchart.yScale(d.Total));
-            rect1.setAttribute("fill", d3.schemeCategory10[0]);
-            rect1.setAttribute("Year", d.Year);
-            if (d.Year == barchart.selectedGameYear) {
-                rect1.setAttribute("style", "stroke-width:2;stroke:rgb(255,0,0)");
+            if (d.Year != selectedGameYear) {
+                rect1.setAttribute("fill", d3.schemeCategory10[0]);
             }
             else {
-                rect1.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+                rect1.setAttribute("fill", d3.schemeCategory10[3]);
+                
             }
+            rect1.setAttribute("Year", d.Year);
+            rect1.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+            
             rects.appendChild(rect1);
 
             var genre = getGenre(vgSelectedGenre, d);
@@ -292,16 +295,15 @@ function gen_barChart() {
             rect2.setAttribute('x', barchart.xScale(i) - barchart.bar_w / 2);
             rect2.setAttribute('y', barchart.yScale(genre));
             //console.log(vgSelectedGenre);
-
-            rect2.setAttribute("fill", "rgb(188, 208, 238)");
-            rect2.setAttribute("Year", d.Year);
-            rects.appendChild(rect2);
-            if (d.Year == barchart.selectedGameYear) {
-                rect2.setAttribute("style", "stroke-width:2;stroke:rgb(255,0,0)");
+            if (d.Year != selectedGameYear) {
+                rect2.setAttribute("fill", "rgb(188, 208, 238)");
             }
             else {
-                rect2.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+                rect2.setAttribute("fill", d3.schemePastel1[0]);
             }
+            rect2.setAttribute("Year", d.Year);
+            rects.appendChild(rect2);
+            rect2.setAttribute("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
 
             return rects;
         })
