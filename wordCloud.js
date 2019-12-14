@@ -6,6 +6,8 @@ function update_wordcloud(){
     wordcloud.svg.remove();
     d3.selectAll('#wordcloud svg').remove();
     wordcloud.words = [];
+    //console.log("WORDCLOUD WORDS");
+    //console.log(wordcloud.words);
     wordcloud.layout = 0;
     gen_Wordcloud();
 }
@@ -20,11 +22,23 @@ var wordcloud = {
 
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
 
+    //TODO: esta apenas criado ainda nao e usado em situacao alguma
+    var data_aux = [];
+    data.forEach(function(d){
+        if(!(d.Word in data_aux)){  //Se a palavra nao existir na lista adiciona
+            data_aux.push({word: d.Word, from: [{title: d.Title, state: d.CODE, year: d.year}] });
+        }
+        else{   // se existir acrescenta a informacao de onde ela veio
+            data_aux[d.Word].from.push({title: d.Title, state: d.CODE, year: d.year});
+        }
+    });
+
+    console.log("Word data AUX:");
+    console.log(data_aux);
 
     wordsDS = data;
-    
 
-    gen_Wordcloud();
+    //gen_Wordcloud();
 });
 
 function gen_Wordcloud() {
@@ -62,14 +76,17 @@ function gen_Wordcloud() {
 
         })
         
-    })
+    });
+
+    //console.log("WORDS");
+    //console.log(wordcloud.words);
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here
     
     wordcloud.layout = d3.layout.cloud()
         .size([width, height])
-        .words(wordcloud.words.map(function(d) { return {text: d.word, size:d.count*10}; }))
+        .words(wordcloud.words.map(function(d) { return {text: d.word, size: (Math.log(d.count)+1) * 30}; }))
         .padding(5)        //space between words
         .rotate(function() { return 0; })
         .fontSize(function(d) { return d.size; })      // font size of words
