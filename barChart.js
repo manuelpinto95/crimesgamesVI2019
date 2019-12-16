@@ -5,7 +5,8 @@ var vgTotal,
     vgSelectedBar = null,
     vgSelectedGenre = "Shooter",
     crimeState,
-    vgNames;
+    vgNames,
+    msSelectedWords;
 
 var colorDict = {}
 colorDict["Action"] = d3.schemeSet3[0];
@@ -61,6 +62,8 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
+
+            msSelectedWords.style("fill", d3.schemeCategory10[0]);
         }
 
         if(vg==0)
@@ -72,6 +75,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + String(vg.Year).trim() + "\']");
         crimeSelectedDot.attr("r", 6);
         crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
+
+        msSelectedWords = d3.selectAll("text[Year=\'" + String(vg.Year).trim() + "\']");
+        msSelectedWords.style("fill", d3.schemeCategory10[1]);
+
 
     })
     // convert from string to number
