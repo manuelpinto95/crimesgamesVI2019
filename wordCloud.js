@@ -102,6 +102,7 @@ function gen_Wordcloud() {
       .selectAll("text")
         .data(words)
       .enter().append("text")
+        .attr("id","cloudWords")
         .style("font-size", function(d) { return d.size; })
         .style("fill", d3.schemeCategory10[0])
         .attr("text-anchor", "middle")
@@ -109,18 +110,32 @@ function gen_Wordcloud() {
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
+        .attr("Years", function(d){
+            return getYears(wordObjFromDS(d.text));
+        })
         .text(function(d) { return d.text; })
-         .on("mouseover", function (d) {
+        .on("mouseover", function (d) {
             d3.select(this).style("fill", d3.schemeCategory10[1]);
-            dispatch.call("yearEvent", d, d);
+            barchartTooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+
+            var text = "ocurrences:<br/>" + wordObjFromDS(d.text).from.length;
+
+                barchartTooltipDiv.html(text)
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
+                dispatch.call("yearEvent", d, d);
+
         })
         .on("mouseout", function (d) {
             d3.select(this).style("fill", d3.schemeCategory10[0]);
+            barchartTooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
             dispatch.call("yearEvent", 0, 0);
-        })
-        .attr("Year" , function(d){
-            return getYears(wordObjFromDS(d.text))[0];
         });
+        
     }
 
 }
