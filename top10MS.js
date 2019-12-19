@@ -13,9 +13,50 @@ var top3Tip;
 
 var msTop3data;
 
+var selectedMScircle = null;
+var selectedMSrect = null;
+
 d3.csv("/data/ms/MS_top10.csv").then(function (data) {
+    ms_dispatch = d3.dispatch("msEvent");
+    ms_dispatch.on("msEvent", function (ms) {
+        //console.log(ms.Year);
+        //console.log(selectedGameYear);
+        
+
+        if (selectedMScircle != null) {
+            selectedMScircle.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+
+            if (selectedGameYear != null && ms.Year == selectedGameYear)
+                selectedMScircle.attr("fill", d3.schemeCategory10[3]); // red
+            else
+                selectedMScircle.attr("fill", d3.schemeSet1[5]); //normal
+        }
+
+        if (selectedMSrect != null) {
+
+            if (selectedGameYear != null && ms.Year == selectedGameYear)
+                selectedMSrect.attr("fill", d3.schemePastel1[0]); // red
+            else
+                selectedMSrect.attr("fill", "#E8E8E8"); // normal
+        }
+
+        if (ms == -1)
+            return;
+
+        selectedMScircle = d3.selectAll("circle.dot2[ID=\'" + ms.ID + "\']");
+
+        selectedMScircle.attr("style", "stroke-width:1.5;stroke:rgb(0,0,0)");
+        selectedMScircle.attr("fill", "rgb(165, 136, 42)");
+        selectedMScircle.raise();
+
+        selectedMSrect = d3.selectAll("rect[ID=\'" + ms.ID + "\']");
+
+        selectedMSrect.attr("fill", d3.schemePastel1[6]);
+    })
+
     //CONVERT STRINGS TO NUMBERS
     data.forEach(function (d) {
+        d.ID = +d.ID;
         d.Fatalities = +d.Fatalities;
         d.Injured = +d.Injured;
         d.Victims = +d.Victims;
@@ -70,9 +111,9 @@ function genTop3() {
         .attr("height", h);
 
 
-    console.log(top3);
+    //console.log(top3);
     var max = 0;
-    if (filteredData.length>0)
+    if (filteredData.length > 0)
         max = filteredData[0].Victims;
 
     xScale = d3.scaleLinear()
@@ -83,6 +124,7 @@ function genTop3() {
     /* for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
         .attr("Year", top3[index].Year)
+        .attr("Ttile", top3[index].Title)
         .attr("fill",podiumD[index])
         .attr("width", xScale(top3[index].Victims))
         .attr("height", h / 3 - 6)
@@ -100,24 +142,25 @@ function genTop3() {
             .attr("x", 3 /* xScale(top3[index].Victims) */)
             .attr("y", index * 60 + 2)
             .on("mousemove", function (d, i) {
-                dispatch.call("yearEvent", top3[index], top3[index]);
+                ms_dispatch.call("msEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
-                dispatch.call("yearEvent", 0, 0);
+                ms_dispatch.call("msEvent", 0, 0);
             });
     }
 
     for (let index = 0; index < top3.length; index++) {
         top3svg.append("rect")
-            .attr("fill", /* index<3?podiumL[index]: */"#E8E8E8")
-            .attr("fill", function() {
+            .attr("fill", "#E8E8E8")
+            .attr("fill", function () {
                 if (top3[index].Year != selectedGameYear) {
-                    return "#E8E8E8" 
+                    return "#E8E8E8"
                 }
                 else {
                     return d3.schemePastel1[0];
-                } 
+                }
             })
+            .attr("ID", top3[index].ID)
             .attr("width", (xScale(top3[index].Victims) - 8 > 0 ? xScale(top3[index].Victims) - 8 : 0))
             .attr("height", 58 - 4)
             .attr("x", 5 /* xScale(top3[index].Victims) */)
@@ -130,13 +173,13 @@ function genTop3() {
                 barchartTooltipDiv.html(text)
                     .style("left", (d3.event.pageX + 10) + "px")
                     .style("top", (d3.event.pageY + 10) + "px");
-                dispatch.call("yearEvent", top3[index], top3[index]);
+                ms_dispatch.call("msEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
                 barchartTooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
-                dispatch.call("yearEvent", 0, 0);
+                ms_dispatch.call("msEvent", 0, 0);
             });
     }
 
@@ -162,13 +205,13 @@ function genTop3() {
                 barchartTooltipDiv.html(text)
                     .style("left", (d3.event.pageX + 10) + "px")
                     .style("top", (d3.event.pageY + 10) + "px");
-                dispatch.call("yearEvent", top3[index], top3[index]);
+                ms_dispatch.call("msEvent", top3[index], top3[index]);
             })
             .on("mouseout", function (d) {
                 barchartTooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
-                dispatch.call("yearEvent", 0, 0);
+                ms_dispatch.call("msEvent", 0, 0);
             });
     }
 }

@@ -4,11 +4,11 @@ var wordsDS = [];
 var aux = [];
 
 function update_wordcloud(){
-    wordcloud.svg.remove();
+    /* wordcloud.svg.remove();
     d3.selectAll('#wordcloud svg').remove();
     wordcloud.data = 0;
     wordcloud.layout = 0;
-    gen_Wordcloud();
+    gen_Wordcloud(); */
 }
 
 function wordObjFromDS(otherword){
@@ -53,7 +53,7 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
     });
 
     wordsDS = aux;
-    gen_Wordcloud();
+    //gen_Wordcloud();
 });
 
 function gen_Wordcloud() {
@@ -112,11 +112,11 @@ function gen_Wordcloud() {
         .text(function(d) { return d.text; })
          .on("mouseover", function (d) {
             d3.select(this).style("fill", d3.schemeCategory10[1]);
-            dispatch.call("yearEvent", d, d);
+            year_dispatch.call("yearEvent", d, d);
         })
         .on("mouseout", function (d) {
             d3.select(this).style("fill", d3.schemeCategory10[0]);
-            dispatch.call("yearEvent", 0, 0);
+            year_dispatch.call("yearEvent", 0, 0);
         })
         .attr("Year" , function(d){
             return getYears(wordObjFromDS(d.text))[0];

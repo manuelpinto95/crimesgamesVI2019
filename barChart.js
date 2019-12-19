@@ -6,7 +6,9 @@ var vgTotal,
     vgSelectedGenre = "Shooter",
     crimeState,
     vgNames,
-    msSelectedWords;
+    msSelectedWords,
+    crimeSelectedDot = null,
+    crimeSelectedDot2 = null;
 
 var colorDict = {}
 colorDict["Action"] = d3.schemeSet3[0];
@@ -54,16 +56,23 @@ genreTextDic["Visual_Novel"] = "Visual Novel";
 
 d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
-    dispatch = d3.dispatch("yearEvent");
-    dispatch.on("yearEvent", function (vg) {
+    year_dispatch = d3.dispatch("yearEvent");
+    year_dispatch.on("yearEvent", function (vg) {
 
         if (vgSelectedBar != null) {
             vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
 
+            //msSelectedWords.style("fill", d3.schemeCategory10[0]);
+        }
+
+        if (crimeSelectedDot != null) {
             crimeSelectedDot.attr("r", lineChart.r);
             crimeSelectedDot.attr("style", "stroke-width:0;stroke:rgb(0,0,0)");
+        }
 
-            msSelectedWords.style("fill", d3.schemeCategory10[0]);
+        if(crimeSelectedDot2 != null) {
+            crimeSelectedDot2.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
+            crimeSelectedDot2.attr("fill", d3.schemeSet1[5]);
         }
 
         if(vg==0)
@@ -76,9 +85,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         crimeSelectedDot.attr("r", 6);
         crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
 
-        msSelectedWords = d3.selectAll("text[Year=\'" + String(vg.Year).trim() + "\']");
-        msSelectedWords.style("fill", d3.schemeCategory10[1]);
-
+        crimeSelectedDot2 = d3.selectAll("circle.dot2[Year=\'" + String(vg.Year).trim() + "\']");
+        crimeSelectedDot2.attr("style", "stroke-width:1.5;stroke:rgb(0,0,0)");
+        crimeSelectedDot2.attr("fill", "rgb(165, 136, 42)");
+        crimeSelectedDot2.raise();
 
     })
     // convert from string to number
@@ -321,13 +331,13 @@ function gen_barChart() {
             barchartTooltipDiv.html(d.Year + "<br/>" + "Total:" + d.Total + "<br/>" + genreTextDic[vgSelectedGenre] + ":" + getGenre(vgSelectedGenre, d))
                 .style("left", (d3.event.pageX + 10) + "px")
                 .style("top", (d3.event.pageY + 10) + "px");
-            dispatch.call("yearEvent", d, d);
+            year_dispatch.call("yearEvent", d, d);
         })
         .on("mouseout", function (d) {
             barchartTooltipDiv.transition()
                 .duration(500)
                 .style("opacity", 0);
-            dispatch.call("yearEvent", 0, 0);
+            year_dispatch.call("yearEvent", 0, 0);
         })
 
     //LEGEND

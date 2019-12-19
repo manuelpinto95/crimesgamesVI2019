@@ -27,9 +27,36 @@ function gen_dots() {
         }
     })
 
+    /*TOLLTIP DIV*/
+    var div = d3.select("body").append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
+    map.svg.append("circle")
+        .attr("class", "dot") // Assign a class for styling
+        .attr("cx", (w - 350))
+        .attr("cy", (h - 50))
+        .attr("r", 5)
+        .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
+        .attr("fill", d3.schemeSet1[5])
+
+    map.svg.append("text")
+        .attr("class", "title")
+        .attr("font-size", "15px")
+        .attr("transform", "translate(" + (w - 343) + "," + (h - 46) + ")")
+        .attr("text-anchor", "start")
+        .text("= one mass shooting");
+
+    map.svg.append("text")
+        .attr("class", "title")
+        .attr("font-size", "12px")
+        .attr("transform", "translate(" + (w - 343) + "," + (h - 30) + ")")
+        .attr("text-anchor", "center")
+        .text("the size of the circle is proportional to the number of victims");
+
     for (let index = 0; index < filteredData.length; index++) {
         map.svg.append("circle") // Uses the enter().append() method
-            .attr("class", "dot") // Assign a class for styling
+            .attr("class", "dot2") // Assign a class for styling
             .attr("cx", function () {
                 return projection([filteredData[index].Longitude, filteredData[index].Latitude])[0];
             })
@@ -39,26 +66,32 @@ function gen_dots() {
             .attr("r", function () {
                 return Math.sqrt(filteredData[index].Victims * 2);
             })
-            .attr("fill", d3.schemeSet1[5])
+            .attr("fill", function(){
+                if (filteredData[index].Year!=selectedGameYear)
+                    return d3.schemeSet1[5];
+                else
+                    return d3.schemeCategory10[3];
+            })
             .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
+            .attr("ID", filteredData[index].ID)
             .attr("Year", function () { return String(filteredData[index].Year).trim(); })
-        .on("mousemove", function (d) {
-            div.transition()
-                .duration(200)
-                .style("opacity", .9);
- 
-            div.html(d.state_abbr + "<br/>" + d.Year + "<br/>" + Number(getCrime(selectedCrimeType, d)).toFixed(3))
-                .style("left", (d3.event.pageX + 10) + "px")
-                .style("top", (d3.event.pageY + 10) + "px");
- 
-            dispatch.call("yearEvent", d, d);
-        })
-        .on("mouseout", function (d) {
-            div.transition()
-                .duration(500)
-                .style("opacity", 0);
-            dispatch.call("yearEvent", 0, 0);
-        })
+            .on("mousemove", function () {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+
+                div.html(filteredData[index].Title + "<br/>" + "Victims: " + filteredData[index].Victims)
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
+
+                ms_dispatch.call("msEvent", filteredData[index], filteredData[index]);
+            })
+            .on("mouseout", function (d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+                ms_dispatch.call("msEvent", 0, 0);
+            })
     }
     console.log("dots done");
 }
@@ -320,7 +353,7 @@ function gen_states() {
         });
 
     });
-    console.log("map done");    
+    console.log("map done");
     /* callback(); */
 }
 
@@ -329,7 +362,7 @@ function gen_map() {
     gen_states()
     setTimeout(function afterTwoSeconds() {
         gen_dots()
-      }, 1500)
+    }, 3000)
 
 };
 

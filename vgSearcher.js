@@ -83,6 +83,7 @@ function vgSelected() {
         update_barChart();
         update_lineChart();
         update_top3();
+        update_map();
     });
 
     console.log(year_filters);
@@ -93,4 +94,5 @@ function vgSelected() {
     update_lineChart();
     update_timeline();
     update_top3();
+    update_map();
 }
