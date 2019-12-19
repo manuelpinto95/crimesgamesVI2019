@@ -52,7 +52,7 @@ Mapa
 
 Coordinates
 [ ] mousemove and out events
-[ ] create new MSevent for the interaction between top10 list and coordinates ()and wordcloud
+[ ] create new MSevent for the interaction between top10 list and coordinates (and wordcloud)
 
 WordCloud
 

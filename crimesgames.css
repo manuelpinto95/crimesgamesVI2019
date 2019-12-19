@@ -413,14 +413,14 @@ li.game_button {
   padding: 12px;
   text-decoration: none;
   font-size: 18px;
-  color: rgb(184, 3, 3);
-  /* background-color: rgb(255, 184, 184); */
+  color: rgb(0, 0, 0);
+  background-color: rgb(253, 124, 124);
   display: block;
   position: relative;
 }
 
 li.game_button:hover {
-  background-color: rgb(255, 184, 184);
+  background-color: rgb(219, 148, 148);
 }
 
 ul li:hover {
@@ -456,6 +456,10 @@ ul li:hover {
 .dot {
   stroke: #fff;
   z-index: 2;
+}
+
+.dot2:hover {
+  fill: rgb(165, 136, 42);
 }
 
 .focus circle {

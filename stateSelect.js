@@ -125,10 +125,10 @@ function addStatebyName(newState) {
     });
 
     console.log(states);
+    update_wordcloud();
     update_lineChart();
     update_top3();
     update_map();
-    update_wordcloud();
 }
 
 function update_colors() {

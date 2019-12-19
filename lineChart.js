@@ -294,13 +294,13 @@ function genLineChart() {
                     .style("left", (d3.event.pageX + 10) + "px")
                     .style("top", (d3.event.pageY + 10) + "px");
 
-                dispatch.call("yearEvent", d, d);
+                year_dispatch.call("yearEvent", d, d);
             })
             .on("mouseout", function (d) {
                 div.transition()
                     .duration(500)
                     .style("opacity", 0);
-                dispatch.call("yearEvent", 0, 0);
+                year_dispatch.call("yearEvent", 0, 0);
             })
     }
     else {
@@ -346,13 +346,13 @@ function genLineChart() {
                         .style("left", (d3.event.pageX + 10) + "px")
                         .style("top", (d3.event.pageY + 10) + "px");
 
-                    dispatch.call("yearEvent", d, d);
+                    year_dispatch.call("yearEvent", d, d);
                 })
                 .on("mouseout", function (d) {
                     div.transition()
                         .duration(500)
                         .style("opacity", 0);
-                    dispatch.call("yearEvent", 0, 0);
+                    year_dispatch.call("yearEvent", 0, 0);
                 })
         }
     }
