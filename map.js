@@ -35,7 +35,7 @@ function gen_dots() {
     map.svg.append("circle")
         .attr("class", "dot") // Assign a class for styling
         .attr("cx", (w - 380))
-        .attr("cy", (h - 50))
+        .attr("cy", (h - 30))
         .attr("r", 7)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", d3.schemeSet1[5])
@@ -43,14 +43,14 @@ function gen_dots() {
     map.svg.append("text")
         .attr("class", "title")
         .attr("font-size", "15px")
-        .attr("transform", "translate(" + (w - 370) + "," + (h - 46) + ")")
+        .attr("transform", "translate(" + (w - 370) + "," + (h - 26) + ")")
         .attr("text-anchor", "start")
         .text("= one mass shooting");
 
     map.svg.append("text")
         .attr("class", "title")
         .attr("font-size", "15px")
-        .attr("transform", "translate(" + (w - 383) + "," + (h - 30) + ")")
+        .attr("transform", "translate(" + (w - 383) + "," + (h - 10) + ")")
         .attr("text-anchor", "center")
         .text("the size of the circle is proportional to the number of victims");
 
@@ -130,7 +130,7 @@ function gen_states() {
     map.svg.append("text")
         .attr("class", "title")
         .attr("font-size", "20px")
-        .attr("transform", "translate(" + (20) + ",35)")
+        .attr("transform", "translate(" + (20) + ",25)")
         .attr("text-anchor", "start")
         .text("Crime in the USA form " + year_filters[0] + " to " + year_filters[1]);
 
@@ -138,7 +138,7 @@ function gen_states() {
 
     var COLOR_COUNTS = 10;
 
-    var SCALE = 0.85;
+    var SCALE = 2;
 
     var COLOR_FIRST = config.color1, COLOR_LAST = config.color2;
 
@@ -170,7 +170,7 @@ function gen_states() {
         .domain([0, 1.0])
         .range(d3.range(COLOR_COUNTS).map(function (i) { return i }));
 
-    projection = d3.geoAlbersUsa().translate([w / 2, h / 2]).scale([1000]);
+    projection = d3.geoAlbersUsa().translate([w / 2, h / 2]).scale([780]);
     var path = d3.geoPath().projection(projection);
 
     function getKeyByValue(object, value) {
@@ -212,13 +212,13 @@ function gen_states() {
         /*LEGEND*/
         var legend = map.svg.append("g")
             .attr("class", "key")
-            .attr("transform", "translate(" + (w - 310) + ",40)");
+            .attr("transform", "translate(" + (w - 310) + ",30)");
 
         var text = selectedCrimeType == "mass_shootings" ? "Number of mass shootings" : crimeNameDic[selectedCrimeType] + " ocurrences per 1000 capita"
         map.svg.append("text")
             .attr("class", "title")
             .attr("font-size", "15px")
-            .attr("transform", "translate(" + (w - 150) + ",35)")
+            .attr("transform", "translate(" + (w - 150) + ",25)")
             .attr("text-anchor", "middle")
             .text(text);
 

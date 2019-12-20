@@ -55,7 +55,7 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
     });
 
     wordsDS = aux;
-    console.log(wordsDS);
+    //console.log(wordsDS);
 
     gen_Wordcloud();
 });
@@ -159,8 +159,8 @@ function gen_Wordcloud() {
 
 
 function filterData() {
-    console.log(wordsDS[0].from[0].state);
-    console.log(wordsDS[0].from[0].year);
+    //console.log(wordsDS[0].from[0].state);
+    //console.log(wordsDS[0].from[0].year);
 
     var filteredData = wordsDS.filter(function (d, key) {
         if (countStates() == 0) {
@@ -173,7 +173,7 @@ function filterData() {
 
     var entries = filteredData;
 
-    console.log(entries);
+    //console.log(entries);
 
     wordcloud.data = entries;
 }
