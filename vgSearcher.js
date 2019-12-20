@@ -84,6 +84,7 @@ function vgSelected() {
         update_lineChart();
         update_top3();
         update_map();
+        update_wordcloud();
     });
 
     console.log(year_filters);
@@ -95,4 +96,5 @@ function vgSelected() {
     update_timeline();
     update_top3();
     update_map();
+    update_wordcloud();
 }

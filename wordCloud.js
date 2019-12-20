@@ -2,6 +2,7 @@
 
 var wordsDS = [];
 var aux = [];
+var color = 0;
 
 function update_wordcloud() {
     wordcloud.svg.remove();
@@ -88,9 +89,9 @@ function gen_Wordcloud() {
     // Wordcloud features that are different from one word to the other must be here
 
     wordcloud.layout = d3.layout.cloud()
-
-        .words(wordcloud.data.map(function (d) { return { text: d.word, size: (Math.log(d.from.length) * 25) }; }))
-        .padding(10)        //space between words
+        .size([width, height])
+        .words(wordcloud.data.map(function (d) { return { text: d.word, size: ((Math.log(d.from.length) + 1) * 25) }; }))
+        .padding(5)        //space between words
         .rotate(function () { return 0; })
         .fontSize(function (d) { return d.size; })      // font size of words
         .on("end", draw);
@@ -115,16 +116,13 @@ function gen_Wordcloud() {
         .style("fill", function(d){
 
                     if (String(d3.select(this).attr("Years")).indexOf(String(selectedGameYear).trim()) != -1) {
-                            console.log("HELLO WORLD");
+
                             return   d3.schemeCategory10[3];
                     }
                     else {
                             return d3.schemeCategory10[0];      
             }
         })
-
-        
-
         .attr("text-anchor", "middle")
         .style("font-family", "Impact")
         .attr("transform", function(d) {
@@ -134,7 +132,11 @@ function gen_Wordcloud() {
         .text(function(d) { return d.text; })
         .on("mousemove", function (d) {
 
-            d3.select(this).style("fill", "rgb(188, 208, 238)");
+           color = d3.select(this).style('fill');
+
+            d3.select(this).style("opacity", .5);
+
+
             barchartTooltipDiv.transition()
                     .duration(200)
                     .style("opacity", .9);
@@ -147,7 +149,9 @@ function gen_Wordcloud() {
 
         })
         .on("mouseout", function (d) {
-            d3.select(this).style("fill", d3.schemeCategory10[0]);
+            d3.select(this).style("fill", color)
+            .style("opacity", 1);
+
             barchartTooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
@@ -157,23 +161,27 @@ function gen_Wordcloud() {
 }
 
 
-
 function filterData() {
-    console.log(wordsDS[0].from[0].state);
-    console.log(wordsDS[0].from[0].year);
 
     var filteredData = wordsDS.filter(function (d, key) {
-        if (countStates() == 0) {
-            return (d.from[0].year >= year_filters[0] && d.from[0].year <= year_filters[1])
-        } else {
+    
+        var years = getYears(d);
+        var states2 = getStates(d);
 
-            return (d.from[0].year >= year_filters[0] && d.from[0].year <= year_filters[1] && (d.from[0].state == states[0] || d.from[0].state == states[1] || d.from[0].state == states[2]))
+        if (countStates() == 0) {
+
+            
+            return years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]);
+            
+        } 
+
+        else {
+            return      years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]) && 
+                        states2.some(elem => elem == states[0] || elem == states[1] || elem == states[2]);
         }
-    })
+    });
+    console.log(filteredData);
 
     var entries = filteredData;
-
-    console.log(entries);
-
     wordcloud.data = entries;
 }
