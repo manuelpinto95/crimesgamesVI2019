@@ -73,6 +73,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         if(crimeSelectedDot2 != null) {
             crimeSelectedDot2.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
             crimeSelectedDot2.attr("fill", d3.schemeSet1[5]);
+
+        if(msSelectedWords != null)
+                msSelectedWords.style("fill", d3.schemeCategory10[0]);
+
         }
 
         if(vg==0)
@@ -84,13 +88,21 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         crimeSelectedDot = d3.selectAll("circle.dot[Year=\'" + String(vg.Year).trim() + "\']");
         crimeSelectedDot.attr("r", 6);
         crimeSelectedDot.attr("style", "stroke-width:3;stroke:rgb(0,0,0)");
-
+        
         crimeSelectedDot2 = d3.selectAll("circle.dot2[Year=\'" + String(vg.Year).trim() + "\']");
         crimeSelectedDot2.attr("style", "stroke-width:1.5;stroke:rgb(0,0,0)");
         crimeSelectedDot2.attr("fill", "rgb(165, 136, 42)");
         crimeSelectedDot2.raise();
 
+
+        msSelectedWords = d3.selectAll("text[id=cloudWords]").filter(function(d, i){
+           return (String(d3.select(this).attr("Years")).indexOf(String(vg.Year).trim()) != -1);
+        });
+
+         msSelectedWords.style("fill", d3.schemeCategory10[1]);
+        
     })
+
     // convert from string to number
     data.forEach(function (d) {
 

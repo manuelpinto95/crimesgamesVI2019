@@ -101,31 +101,45 @@ function gen_Wordcloud() {
     //console.log(words);
     
     function draw(words) {
-        wordcloud.svg
-            .append("g")
-            .attr("transform", "translate(" + wordcloud.layout.size()[0] / 2 + "," + wordcloud.layout.size()[1] / 2 + ")")
-            .selectAll("text")
-            .data(words)
-            .enter().append("text")
-            .style("font-size", function (d) { return d.size; })
-            .style("fill", d3.schemeCategory10[0])
-            .attr("text-anchor", "middle")
-            .style("font-family", "Impact")
-            .attr("transform", function (d) {
-                return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
-            })
-            .text(function (d) { return d.text; })
-            .on("mouseover", function (d) {
-                d3.select(this).style("fill", d3.schemeCategory10[1]);
+  wordcloud.svg
+    .append("g")
+      .attr("transform", "translate(" + wordcloud.layout.size()[0] / 2 + "," + wordcloud.layout.size()[1] / 2 + ")")
+      .selectAll("text")
+        .data(words)
+      .enter().append("text")
+        .attr("id","cloudWords")
+        .style("font-size", function(d) { return d.size; })
+        .style("fill", d3.schemeCategory10[0])
+        .attr("text-anchor", "middle")
+        .style("font-family", "Impact")
+        .attr("transform", function(d) {
+          return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+        })
+        .attr("Years", function(d){
+            return getYears(wordObjFromDS(d.text));
+        })
+        .text(function(d) { return d.text; })
+        .on("mouseover", function (d) {
+            d3.select(this).style("fill", d3.schemeCategory10[1]);
+            barchartTooltipDiv.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+
+            var text = "ocurrences:<br/>" + wordObjFromDS(d.text).from.length;
+
+                barchartTooltipDiv.html(text)
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY + 10) + "px");
                 year_dispatch.call("yearEvent", d, d);
-            })
-            .on("mouseout", function (d) {
-                d3.select(this).style("fill", d3.schemeCategory10[0]);
-                year_dispatch.call("yearEvent", 0, 0);
-            })
-            .attr("Year", function (d) {
-                return getYears(wordObjFromDS(d.text))[0];
-            });
+
+        })
+        .on("mouseout", function (d) {
+            d3.select(this).style("fill", d3.schemeCategory10[0]);
+            barchartTooltipDiv.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            year_dispatch.call("yearEvent", 0, 0);
+        });
     }
 
 }
