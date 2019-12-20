@@ -75,7 +75,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
             crimeSelectedDot2.attr("fill", d3.schemeSet1[5]);
 
         if(msSelectedWords != null)
-                msSelectedWords.style("fill", d3.schemeCategory10[0]);
+                msSelectedWords.style("opacity", 1);
 
         }
 
@@ -96,10 +96,10 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 
 
         msSelectedWords = d3.selectAll("text[id=cloudWords]").filter(function(d, i){
-           return (String(d3.select(this).attr("Years")).indexOf(String(vg.Year).trim()) != -1);
+           return !(String(d3.select(this).attr("Years")).indexOf(String(vg.Year).trim()) != -1);
         });
 
-         msSelectedWords.style("fill", d3.schemeCategory10[1]);
+         msSelectedWords.style("opacity", .5);
         
     })
 

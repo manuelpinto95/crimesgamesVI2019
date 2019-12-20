@@ -88,7 +88,7 @@ function gen_Wordcloud() {
     // Wordcloud features that are different from one word to the other must be here
 
     wordcloud.layout = d3.layout.cloud()
-        .size([width, height])
+
         .words(wordcloud.data.map(function (d) { return { text: d.word, size: (Math.log(d.from.length) * 25) }; }))
         .padding(10)        //space between words
         .rotate(function () { return 0; })
@@ -108,19 +108,33 @@ function gen_Wordcloud() {
         .data(words)
       .enter().append("text")
         .attr("id","cloudWords")
+        .attr("Years", function(d){
+            return getYears(wordObjFromDS(d.text));
+        })
         .style("font-size", function(d) { return d.size; })
-        .style("fill", d3.schemeCategory10[0])
+        .style("fill", function(d){
+
+                    if (String(d3.select(this).attr("Years")).indexOf(String(selectedGameYear).trim()) != -1) {
+                            console.log("HELLO WORLD");
+                            return   d3.schemeCategory10[3];
+                    }
+                    else {
+                            return d3.schemeCategory10[0];      
+            }
+        })
+
+        
+
         .attr("text-anchor", "middle")
         .style("font-family", "Impact")
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
-        .attr("Years", function(d){
-            return getYears(wordObjFromDS(d.text));
-        })
+        
         .text(function(d) { return d.text; })
-        .on("mouseover", function (d) {
-            d3.select(this).style("fill", d3.schemeCategory10[1]);
+        .on("mousemove", function (d) {
+
+            d3.select(this).style("fill", "rgb(188, 208, 238)");
             barchartTooltipDiv.transition()
                     .duration(200)
                     .style("opacity", .9);
@@ -130,7 +144,6 @@ function gen_Wordcloud() {
                 barchartTooltipDiv.html(text)
                     .style("left", (d3.event.pageX + 10) + "px")
                     .style("top", (d3.event.pageY + 10) + "px");
-                year_dispatch.call("yearEvent", d, d);
 
         })
         .on("mouseout", function (d) {
@@ -138,7 +151,6 @@ function gen_Wordcloud() {
             barchartTooltipDiv.transition()
                     .duration(500)
                     .style("opacity", 0);
-            year_dispatch.call("yearEvent", 0, 0);
         });
     }
 
