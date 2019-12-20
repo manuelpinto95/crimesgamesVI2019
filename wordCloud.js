@@ -90,7 +90,7 @@ function gen_Wordcloud() {
     wordcloud.layout = d3.layout.cloud()
         .size([width, height])
         .words(wordcloud.data.map(function (d) { return { text: d.word, size: ((Math.log(d.from.length) + 1) * 25) }; }))
-        .padding(5)        //space between words
+        .padding(10)        //space between words
         .rotate(function () { return 0; })
         .fontSize(function (d) { return d.size; })      // font size of words
         .on("end", draw);
@@ -98,7 +98,6 @@ function gen_Wordcloud() {
 
     // This function takes the output of 'layout' above and draw the words
     // Wordcloud features that are THE SAME from one word to the other can be here
-    //console.log(words);
     
     function draw(words) {
   wordcloud.svg
@@ -116,7 +115,7 @@ function gen_Wordcloud() {
 
                     if (String(d3.select(this).attr("Years")).indexOf(String(selectedGameYear).trim()) != -1) {
 
-                            return   d3.schemeCategory10[3];
+                            return d3.schemeCategory10[3];
                     }
                     else {
                             return d3.schemeCategory10[0];      
@@ -131,10 +130,8 @@ function gen_Wordcloud() {
         .text(function(d) { return d.text; })
         .on("mousemove", function (d) {
 
-           color = d3.select(this).style('fill');
-
-            d3.select(this).style("opacity", .5);
-
+            color = d3.select(this).style('fill');
+            d3.select(this).raise().style("opacity", .5);
 
             barchartTooltipDiv.transition()
                     .duration(200)
@@ -148,7 +145,7 @@ function gen_Wordcloud() {
 
         })
         .on("mouseout", function (d) {
-            d3.select(this).style("fill", color)
+            d3.select(this).style("fill", color).raise()
             .style("opacity", 1);
 
             barchartTooltipDiv.transition()
@@ -168,12 +165,8 @@ function filterData() {
         var states2 = getStates(d);
 
         if (countStates() == 0) {
-
-            
             return years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]);
-            
         } 
-
         else {
             return      years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]) && 
                         states2.some(elem => elem == states[0] || elem == states[1] || elem == states[2]);
