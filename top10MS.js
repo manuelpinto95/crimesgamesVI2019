@@ -14,30 +14,22 @@ var top3Tip;
 var msTop3data;
 
 var selectedMScircle = null;
-var selectedMSrect = null;
+var selectedMStext = null;
 
 d3.csv("/data/ms/MS_top10.csv").then(function (data) {
     ms_dispatch = d3.dispatch("msEvent");
     ms_dispatch.on("msEvent", function (ms) {
         //console.log(ms.Year);
         //console.log(selectedGameYear);
-        
+
 
         if (selectedMScircle != null) {
             selectedMScircle.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
 
-            if (selectedGameYear != null && ms.Year == selectedGameYear)
-                selectedMScircle.attr("fill", d3.schemeCategory10[3]); // red
-            else
-                selectedMScircle.attr("fill", d3.schemeSet1[5]); //normal
         }
 
-        if (selectedMSrect != null) {
-
-            if (selectedGameYear != null && ms.Year == selectedGameYear)
-                selectedMSrect.attr("fill", d3.schemePastel1[0]); // red
-            else
-                selectedMSrect.attr("fill", "#E8E8E8"); // normal
+        if (selectedMStext != null) {
+            selectedMStext.attr("font-weight", "normal"); // red
         }
 
         if (ms == -1)
@@ -46,12 +38,12 @@ d3.csv("/data/ms/MS_top10.csv").then(function (data) {
         selectedMScircle = d3.selectAll("circle.dot2[ID=\'" + ms.ID + "\']");
 
         selectedMScircle.attr("style", "stroke-width:1.5;stroke:rgb(0,0,0)");
-        selectedMScircle.attr("fill", "rgb(165, 136, 42)");
+        /* selectedMScircle.attr("fill", "rgb(165, 136, 42)"); */
         selectedMScircle.raise();
 
-        selectedMSrect = d3.selectAll("rect[ID=\'" + ms.ID + "\']");
+        selectedMStext = d3.selectAll("text[ID=\'" + ms.ID + "\']");
 
-        selectedMSrect.attr("fill", d3.schemePastel1[6]);
+        selectedMStext.attr("font-weight", "bold");
     })
 
     //CONVERT STRINGS TO NUMBERS
@@ -189,6 +181,7 @@ function genTop3() {
             .attr("y", index * 60 + 35)
             .attr("text-anchor", "start")
             .attr("font-weight", "normal")
+            .attr("ID", top3[index].ID)
             .style('fill', function () {
                 var state = findState(top3[index].state_abbr)
                 if (state != -1)

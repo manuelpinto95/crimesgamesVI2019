@@ -459,9 +459,6 @@ ul li:hover {
   z-index: 2;
 }
 
-.dot2:hover {
-  fill: rgb(165, 136, 42);
-}
 
 .focus circle {
   fill: none;

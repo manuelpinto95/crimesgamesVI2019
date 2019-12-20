@@ -57,8 +57,9 @@ genreTextDic["Visual_Novel"] = "Visual Novel";
 d3.csv("/data/vg/DataSet.csv").then(function (data) {
     // mouse hover event
     year_dispatch = d3.dispatch("yearEvent");
-    year_dispatch.on("yearEvent", function (vg) {
-
+    year_dispatch.on("yearEvent", function (vg, year_flag) {
+        console.log(year_flag);
+        
         if (vgSelectedBar != null) {
             vgSelectedBar.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
 
@@ -72,7 +73,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
 
         if(crimeSelectedDot2 != null) {
             crimeSelectedDot2.attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)");
-            crimeSelectedDot2.attr("fill", d3.schemeSet1[5]);
+            /* crimeSelectedDot2.attr("fill", d3.schemeSet1[5]); */
 
         if(msSelectedWords != null)
                 msSelectedWords.style("opacity", 1);
@@ -91,7 +92,7 @@ d3.csv("/data/vg/DataSet.csv").then(function (data) {
         
         crimeSelectedDot2 = d3.selectAll("circle.dot2[Year=\'" + String(vg.Year).trim() + "\']");
         crimeSelectedDot2.attr("style", "stroke-width:1.5;stroke:rgb(0,0,0)");
-        crimeSelectedDot2.attr("fill", "rgb(165, 136, 42)");
+        /* crimeSelectedDot2.attr("fill", "rgb(165, 136, 42)"); */
         crimeSelectedDot2.raise();
 
 

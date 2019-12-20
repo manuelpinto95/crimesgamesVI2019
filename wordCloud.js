@@ -56,7 +56,6 @@ d3.csv("/data/ms/MSWords.csv").then(function (data) {
     });
 
     wordsDS = aux;
-    console.log(wordsDS);
 
     gen_Wordcloud();
 });
@@ -161,7 +160,7 @@ function gen_Wordcloud() {
 }
 
 
-function filterData() {
+function filterData() { 
 
     var filteredData = wordsDS.filter(function (d, key) {
     
@@ -180,7 +179,6 @@ function filterData() {
                         states2.some(elem => elem == states[0] || elem == states[1] || elem == states[2]);
         }
     });
-    console.log(filteredData);
 
     var entries = filteredData;
     wordcloud.data = entries;
