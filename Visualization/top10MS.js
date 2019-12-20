@@ -16,7 +16,7 @@ var msTop3data;
 var selectedMScircle = null;
 var selectedMStext = null;
 
-d3.csv("/data/ms/MS_top10.csv").then(function (data) {
+d3.csv("data/ms/MS_top10.csv").then(function (data) {
     ms_dispatch = d3.dispatch("msEvent");
     ms_dispatch.on("msEvent", function (ms) {
         //console.log(ms.Year);

@@ -20,7 +20,7 @@ function newTimeFrame(year) {
     year_filters[1] = end;
 }
 
-d3.csv("/data/vg/vgNames.csv").then(function (data) {
+d3.csv("data/vg/vgNames.csv").then(function (data) {
     data.forEach(function (d) {
         d.Year = +d.Year;
     });
