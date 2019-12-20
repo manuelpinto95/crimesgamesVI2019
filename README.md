@@ -1,4 +1,5 @@
 # crimesgamesVI2019
+[WE ARE GROUP 26 AND OUR LAB IS ON MONDAY, BUT DUE TO A GROUP MEMBER GETTING VERY SICK PROF. DANIEL ALLOWED US TO DELIVER UNTIL FRIDAY]
 How to run:
 - Use the "Web Server for Chrome" extension to open crimesgames.html (after launching the app you can turn off internet connection as everything will be run locally)
 - the vis changes depending on the screen resolution and zoom of the browser
