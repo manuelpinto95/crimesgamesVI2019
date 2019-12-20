@@ -3,7 +3,7 @@
 var wordsDS = [];
 var aux = [];
 
-function update_wordcloud(){
+function update_wordcloud() {
     wordcloud.svg.remove();
     d3.selectAll('#wordcloud svg').remove();
     wordcloud.data = 0;
@@ -11,23 +11,23 @@ function update_wordcloud(){
     gen_Wordcloud();
 }
 
-function wordObjFromDS(otherword){
-    return wordsDS.filter(obj => { return String(obj.word).valueOf() === String(otherword).valueOf()})[0];
+function wordObjFromDS(otherword) {
+    return wordsDS.filter(obj => { return String(obj.word).valueOf() === String(otherword).valueOf() })[0];
 }
 
-function getYears(obj){
+function getYears(obj) {
     var res = [];
 
-    obj.from.forEach(function(d){
-            res.push(d.year);
+    obj.from.forEach(function (d) {
+        res.push(d.year);
     });
     return res;
 }
 
-function getStates(obj){
+function getStates(obj) {
     var res = [];
-    obj.from.forEach(function(d){
-            res.push(d.state);
+    obj.from.forEach(function (d) {
+        res.push(d.state);
     });
     return res;
 }
@@ -41,60 +41,65 @@ var wordcloud = {
 
 d3.csv("/data/ms/MSWords.csv").then(function (data) {
 
-    data.forEach(function(d){
-        
-        if(aux.filter(obj => { return String(obj.word).valueOf() === String(d.Word).valueOf()}).length === 0){   
-           aux.push({word: d.Word, from: [{title: d.Title, state: d.CODE, year: d.year}] });
+    data.forEach(function (d) {
+
+        if (aux.filter(obj => { return String(obj.word).valueOf() === String(d.Word).valueOf() }).length === 0) {
+            aux.push({ word: d.Word, from: [{ title: d.Title, state: d.CODE, year: d.year }] });
         }
-        else{
-            aux.filter(obj => { return String(obj.word).valueOf() === 
-                String(d.Word).valueOf()})[0].from.push({title: d.Title, state: d.CODE, year: d.year});
+        else {
+            aux.filter(obj => {
+                return String(obj.word).valueOf() ===
+                    String(d.Word).valueOf()
+            })[0].from.push({ title: d.Title, state: d.CODE, year: d.year });
         }
     });
 
     wordsDS = aux;
+    console.log(wordsDS);
+
     gen_Wordcloud();
 });
 
 function gen_Wordcloud() {
     console.log("gen wordcloud");
-    
+
     // set the dimensions and margins of the graph
     var margin = {
-            top: 10,
-            right: 10,
-            bottom: 10,
-            left: 10
-        };
+        top: 10,
+        right: 10,
+        bottom: 10,
+        left: 10
+    };
     var height = (window.innerHeight / 2 - 60);
     var mapW = height * 1.6;
-    var width = window.innerWidth - mapW - 500 - margin.right - margin.left;
+    var width = window.innerWidth - mapW - 600 - margin.right - margin.left;
 
     // append the svg object to the body of the page
-   wordcloud.svg = d3.select("#wordcloud").append("svg")
+    wordcloud.svg = d3.select("#wordcloud").append("svg")
         .attr("width", width)
         .attr("height", height)
         .append("g")
-        .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     //filter the data to match the time period
     filterData();
 
     // Constructs a new cloud layout instance. It run an algorithm to find the position of words that suits your requirements
     // Wordcloud features that are different from one word to the other must be here
-    
+
     wordcloud.layout = d3.layout.cloud()
-        .size([width, height])
-        .words(wordcloud.data.map(function(d) { return {text: d.word, size: ((Math.log(d.from.length) + 1) * 25)}; }))
-        .padding(8)        //space between words
-        .rotate(function() { return 0; })
-        .fontSize(function(d) { return d.size; })      // font size of words
+
+        .words(wordcloud.data.map(function (d) { return { text: d.word, size: (Math.log(d.from.length) * 25) }; }))
+        .padding(10)        //space between words
+        .rotate(function () { return 0; })
+        .fontSize(function (d) { return d.size; })      // font size of words
         .on("end", draw);
     wordcloud.layout.start();
 
     // This function takes the output of 'layout' above and draw the words
     // Wordcloud features that are THE SAME from one word to the other can be here
-
+    //console.log(words);
+    
     function draw(words) {
   wordcloud.svg
     .append("g")
@@ -147,7 +152,6 @@ function gen_Wordcloud() {
                     .duration(500)
                     .style("opacity", 0);
         });
-        
     }
 
 }
@@ -155,26 +159,21 @@ function gen_Wordcloud() {
 
 
 function filterData() {
+    console.log(wordsDS[0].from[0].state);
+    console.log(wordsDS[0].from[0].year);
 
     var filteredData = wordsDS.filter(function (d, key) {
-    
-        var years = getYears(d);
-        var states = getStates(d);
-
         if (countStates() == 0) {
-            return years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]);
-        } 
+            return (d.from[0].year >= year_filters[0] && d.from[0].year <= year_filters[1])
+        } else {
 
-        else {
-            return      years.some(elem => elem >= year_filters[0] && elem <= year_filters[1]) && 
-                        states.some(elem => elem == states[0] || elem == states[1] || elem == states[2]);
+            return (d.from[0].year >= year_filters[0] && d.from[0].year <= year_filters[1] && (d.from[0].state == states[0] || d.from[0].state == states[1] || d.from[0].state == states[2]))
         }
-    });
+    })
 
-    var entries = filteredData; /*d3.nest()
-        .key(function (d) {
-            return d.CODE; })
-        .entries(filteredData);*/
-        
+    var entries = filteredData;
+
+    console.log(entries);
+
     wordcloud.data = entries;
 }

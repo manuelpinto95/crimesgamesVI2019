@@ -496,7 +496,7 @@ function filterCrimeData() {
             return (d.Year >= year_filters[0] && d.Year <= year_filters[1] && (d.state_abbr == states[0] || d.state_abbr == states[1] || d.state_abbr == states[2]))
         }
     })
-    console.log(filteredData);
+    //console.log(filteredData);
 
     var entries = d3.nest()
         .key(function (d) { return d.state_abbr; })
@@ -506,7 +506,7 @@ function filterCrimeData() {
     entries.sort(function (x, y) {
         return d3.ascending(findState(x.key), findState(y.key));
     })
-    console.log(entries);
+    //console.log(entries);
 
     lineChart.data = entries;
 

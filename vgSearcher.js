@@ -32,7 +32,7 @@ d3.csv("/data/vg/vgNames.csv").then(function (data) {
         option.appendChild(document.createTextNode(vgNames[i].Year + " - " + vgNames[i].Genre ))
         list.appendChild(option);
     }
-    console.log("video game dataset is now loaded");
+    //console.log("video game dataset is now loaded");
     gen_map();
 });
 

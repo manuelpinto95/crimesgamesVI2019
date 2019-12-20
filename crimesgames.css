@@ -7,7 +7,7 @@
 }
 
 h1 {
-  font-size: 35pt;
+  font-size: 25pt;
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -20,20 +20,21 @@ h2 {
 }
 
 #search-icon {
-  margin-left: 402;
-  margin-top: 48;
+  margin-left: 505;
+  margin-top: 30;
 }
 
 #container2 { 
-  height: 116;
+  height: 50;
   position: relative;
 }
 
 #vgSearch {
   margin: 0;
   margin-left: 100px;
+  margin-top: 15;
   position: absolute;
-  width: 300;
+  width: 400;
   height: 30;
   top: 50%;
   -ms-transform: translateY(-50%);
