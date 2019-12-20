@@ -362,6 +362,12 @@ function gen_map() {
     gen_states()
     setTimeout(function afterTwoSeconds() {
         gen_dots()
+    }, 1000)
+    setTimeout(function afterTwoSeconds() {
+        gen_dots()
+    }, 3000)
+    setTimeout(function afterTwoSeconds() {
+        gen_dots()
     }, 4000)
 
 };
