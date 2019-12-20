@@ -74,6 +74,10 @@ function gen_Wordcloud() {
     var mapW = height * 1.6;
     var width = window.innerWidth - mapW - 600 - margin.right - margin.left;
 
+    textScale = d3.scaleLinear()
+        .domain([0, 160])
+        .range([2, 120]);
+
     // append the svg object to the body of the page
     wordcloud.svg = d3.select("#wordcloud").append("svg")
         .attr("width", width)
@@ -90,9 +94,9 @@ function gen_Wordcloud() {
     wordcloud.layout = d3.layout.cloud()
         .size([width, height])
         .words(wordcloud.data.map(function (d) { return { text: d.word, size: ((Math.log(d.from.length) + 1) * 25) }; }))
-        .padding(10)        //space between words
+        .padding(5)        //space between words
         .rotate(function () { return 0; })
-        .fontSize(function (d) { return d.size; })      // font size of words
+        .fontSize(function (d) { return textScale(d.size); })      // font size of words
         .on("end", draw);
     wordcloud.layout.start();
 
