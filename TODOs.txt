@@ -9,7 +9,7 @@ DashBoard
 [X] add mouse out events to reduce the border width 
 [X] espaçamento do barchart chart e line chart mais centrado
 [X] dropdown buttons todos iguais
-[ ] font igual para tudo
+[X] font igual para tudo
 [ ] a terceira cor roxa é má para distinguir no mapa, mudar para outra
 [ ] cor do texto no top3 nao pode deixar de ser visivel com o vermelho do jogo seleccionado
 
@@ -51,8 +51,8 @@ Mapa
 [X] add crime type to the title
 
 Coordinates
-[ ] mousemove and out events
-[ ] create new MSevent for the interaction between top10 list and coordinates (and wordcloud)
+[X] mousemove and out events
+[X] create new MSevent for the interaction between top10 list and coordinates (and wordcloud)
 
 WordCloud
 
@@ -66,7 +66,7 @@ vgEvent
 [X] implementar como deve de ser
 [X] adjust time line so it doesnt miss the year of the video game
 [X] impose limite of 1 vg
-[ ] make button prettier
+[X] make button prettier
 
 
 ADICIONAL:
