@@ -14,7 +14,7 @@ var map = {
 }
 
 function gen_dots() {
-    console.log("dots start");
+    //console.log("dots start");
     var coordinatesData = msTop3data;
 
     var filteredData = msTop3data.filter(function (d, key) {
@@ -34,23 +34,23 @@ function gen_dots() {
 
     map.svg.append("circle")
         .attr("class", "dot") // Assign a class for styling
-        .attr("cx", (w - 350))
+        .attr("cx", (w - 380))
         .attr("cy", (h - 50))
-        .attr("r", 5)
+        .attr("r", 7)
         .attr("style", "stroke-width:0.5;stroke:rgb(0,0,0)")
         .attr("fill", d3.schemeSet1[5])
 
     map.svg.append("text")
         .attr("class", "title")
         .attr("font-size", "15px")
-        .attr("transform", "translate(" + (w - 343) + "," + (h - 46) + ")")
+        .attr("transform", "translate(" + (w - 370) + "," + (h - 46) + ")")
         .attr("text-anchor", "start")
         .text("= one mass shooting");
 
     map.svg.append("text")
         .attr("class", "title")
-        .attr("font-size", "12px")
-        .attr("transform", "translate(" + (w - 343) + "," + (h - 30) + ")")
+        .attr("font-size", "15px")
+        .attr("transform", "translate(" + (w - 383) + "," + (h - 30) + ")")
         .attr("text-anchor", "center")
         .text("the size of the circle is proportional to the number of victims");
 
@@ -93,11 +93,11 @@ function gen_dots() {
                 ms_dispatch.call("msEvent", 0, 0);
             })
     }
-    console.log("dots done");
+    //console.log("dots done");
 }
 
 function gen_states() {
-    console.log("map start");
+    //console.log("map start");
     data = mapData.filter(function (d, key) {
         return (d.Year >= year_filters[0] && d.Year <= year_filters[1])
 
@@ -115,7 +115,7 @@ function gen_states() {
     //console.log(data);
 
     h = (window.innerHeight / 2 - 60);
-    w = h * 1.6;
+    w = h * 1.6 + 100;
 
     document.getElementById("wordcloud").style.width = window.innerWidth - w - 500;
 
@@ -353,7 +353,7 @@ function gen_states() {
         });
 
     });
-    console.log("map done");
+    //console.log("map done");
     /* callback(); */
 }
 
