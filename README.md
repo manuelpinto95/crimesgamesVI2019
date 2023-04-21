@@ -1,5 +1,9 @@
 # crimesgamesVI2019
-[WE ARE GROUP 26 AND OUR LAB IS ON MONDAY, BUT DUE TO A GROUP MEMBER GETTING VERY SICK PROF. DANIEL ALLOWED US TO DELIVER UNTIL FRIDAY]
+
+
+https://user-images.githubusercontent.com/32391409/233694731-931ab35f-99d4-490f-b570-1b082808d0eb.mp4
+
+
 How to run:
 - Use google chrome
 - Use the "Web Server for Chrome" extension (https://chrome.google.com/webstore/detail/web-server-for-chrome/ofhbbkphhbklhfoeikjpcbhemlocgigb?hl=en)
